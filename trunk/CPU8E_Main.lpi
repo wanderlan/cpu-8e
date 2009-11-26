@@ -1,0 +1,349 @@
+<?xml version="1.0"?>
+<CONFIG>
+  <ProjectOptions>
+    <PathDelim Value="\"/>
+    <Version Value="7"/>
+    <General>
+      <Flags>
+        <AlwaysBuild Value="False"/>
+      </Flags>
+      <MainUnit Value="0"/>
+      <TargetFileExt Value=".exe"/>
+      <Title Value="CPU-8E"/>
+      <UseAppBundle Value="False"/>
+      <Icon Value="0"/>
+      <UseXPManifest Value="True"/>
+      <ActiveEditorIndexAtStart Value="2"/>
+    </General>
+    <i18n>
+      <EnableI18N Value="True"/>
+    </i18n>
+    <VersionInfo>
+      <ProjectVersion Value=""/>
+    </VersionInfo>
+    <PublishOptions>
+      <Version Value="2"/>
+      <IgnoreBinaries Value="False"/>
+      <IncludeFileFilter Value="*.(pas|pp|inc|lfm|lpr|lrs|lpi|lpk|sh|xml)"/>
+      <ExcludeFileFilter Value="*.(bak|ppu|ppw|o|so);*~;backup"/>
+    </PublishOptions>
+    <RunParams>
+      <local>
+        <FormatVersion Value="1"/>
+        <LaunchingApplication PathPlusParams="/usr/X11R6/bin/xterm -T 'Lazarus Run Output' -e $(LazarusDir)/tools/runwait.sh $(TargetCmdLine)"/>
+      </local>
+    </RunParams>
+    <RequiredPackages Count="1">
+      <Item1>
+        <PackageName Value="LCL"/>
+      </Item1>
+    </RequiredPackages>
+    <Units Count="15">
+      <Unit0>
+        <Filename Value="CPU8E_Main.lpr"/>
+        <IsPartOfProject Value="True"/>
+        <UnitName Value="CPU8E_Main"/>
+        <CursorPos X="28" Y="8"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="0"/>
+        <UsageCount Value="47"/>
+        <Loaded Value="True"/>
+        <SyntaxHighlighter Value="Delphi"/>
+      </Unit0>
+      <Unit1>
+        <Filename Value="CPU8E_Panel.pas"/>
+        <ComponentName Value="frmCPU"/>
+        <HasResources Value="True"/>
+        <ResourceBaseClass Value="Form"/>
+        <UnitName Value="CPU8E_Panel"/>
+        <CursorPos X="6" Y="265"/>
+        <TopLine Value="244"/>
+        <EditorIndex Value="1"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+        <SyntaxHighlighter Value="Delphi"/>
+      </Unit1>
+      <Unit2>
+        <Filename Value="CPU8E_Main.lrs"/>
+        <CursorPos X="40" Y="5222"/>
+        <TopLine Value="5179"/>
+        <UsageCount Value="7"/>
+        <SyntaxHighlighter Value="Delphi"/>
+      </Unit2>
+      <Unit3>
+        <Filename Value="Main.pas"/>
+        <UnitName Value="CPU8E_Simulator"/>
+        <CursorPos X="21" Y="69"/>
+        <TopLine Value="54"/>
+        <EditorIndex Value="3"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+        <SyntaxHighlighter Value="Delphi"/>
+      </Unit3>
+      <Unit4>
+        <Filename Value="CPU8E_Utils.pas"/>
+        <UnitName Value="CPU8e_Utils"/>
+        <CursorPos X="19" Y="25"/>
+        <TopLine Value="1"/>
+        <EditorIndex Value="6"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+        <SyntaxHighlighter Value="Delphi"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="CPU8E_Oper.pas"/>
+        <UnitName Value="CPU8E_Oper"/>
+        <CursorPos X="7" Y="117"/>
+        <TopLine Value="114"/>
+        <EditorIndex Value="5"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+        <SyntaxHighlighter Value="Delphi"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="CPU8E.pas"/>
+        <UnitName Value="CPU8E"/>
+        <CursorPos X="23" Y="162"/>
+        <TopLine Value="145"/>
+        <EditorIndex Value="4"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+        <SyntaxHighlighter Value="Delphi"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\..\..\..\lazarus\lcl\grids.pas"/>
+        <UnitName Value="Grids"/>
+        <CursorPos X="15" Y="897"/>
+        <TopLine Value="875"/>
+        <UsageCount Value="10"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="..\..\..\..\lazarus\lcl\dialogs.pp"/>
+        <UnitName Value="Dialogs"/>
+        <CursorPos X="10" Y="491"/>
+        <TopLine Value="478"/>
+        <UsageCount Value="7"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="CPU8E_Control.pas"/>
+        <UnitName Value="CPU8E_Control"/>
+        <CursorPos X="11" Y="234"/>
+        <TopLine Value="220"/>
+        <EditorIndex Value="2"/>
+        <UsageCount Value="22"/>
+        <Loaded Value="True"/>
+        <SyntaxHighlighter Value="Delphi"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="..\..\..\..\lazarus\lcl\graphics.pp"/>
+        <UnitName Value="Graphics"/>
+        <CursorPos X="3" Y="250"/>
+        <TopLine Value="228"/>
+        <UsageCount Value="7"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="..\..\..\..\lazarus\fpc\2.2.4\source\rtl\objpas\classes\classesh.inc"/>
+        <CursorPos X="13" Y="33"/>
+        <TopLine Value="11"/>
+        <UsageCount Value="7"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="..\..\..\..\lazarus\fpc\2.2.4\source\rtl\win32\classes.pp"/>
+        <UnitName Value="Classes"/>
+        <CursorPos X="6" Y="28"/>
+        <TopLine Value="6"/>
+        <UsageCount Value="7"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="..\..\..\..\lazarus\fpc\2.2.4\source\rtl\objpas\types.pp"/>
+        <UnitName Value="types"/>
+        <CursorPos X="13" Y="21"/>
+        <TopLine Value="21"/>
+        <UsageCount Value="7"/>
+      </Unit13>
+      <Unit14>
+        <Filename Value="..\..\..\..\lazarus\fpc\2.2.4\source\rtl\win32\windows.pp"/>
+        <UnitName Value="windows"/>
+        <CursorPos X="1" Y="1"/>
+        <TopLine Value="25"/>
+        <UsageCount Value="7"/>
+      </Unit14>
+    </Units>
+    <JumpHistory Count="30" HistoryIndex="29">
+      <Position1>
+        <Filename Value="CPU8E_Panel.pas"/>
+        <Caret Line="231" Column="16" TopLine="225"/>
+      </Position1>
+      <Position2>
+        <Filename Value="CPU8E_Panel.pas"/>
+        <Caret Line="184" Column="44" TopLine="184"/>
+      </Position2>
+      <Position3>
+        <Filename Value="CPU8E_Panel.pas"/>
+        <Caret Line="233" Column="96" TopLine="223"/>
+      </Position3>
+      <Position4>
+        <Filename Value="CPU8E_Panel.pas"/>
+        <Caret Line="249" Column="21" TopLine="234"/>
+      </Position4>
+      <Position5>
+        <Filename Value="CPU8E_Panel.pas"/>
+        <Caret Line="241" Column="8" TopLine="237"/>
+      </Position5>
+      <Position6>
+        <Filename Value="CPU8E.pas"/>
+        <Caret Line="108" Column="22" TopLine="86"/>
+      </Position6>
+      <Position7>
+        <Filename Value="CPU8E.pas"/>
+        <Caret Line="163" Column="35" TopLine="140"/>
+      </Position7>
+      <Position8>
+        <Filename Value="CPU8E_Panel.pas"/>
+        <Caret Line="241" Column="1" TopLine="219"/>
+      </Position8>
+      <Position9>
+        <Filename Value="CPU8E_Panel.pas"/>
+        <Caret Line="242" Column="1" TopLine="220"/>
+      </Position9>
+      <Position10>
+        <Filename Value="CPU8E_Panel.pas"/>
+        <Caret Line="251" Column="52" TopLine="229"/>
+      </Position10>
+      <Position11>
+        <Filename Value="CPU8E_Panel.pas"/>
+        <Caret Line="260" Column="30" TopLine="219"/>
+      </Position11>
+      <Position12>
+        <Filename Value="CPU8E_Oper.pas"/>
+        <Caret Line="47" Column="11" TopLine="25"/>
+      </Position12>
+      <Position13>
+        <Filename Value="CPU8E_Oper.pas"/>
+        <Caret Line="1" Column="1" TopLine="1"/>
+      </Position13>
+      <Position14>
+        <Filename Value="CPU8E_Oper.pas"/>
+        <Caret Line="55" Column="17" TopLine="33"/>
+      </Position14>
+      <Position15>
+        <Filename Value="CPU8E_Control.pas"/>
+        <Caret Line="125" Column="48" TopLine="83"/>
+      </Position15>
+      <Position16>
+        <Filename Value="CPU8E_Control.pas"/>
+        <Caret Line="75" Column="51" TopLine="60"/>
+      </Position16>
+      <Position17>
+        <Filename Value="CPU8E_Control.pas"/>
+        <Caret Line="99" Column="1" TopLine="60"/>
+      </Position17>
+      <Position18>
+        <Filename Value="CPU8E_Control.pas"/>
+        <Caret Line="98" Column="19" TopLine="76"/>
+      </Position18>
+      <Position19>
+        <Filename Value="CPU8E_Control.pas"/>
+        <Caret Line="184" Column="88" TopLine="84"/>
+      </Position19>
+      <Position20>
+        <Filename Value="CPU8E_Control.pas"/>
+        <Caret Line="75" Column="47" TopLine="64"/>
+      </Position20>
+      <Position21>
+        <Filename Value="CPU8E_Control.pas"/>
+        <Caret Line="77" Column="78" TopLine="61"/>
+      </Position21>
+      <Position22>
+        <Filename Value="CPU8E_Control.pas"/>
+        <Caret Line="75" Column="77" TopLine="72"/>
+      </Position22>
+      <Position23>
+        <Filename Value="CPU8E_Control.pas"/>
+        <Caret Line="73" Column="38" TopLine="67"/>
+      </Position23>
+      <Position24>
+        <Filename Value="CPU8E_Control.pas"/>
+        <Caret Line="77" Column="39" TopLine="51"/>
+      </Position24>
+      <Position25>
+        <Filename Value="CPU8E_Control.pas"/>
+        <Caret Line="126" Column="15" TopLine="114"/>
+      </Position25>
+      <Position26>
+        <Filename Value="CPU8E_Panel.pas"/>
+        <Caret Line="229" Column="23" TopLine="219"/>
+      </Position26>
+      <Position27>
+        <Filename Value="CPU8E_Panel.pas"/>
+        <Caret Line="225" Column="15" TopLine="223"/>
+      </Position27>
+      <Position28>
+        <Filename Value="CPU8E_Panel.pas"/>
+        <Caret Line="265" Column="6" TopLine="244"/>
+      </Position28>
+      <Position29>
+        <Filename Value="CPU8E_Oper.pas"/>
+        <Caret Line="117" Column="7" TopLine="114"/>
+      </Position29>
+      <Position30>
+        <Filename Value="CPU8E.pas"/>
+        <Caret Line="162" Column="23" TopLine="145"/>
+      </Position30>
+    </JumpHistory>
+  </ProjectOptions>
+  <CompilerOptions>
+    <Version Value="8"/>
+    <PathDelim Value="\"/>
+    <Target>
+      <Filename Value="CPU-8E"/>
+    </Target>
+    <SearchPaths>
+      <IncludeFiles Value="$(ProjOutDir)\"/>
+    </SearchPaths>
+    <Parsing>
+      <SyntaxOptions>
+        <SyntaxMode Value="Delphi"/>
+      </SyntaxOptions>
+    </Parsing>
+    <CodeGeneration>
+      <SmartLinkUnit Value="True"/>
+      <SmallerCode Value="True"/>
+      <Optimizations>
+        <VariablesInRegisters Value="True"/>
+        <UncertainOptimizations Value="True"/>
+        <OptimizationLevel Value="3"/>
+      </Optimizations>
+    </CodeGeneration>
+    <Linking>
+      <Debugging>
+        <UseLineInfoUnit Value="False"/>
+      </Debugging>
+      <LinkSmart Value="True"/>
+      <Options>
+        <Win32>
+          <GraphicApplication Value="True"/>
+        </Win32>
+      </Options>
+    </Linking>
+    <Other>
+      <ConfigFile>
+        <StopAfterErrCount Value="10"/>
+      </ConfigFile>
+      <CompilerPath Value="$(CompPath)"/>
+    </Other>
+  </CompilerOptions>
+  <Debugging>
+    <Exceptions Count="3">
+      <Item1>
+        <Name Value="EAbort"/>
+      </Item1>
+      <Item2>
+        <Name Value="ECodetoolError"/>
+      </Item2>
+      <Item3>
+        <Name Value="EFOpenError"/>
+      </Item3>
+    </Exceptions>
+  </Debugging>
+</CONFIG>
