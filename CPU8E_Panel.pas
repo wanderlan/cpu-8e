@@ -6,7 +6,7 @@ interface
 
 uses
   Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, Menus, Grids, ComCtrls,
-  DbCtrls, Buttons;
+  DbCtrls, Buttons, MaskEdit;
 
 type
 
@@ -14,7 +14,7 @@ type
 
   TfrmCPU = class(TForm)
     Bevel1: TBevel;
-    edtClock : TEdit;
+    edtClock: TEdit;
     IR0 : TShape;
     IR1 : TShape;
     IR2 : TShape;
@@ -183,12 +183,14 @@ type
     procedure cbModeChange(Sender: TObject);
     procedure sbHaltClick(Sender: TObject);
     procedure sbPauseClick(Sender: TObject);
+    procedure sgMemoriaEditingDone(Sender: TObject);
     procedure spExitClick(Sender: TObject);
     procedure sbGoClick(Sender: TObject);
     procedure spHelpClick(Sender: TObject);
     procedure sbLoadClick(Sender: TObject);
     procedure sbResetClick(Sender: TObject);
   private
+    procedure LoadMem;
     { private declarations }
   public
     { public declarations }
@@ -208,6 +210,7 @@ procedure TfrmCPU.FormCreate(Sender: TObject);
 var
   I : integer;
 begin
+  Caption := ProgName + ' - ' + Author;
   SetLocalDir;
   SetClock;
   for I := 0 to 255 do
@@ -228,6 +231,12 @@ end;
 procedure TfrmCPU.sbPauseClick(Sender: TObject);
 begin
   Cmd := _Pause;
+end;
+
+procedure TfrmCPU.sgMemoriaEditingDone(Sender: TObject);
+begin
+  for I := 0 to 255 do
+    sgMemoria.Cells[0, I+1] := IntToHex(I, 2);
 end;
 
 procedure TfrmCPU.spExitClick(Sender: TObject);
@@ -255,9 +264,41 @@ begin
   Exec('Notepad.exe','CPU8E_Sim.txt');
 end;
 
-procedure TfrmCPU.sbLoadClick(Sender: TObject);
+procedure TfrmCPU.LoadMem;
+var
+  I : integer;
 begin
-  if odLoad.Execute then LoadFile(odLoad.FileName)
+  for I := 0 to 255 do
+    sgMemoria.Cells[1, I+1] := IntToHex(CPU.Mem[I], 2);
+end;
+
+procedure TfrmCPU.StoreMem;
+var
+  I : integer;
+begin
+  for I := 0 to 255 do
+    CPU.Mem[I] := IntToStr('$' + sgMemoria.Cells[1, I+1]);
+end;
+
+procedure TfrmCPU.sbLoadClick(Sender: TObject);
+var
+  NRead : integer;
+begin
+  if odLoad.Execute then begin
+    NRead := LoadFile(odLoad.FileName);
+    if NRead >=0 then begin
+      LoadMem;
+      ShowMem(CPU.PC); // atualiza display da memoria
+      Caption := ProgName + ' - ' + ExtractFileName(odLoad.FileName);
+      sbGo.Enabled    := true;
+      sbPause.Enabled := true;
+      sbHalt.Enabled  := true;
+      sbReset.Enabled := true;
+      ShowMessage('Foram lidos ' + IntToStr(NRead) + '(' + IntToHex(NRead, 2) + 'h) bytes para a memória.');
+    end
+    else
+      ShowMessage('Erro ao carregar arquivo ' + odLoad.FileName);
+  end;
 end;
 
 procedure TfrmCPU.sbResetClick(Sender: TObject);
@@ -267,7 +308,9 @@ end;
 
 procedure TfrmCPU.edtClockChange(Sender: TObject);
 begin
-  CPUClock := StrToIntDef(edtClock.Text, 0);
+  CPUClock := abs(StrToIntDef(edtClock.Text, 0));
+  if CPUClock > 100 then CPUClock := 100;
+  edtClock.Text := IntToStr(CPUClock);
   SetClock;
 end;
 

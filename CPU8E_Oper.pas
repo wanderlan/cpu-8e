@@ -44,7 +44,7 @@ interface
 
 uses Crt,SysUtils,CPU8E,CPU8E_Utils,CPU8E_Control;
 
-procedure LoadFile(fname : string);
+function LoadFile(fname : string) : integer;
 { Faz a carga de um arquivo executavel pela CPU-8E para sua "memoria" }
 procedure Run;
 { Executa o arquivo em memoria pela CPU simulada }
@@ -65,37 +65,46 @@ implementation
 
 uses DOS, Dialogs, CPU8E_Panel;
 
-procedure LoadFile(fname : string);
+function LoadFile(fname : string) : integer;
 { Faz a carga de um arquivo executavel pela CPU-8E para sua "memoria" }
 var
-  f: file;
-  nread, I: word;
+  f : file;
 begin
   Cmd := _Halt;               // pausa a CPU após esta operacao
   assign(f,fname);
   {$I-}
   reset(f,1);
   if IOResult <> 0 then begin  // se houve erro na abertura do arquivo ...
-    Buzz;
-    ShowMessage('Arquivo ' + fname + ' não encontrado!');
     close(f);
+    Buzz;
+    Result := -1;
     exit;
   end;
-  blockread(f,CPU.Mem,sizeof(CPU.Mem),nread);  // le arquivo completo
-  for I := 0 to 255 do
-    frmCPU.sgMemoria.Cells[1, I+1] := IntToHex(CPU.Mem[I], 2);
+  blockread(f,CPU.Mem,sizeof(CPU.Mem),Result);  // le arquivo completo
   close(f);
   {$I+}
   ProgramLoaded := true;       // sinaliza que programa carregado Ok
-  ShowMem(CPU.PC);             // atualiza display da memoria
-  with frmCPU do begin
-    Caption := ProgName + ' - ' + ExtractFileName(fname);
-    sbGo.Enabled    := true;
-    sbPause.Enabled := true;
-    sbHalt.Enabled  := true;
-    sbReset.Enabled := true;
+end;
+
+function SaveFile(fname : string) : integer;
+{ Salva a memriaFaz a carga de um arquivo executavel pela CPU-8E para sua "memoria" }
+var
+  f : file;
+begin
+  Cmd := _Halt;               // pausa a CPU após esta operacao
+  assign(f,fname);
+  {$I-}
+  reset(f,1);
+  if IOResult <> 0 then begin  // se houve erro na abertura do arquivo ...
+    close(f);
+    Buzz;
+    Result := -1;
+    exit;
   end;
-  ShowMessage('Foram lidos ' + IntToStr(nread) + '(' + IntToHex(nread,2) + 'h) bytes para a memória.');
+  blockread(f,CPU.Mem,sizeof(CPU.Mem),Result);  // le arquivo completo
+  close(f);
+  {$I+}
+  ProgramLoaded := true;       // sinaliza que programa carregado Ok
 end;
 
 procedure Run;

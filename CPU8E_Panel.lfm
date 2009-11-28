@@ -5,7 +5,7 @@ object frmCPU: TfrmCPU
   Width = 753
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
-  Caption = 'CPU-8E Simulador V2 - (R) Prof. Joel Guilherme (IESB)'
+  Caption = 'CPU-8E Simulador V2.0 - (R) Prof. Joel Guilherme (IESB)'
   ClientHeight = 413
   ClientWidth = 753
   Color = clWhite
@@ -14,7 +14,14 @@ object frmCPU: TfrmCPU
   OnCreate = FormCreate
   Position = poScreenCenter
   ShowHint = True
-  LCLVersion = '0.9.27'
+  LCLVersion = '0.9.29'
+  object Shape11: TShape
+    Left = 409
+    Height = 32
+    Top = 349
+    Width = 95
+    Brush.Color = 33023
+  end
   object shIRIn1: TShape
     Left = 100
     Height = 30
@@ -125,13 +132,6 @@ object frmCPU: TfrmCPU
     Height = 30
     Top = 241
     Width = 81
-    Brush.Color = 33023
-  end
-  object Shape11: TShape
-    Left = 409
-    Height = 30
-    Top = 351
-    Width = 93
     Brush.Color = 33023
   end
   object Shape9: TShape
@@ -857,7 +857,7 @@ object frmCPU: TfrmCPU
   object Shape98: TShape
     Left = 490
     Height = 6
-    Top = 254
+    Top = 253
     Width = 17
     Brush.Color = 50688
     Pen.Style = psClear
@@ -1057,30 +1057,6 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRoundRect
   end
-  object edtClock: TEdit
-    Left = 464
-    Height = 28
-    Top = 352
-    Width = 38
-    Alignment = taRightJustify
-    AutoSize = False
-    BorderStyle = bsNone
-    BorderSpacing.Top = 20
-    BorderSpacing.CellAlignHorizontal = ccaLeftTop
-    BorderSpacing.CellAlignVertical = ccaCenter
-    Color = 33023
-    Font.CharSet = ANSI_CHARSET
-    Font.Color = clBlack
-    Font.Height = -16
-    Font.Name = 'Arial Black'
-    Font.Pitch = fpVariable
-    Font.Quality = fqAntialiased
-    Font.Style = [fsBold]
-    OnChange = edtClockChange
-    ParentFont = False
-    TabOrder = 23
-    Text = '50'
-  end
   object Panel1: TPanel
     Left = 0
     Height = 31
@@ -1091,7 +1067,7 @@ object frmCPU: TfrmCPU
     ClientHeight = 31
     ClientWidth = 753
     ParentColor = False
-    TabOrder = 25
+    TabOrder = 24
     object sbLoad: TSpeedButton
       Left = 6
       Height = 22
@@ -2142,17 +2118,42 @@ object frmCPU: TfrmCPU
     TitleFont.Quality = fqDraft
     TitleFont.Style = [fsBold]
     UseXORFeatures = True
+    OnEditingDone = sgMemoriaEditingDone
   end
   object UpDown1: TUpDown
-    Left = 502
-    Height = 28
+    Cursor = crNo
+    Left = 504
+    Height = 27
     Top = 352
     Width = 17
     Associate = edtClock
     Min = 0
     Position = 50
-    TabOrder = 24
+    TabOrder = 23
+    Thousands = False
     Wrap = False
+  end
+  object edtClock: TEdit
+    Left = 461
+    Height = 27
+    Top = 352
+    Width = 43
+    Alignment = taRightJustify
+    AutoSize = False
+    BorderStyle = bsNone
+    Color = 33023
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -16
+    Font.Name = 'Arial Black'
+    Font.Pitch = fpVariable
+    Font.Quality = fqAntialiased
+    Font.Style = [fsBold]
+    MaxLength = 3
+    OnChange = edtClockChange
+    ParentFont = False
+    TabOrder = 25
+    Text = '50'
   end
   object StaticText10: TStaticText
     Left = 411
