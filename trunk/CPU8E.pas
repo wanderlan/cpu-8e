@@ -123,7 +123,7 @@ const
    DirectMask = $40;    // bir identificador de enderecamento direto
 
 // Identificador do programa e versao
-   ProgName = 'CPU-8E Simulator V2';
+   ProgName = 'CPU-8E Simulator V2.0 b.2';
    Author   = '(R) Prof. Joel Guilherme (IESB)';
 
 procedure CPU_Reset;

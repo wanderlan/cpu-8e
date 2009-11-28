@@ -1,4 +1,4 @@
-			CPU8E_Sim v1.0b - 04/2009
+			CPU8E_Sim v2.0 - 11/2009
 
                           Simulador da CPU-8E
 
@@ -23,6 +23,7 @@
   "Copiando(GPL).txt", parte integrante deste pacote de programa.
 
   Autor: Prof. Joel Guilherme da Silva Filho
+  Interface Gráfica: Bárbara A.B. dos Anjos e Wanderlan Santos dos Anjos	
   Organizacao: IESB - Instituto de Educacao Superior de Brasília
   Local: Brasilia/DF, Brasil
 
@@ -30,6 +31,8 @@
      Versao: 0.9  - 01/02/2009 - Primeira versao totalmente operacional
      Versão: 1.0  - 05/02/2009 - Corrigidos alguns problemas nao criticos
      Versão: 1.0b - 29/04/2009 - Corrigido problema na sinalizacao de Carry
+     Versão: 2.0  - 28/11/2009 - Interface caractere substituída por interface
+                                 gráfica construída no Lazarus
 
 --------------------------------------------------------------------------------
 
