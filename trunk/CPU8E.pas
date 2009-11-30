@@ -83,6 +83,8 @@ type
 }
    ModeType = (_Step,_Cycle,_Full);
 
+   PhaseType = (_Fetch, _Operand, _Execute, _Reset);
+
 var
 // Esta eh a estrutura basica correspondente aa arquitetura da CPU
    CPU: record
@@ -102,7 +104,7 @@ var
       OpCode: OpCodeType;           // OpCode (decodificado do IR)
       DW: boolean;                  // Flag indicando Instrucao de 2 palavras
       ED: boolean;                  // Flag indicando Enderecamento Direto
-      Mem: array[0..255] of byte;   // Memoria de 256 Bytes
+      Mem: packed array[0..255] of byte;   // Memoria de 256 Bytes
     end;
 
     Cmd, LastCmd: CmdType;          // Comando do usuario
@@ -167,6 +169,7 @@ procedure ShowReg(Item : TStaticText; Val: byte);
   identificador do objeto e seu valor, para apresntacao na tela }
 begin
   Item.Caption := copy(Item.Name, 3, 3) + ':' + IntToHex(Val,2);
+  Item.Font.Color := clBlack;
   Application.ProcessMessages;
 end;
 
@@ -175,6 +178,7 @@ procedure ShowReg(Item : TStaticText; Val: string);
   identificador do objeto e seu valor, para apresntacao na tela }
 begin
   Item.Caption := copy(Item.Name, 3, 3) + ':' + Val;
+  Item.Font.Color := clBlack;
   Application.ProcessMessages;
 end;
 
@@ -209,6 +213,7 @@ procedure ShowMem(Current: byte);
 var
   Sel : TGridRect;
 begin
+  inc(Current);
   TSG(frmCPU.sgMemoria).MoveExtend(false, 0, Current);
   Sel.Left   := 0;
   Sel.Top    := Current;

@@ -23,7 +23,9 @@
   "Copiando(GPL).txt", parte integrante deste pacote de programa.
 
   Autor: Prof. Joel Guilherme da Silva Filho
+
   Interface Gráfica: Bárbara A.B. dos Anjos e Wanderlan Santos dos Anjos	
+
   Organizacao: IESB - Instituto de Educacao Superior de Brasília
   Local: Brasilia/DF, Brasil
 

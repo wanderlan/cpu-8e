@@ -52,8 +52,6 @@ procedure ResetCPU;
 { Executa um "hardware reset" da CPU simulada }
 procedure SetClock;
 { Estabelece um valor de "clock" para a CPU simulada }
-procedure GetCmd;
-{ Interpreta comandos fornecidos pelo usuário atraves do teclado }
 
 const
   DefaultClock = 50;    // valor "default" para o "clock" da CPU
@@ -63,7 +61,7 @@ var
 
 implementation
 
-uses DOS, Dialogs, CPU8E_Panel;
+uses DOS, Dialogs;
 
 function LoadFile(fname : string) : integer;
 { Faz a carga de um arquivo executavel pela CPU-8E para sua "memoria" }
@@ -90,21 +88,24 @@ function SaveFile(fname : string) : integer;
 { Salva a memriaFaz a carga de um arquivo executavel pela CPU-8E para sua "memoria" }
 var
   f : file;
+  I : integer;
 begin
   Cmd := _Halt;               // pausa a CPU após esta operacao
   assign(f,fname);
   {$I-}
-  reset(f,1);
-  if IOResult <> 0 then begin  // se houve erro na abertura do arquivo ...
+  rewrite(f,1);
+  if IOResult <> 0 then begin  // se houve erro na gravação do arquivo ...
     close(f);
     Buzz;
     Result := -1;
-    exit;
+  end
+  else begin
+    for I := sizeof(CPU.Mem) downto 0 do
+      if CPU.Mem[I] <> 0 then break; // acha fim do programa
+    blockwrite(f, CPU.Mem, I+1,Result);  // grava arquivo completo
+    close(f);
   end;
-  blockread(f,CPU.Mem,sizeof(CPU.Mem),Result);  // le arquivo completo
-  close(f);
   {$I+}
-  ProgramLoaded := true;       // sinaliza que programa carregado Ok
 end;
 
 procedure Run;
@@ -114,7 +115,8 @@ begin
       Buzz;
       ShowMessage('Nenhum programa carregado em memoria!');
       Cmd := _Pause;
-   end else
+   end
+   else
       RunProgram;            // executa o programa
    if UControl.S = 3 then    // se programa terminou ...
       Cmd := _Halt;
@@ -145,45 +147,4 @@ begin
     end;
 end;
 
-procedure GetCmd;
-{ Interpreta comandos fornecidos pelo usuário atraves do teclado }
-begin
-   Write('Entre Comando: ');
-   if keypressed or (Cmd = _Up) or (Cmd = _Down) then
-// '_Up' e '_Down' sao comandos para rolar a tela da memoria, e devem ser
-// repetidos até que um comando distinto seja acionado pelo usuario
-   begin
-//      Option := upcase(readkey);
-//      if Option = #$00 then
-// devem ser as setas para rolar a janela da memoria
-         begin
-//         Option := readkey;
-(*         case Option of
-            #$48: Option := 'U';   // seta para cima - UP
-            #$50: Option := 'D';   // seta para baixo - DOWN
-            #$3B: Option := 'A';   // tecla <F1> - Auxilio (Help)
-        *) end;
-      end;
-(*      case Option of
-           'A': Exec('Notepad.exe','CPU8E_Sim.txt');
-           'L': Cmd := _Load;
-           'E': Cmd := _Edit;
-           'C': Cmd := _Clock;
-           'M': Cmd := _Mode;
-           'G': Cmd := _Go;
-           'P': Cmd := _Pause;
-           'H': begin
-                   Cmd := _Halt;
-                   UControl.S := 3;
-                end;
-           'R': Cmd := _Rst;
-           'X': Cmd := _eXit;
-           'U': Cmd := _Up;
-           'D': Cmd := _Down;
-      end;
-//      write(Option,BS);
-   end;*)
-end;
-
 end.
-
