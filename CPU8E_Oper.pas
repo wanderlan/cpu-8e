@@ -93,7 +93,6 @@ var
   f : file;
   I : integer;
 begin
-  Cmd := _Halt;               // pausa a CPU após esta operacao
   assign(f,fname);
   {$I-}
   rewrite(f,1);
@@ -118,7 +117,7 @@ begin
    if not ProgramLoaded then begin   // se nao ha programa carregado ...
       Buzz;
       ShowMessage('Nenhum programa carregado em memoria!');
-      Cmd := _Pause;
+      Cmd := _Halt;
    end
    else
       RunProgram;            // executa o programa

@@ -116,6 +116,7 @@ end;
 procedure Pause(Mode : ModeType); begin
   if CPUMode = Mode then begin
     Cmd := _Pause;
+    frmCPU.ilImagens.GetBitmap(1, frmCPU.sbStatus.Picture.Bitmap);
     repeat
       Sleep(10);
       Application.ProcessMessages;
@@ -410,6 +411,7 @@ begin
   repeat
     RunStep;
   until Cmd = _Halt;
+  frmCPU.ilImagens.GetBitmap(0, frmCPU.sbStatus.Picture.Bitmap);
 end;
 
 // Inicializacao do Controle
