@@ -46,6 +46,8 @@ uses Crt,SysUtils,CPU8E,CPU8E_Utils,CPU8E_Control;
 
 function LoadFile(fname : string) : integer;
 { Faz a carga de um arquivo executavel pela CPU-8E para sua "memoria" }
+function SaveFile(fname : string) : integer;
+{ Salva o conteudo da memoria para um arquivo binario }
 procedure Run;
 { Executa o arquivo em memoria pela CPU simulada }
 procedure ResetCPU;
@@ -78,6 +80,7 @@ begin
     Result := -1;
     exit;
   end;
+  fillchar(CPU.Mem, sizeof(CPU.Mem), 0);
   blockread(f,CPU.Mem,sizeof(CPU.Mem),Result);  // le arquivo completo
   close(f);
   {$I+}
@@ -85,7 +88,7 @@ begin
 end;
 
 function SaveFile(fname : string) : integer;
-{ Salva a memriaFaz a carga de um arquivo executavel pela CPU-8E para sua "memoria" }
+{ Salva o conteudo da memoria para um arquivo binario }
 var
   f : file;
   I : integer;
@@ -100,9 +103,10 @@ begin
     Result := -1;
   end
   else begin
-    for I := sizeof(CPU.Mem) downto 0 do
+    for I := sizeof(CPU.Mem)-1 downto 0 do
       if CPU.Mem[I] <> 0 then break; // acha fim do programa
-    blockwrite(f, CPU.Mem, I+1,Result);  // grava arquivo completo
+    if I > 255 then I := 255;
+    blockwrite(f, CPU.Mem, I+1, Result);  // grava arquivo completo
     close(f);
   end;
   {$I+}

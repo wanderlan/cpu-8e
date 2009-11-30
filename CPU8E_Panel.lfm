@@ -13,11 +13,13 @@ object frmCPU: TfrmCPU
   OnClose = FormClose
   OnCreate = FormCreate
   Position = poScreenCenter
+  SessionProperties = 'edtClock.Text;cbMode.ItemIndex'
   ShowHint = True
   LCLVersion = '0.9.29'
   object Shape68: TShape
     Left = 102
     Height = 6
+    Hint = 'Barramento de Controle'
     Top = 65
     Width = 272
     Brush.Color = 57311
@@ -112,7 +114,7 @@ object frmCPU: TfrmCPU
       ShowCaption = False
     end
     object sbGo: TSpeedButton
-      Left = 34
+      Left = 64
       Height = 22
       Top = 4
       Width = 23
@@ -187,7 +189,7 @@ object frmCPU: TfrmCPU
       NumGlyphs = 0
     end
     object sbPause: TSpeedButton
-      Left = 62
+      Left = 92
       Height = 22
       Top = 4
       Width = 23
@@ -262,7 +264,7 @@ object frmCPU: TfrmCPU
       NumGlyphs = 0
     end
     object sbHalt: TSpeedButton
-      Left = 90
+      Left = 119
       Height = 22
       Top = 4
       Width = 23
@@ -337,7 +339,7 @@ object frmCPU: TfrmCPU
       NumGlyphs = 0
     end
     object sbReset: TSpeedButton
-      Left = 118
+      Left = 147
       Height = 22
       Top = 4
       Width = 23
@@ -412,7 +414,7 @@ object frmCPU: TfrmCPU
       NumGlyphs = 0
     end
     object spExit: TSpeedButton
-      Left = 146
+      Left = 175
       Height = 22
       Top = 4
       Width = 23
@@ -487,7 +489,7 @@ object frmCPU: TfrmCPU
       NumGlyphs = 0
     end
     object spHelp: TSpeedButton
-      Left = 174
+      Left = 203
       Height = 22
       Top = 4
       Width = 23
@@ -562,14 +564,14 @@ object frmCPU: TfrmCPU
       NumGlyphs = 0
     end
     object Bevel1: TBevel
-      Left = 204
+      Left = 232
       Height = 28
       Top = 2
       Width = 2
       Shape = bsLeftLine
     end
     object cbMode: TComboBox
-      Left = 258
+      Left = 286
       Height = 24
       Top = 4
       Width = 104
@@ -597,7 +599,7 @@ object frmCPU: TfrmCPU
       Text = 'Single Step'
     end
     object StaticText24: TStaticText
-      Left = 213
+      Left = 241
       Height = 16
       Top = 7
       Width = 43
@@ -616,7 +618,7 @@ object frmCPU: TfrmCPU
       TabOrder = 0
     end
     object StaticText25: TStaticText
-      Left = 378
+      Left = 406
       Height = 16
       Top = 7
       Width = 43
@@ -634,7 +636,7 @@ object frmCPU: TfrmCPU
       TabOrder = 1
     end
     object shFetch: TShape
-      Left = 424
+      Left = 452
       Height = 23
       Top = 4
       Width = 46
@@ -643,7 +645,7 @@ object frmCPU: TfrmCPU
       Shape = stRoundRect
     end
     object lblFetch: TLabel
-      Left = 426
+      Left = 454
       Height = 18
       Top = 6
       Width = 45
@@ -662,7 +664,7 @@ object frmCPU: TfrmCPU
       OptimalFill = True
     end
     object shOperand: TShape
-      Left = 472
+      Left = 500
       Height = 23
       Top = 4
       Width = 46
@@ -670,7 +672,7 @@ object frmCPU: TfrmCPU
       Shape = stRoundRect
     end
     object lblOperand: TLabel
-      Left = 474
+      Left = 502
       Height = 13
       Top = 9
       Width = 45
@@ -689,7 +691,7 @@ object frmCPU: TfrmCPU
       OptimalFill = True
     end
     object shExecute: TShape
-      Left = 520
+      Left = 548
       Height = 23
       Top = 4
       Width = 46
@@ -698,7 +700,7 @@ object frmCPU: TfrmCPU
       Shape = stRoundRect
     end
     object lblExecute: TLabel
-      Left = 523
+      Left = 551
       Height = 14
       Top = 9
       Width = 45
@@ -715,6 +717,90 @@ object frmCPU: TfrmCPU
       ParentColor = False
       ParentFont = False
       OptimalFill = True
+    end
+    object sbSave: TSpeedButton
+      Left = 31
+      Height = 22
+      Top = 5
+      Width = 23
+      Action = acSave
+      AutoSize = True
+      Color = clBtnFace
+      Flat = True
+      Glyph.Data = {
+        C6070000424DC607000000000000360000002800000016000000160000000100
+        2000000000009007000064000000640000000000000000000000FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+        FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF0094140FA6C86C4EFCD37B53FDC06E
+        59FDB98889FDBF8D8DFDBF8B8BFDBF8C8CFDBF8C8CFDBF8C8CFDBF8C8CFDBE8D
+        8FFDBB7D76FDD07E63FDD07752FDD27146FDCB6B45FC961812B6860000048800
+        0000FFFFFF00FFFFFF00BD5941FAFFC474FFFFAD57FFE5986DFFD2CCD1FFD9DC
+        DEFFD8D9DCFFD9D1D1FFD9D1D1FFD9D1D1FFD9D1D1FFD7D4D6FFD9C0B4FFFFC0
+        92FFFFA755FFFF8F2AFFFFA33DFFC56240FB8100002185000000FFFFFF00FFFF
+        FF00C5674AFCFFBA6CFFFF9F4FFFE29067FFCCC2C8FFD5978BFFD19085FFD1C4
+        C5FFD4C6C6FFD4C5C5FFD4C5C5FFD3C8CAFFD5B1A6FFF89E72FFFE9448FFFF85
+        26FFFF9533FFCE6D44FB8100002C85000000FFFFFF00FFFFFF00C36245FBFFBC
+        71FFFFA354FFE89971FFD2D6DDFFC85245FFEA5236FFE7E3E0FFE2DDDCFFE0D7
+        D8FFE0D8D8FFE0DCDFFFDCB9AEFFF58C5DFFFE9246FFFF8C2FFFFF9839FFCC69
+        41FB8100002A85000000FFFFFF00FFFFFF00C36043FBFFBE73FFFFA558FFEA9E
+        76FFE1DFE4FF695A6BFF5C3B45FFB4ADBAFFE7E0E0FFF4ECE8FFEAE4E3FFE6E6
+        E9FFE1BCAFFFF37849FFFD8E43FFFF9034FFFF9B3CFFCC673FFB8100002A8500
+        0000FFFFFF00FFFFFF00C35E41FBFFBF76FFFFA65AFFEBA27BFFF1F0F3FF9A8F
+        98FF566B78FF85A4BDFF909CB4FFC2B9C2FFF2EAE7FFF1F7F9FFE5BFB3FFF266
+        35FFFC8A3FFFFF933AFFFF9C3FFFCC653CFB8100002A85000000FFFFFF00FFFF
+        FF00C35D3EFBFFC179FFFFA85DFFEDA37EFFEFF6FEFFD3D9E6FFAEBED1FFDCFC
+        FFFF8EC9EAFF237BCAFF718DB8FFF8F5F2FFEAC3B9FFEE4C1CFFFB843AFFFF98
+        3FFFFF9E42FFCC6339FB8100002A85000000FFFFFF00FFFFFF00C35C3CFBFFC2
+        7BFFFFB069FFF69155FFF29467FFE98C5EFFA48A8FFFD7F1FDFF43B7FFFF0095
+        FFFF007FE7FF7D728BFFFF8345FFF66420FFFD8836FFFF973CFFFFA145FFCC62
+        37FB8100002A85000000FFFFFF00FFFFFF00C35A39FBFFC37DFFFFB97DFFFDB8
+        7CFFFCB270FFFFB369FFB68A73FF89CCE5FF90E6FFFF1DB3FFFF00A6FFFF0480
+        DBFF9A7262FFFFAE5FFFFAA861FFFCA057FFFFA349FFCC6034FB8100002A8500
+        0000FFFFFF00FFFFFF00C35836FBFFC27AFFF6D8BFFFF3EFECFFF3EBE6FFF6EF
+        E7FFE7DAD8FF5A98B9FF84E6F3FF9EEDFFFF21C3FFFF04B9FFFF0C8CD9FF9E98
+        A7FFF0E1D9FFE4C2A8FFFFA449FFCC5E30FB8100002A85000000FFFFFF00FFFF
+        FF00C35735FBFFC27BFFF4DCC7FFFAFFFFFFFEFFFFFFFEFFFFFFFFFFFFFFDEDA
+        E2FF55A5C0FF97F6F9FF97F0FFFF24D3FFFF09C9FFFF2195D1FFBBB8CCFFEFCA
+        B1FFFFA54AFFCC5D2EFB8100002A85000000FFFFFF00FFFFFF00C35533FBFFC4
+        7DFFF3D8C1FFFBFFFFFFFFFFFFFFFFFFFFFFFFFEFEFFFFFFFFFFD5CFD9FF4EA8
+        C2FF9AF7F9FF93F7FFFF27E4FFFF15DAFDFF299ACCFFB89187FFFFAD4EFFCC5C
+        2DFB8100002A85000000FFFFFF00FFFFFF00C35430FBFFC67FFFF1D6C0FFFAFF
+        FFFFFFFFFFFFFFFEFDFFFFFBF9FFFFF9F6FFFFFFF9FFC7C3CDFF45A8C3FFA3FC
+        FDFF8CF8FFFF2AEFFFFF1AECFEFF3C99B3FFDA8E50FFDA5F26FB8000002A8400
+        0000FFFFFF00FFFFFF00C3532DFBFFC782FFEFD3BDFFF9FEFFFFFFFEFDFFFFFB
+        F9FFFFF9F6FFFFF5F3FFFFF4F0FFFFFBF1FFBEBBC5FF47ADC8FFA9FCFEFF7DF3
+        FFFF26F0FFFF1EF1FFFF51A4AFFFB43C21FA9100002191000000FFFFFF00FFFF
+        FF00C3502DFBFFC884FFEED1BAFFF8FDFFFFFFFCFAFFFFF8F6FFFFF6F2FFFFF4
+        EFFFFFF1EBFFFFEFE8FFFFF8ECFFAFB4C2FF41B2CEFFACFDFFFF73EEFFFF22EC
+        FFFF21F3FFFF43748FFD580C30454B1C4400FFFFFF00FFFFFF00C4512DFBFFCA
+        87FFECCEB8FFF8F9FCFFFFF9F5FFFFF5F2FFFFF3EEFFFFF0EBFFFFEDE6FFFFEC
+        E5FFFFF1EBFFFFF8F0FF96A7BDFF48BDD7FFB5FDFFFF65EAFFFF1DEAFFFF24EA
+        FCFF296896E82E245C1DFFFFFF00FFFFFF00C24C28FCFFD68FFFEFDBC3FFFBFF
+        FFFFFFFFFFFFFFFFFEFFFFFFFAFFFFFCF6FFFFFCF5FFFFFDF8FFFFFFFBFFFFFF
+        FFFFFFFFFFFF8BB3CDFF4FCFEBFFB1FDFFFF59E6FFFF1FEAFFFF26DEF4FF2E56
+        89DCFFFFFF00FFFFFF009C1408C8D5703BFFD58764FFD18E7BFFD48E78FFD28D
+        77FFD28B75FFD18A73FFD08A73FFCF8A73FFCF8973FFCD8872FFCF8B75FFD480
+        69FF5B566AFF55D0ECFFB3FEFFFF3BE2FFFF0ECAFFFF285B96F4FFFFFF00FFFF
+        FF008900000C880000708D00007F8C00007A8B00007A8B00007A8B00007A8B00
+        007A8B00007A8B00007A8B00007A8B00007A8A00007A9300007A8B0000793251
+        7DDF48D9F4FF20C6FAFF1C6BB0FC342D5F6DFFFFFF00FFFFFF008B0000008C01
+        0000900200008F0000008F0000008F0000008F0000008F0000008F0000008F00
+        00008F0000008F0000008E000000940100008B0205003F1A491F21528BE52751
+        8CEA36295B5A362B5C00
+      }
+      NumGlyphs = 0
+      ShowCaption = False
+    end
+    object Bevel2: TBevel
+      Left = 58
+      Height = 28
+      Top = 2
+      Width = 2
+      Shape = bsLeftLine
     end
   end
   object Shape11: TShape
@@ -742,6 +828,7 @@ object frmCPU: TfrmCPU
   object IR0: TShape
     Left = 32
     Height = 26
+    Hint = 'Unidade Lógica e Aritmética'
     Top = 106
     Width = 38
     Brush.Color = clLime
@@ -750,6 +837,7 @@ object frmCPU: TfrmCPU
   object IR1: TShape
     Left = 50
     Height = 26
+    Hint = 'Unidade Lógica e Aritmética'
     Top = 130
     Width = 38
     Brush.Color = clLime
@@ -782,6 +870,7 @@ object frmCPU: TfrmCPU
   object IR4: TShape
     Left = 130
     Height = 26
+    Hint = 'Unidade Lógica e Aritmética'
     Top = 107
     Width = 38
     Brush.Color = clLime
@@ -825,6 +914,7 @@ object frmCPU: TfrmCPU
   object Shape7: TShape
     Left = 257
     Height = 30
+    Hint = 'Program Counter'
     Top = 241
     Width = 81
     Brush.Color = clSilver
@@ -847,6 +937,7 @@ object frmCPU: TfrmCPU
   object Shape10: TShape
     Left = 257
     Height = 54
+    Hint = 'Unidade de Controle'
     Top = 321
     Width = 81
     Brush.Color = clSilver
@@ -870,6 +961,7 @@ object frmCPU: TfrmCPU
   object Shape14: TShape
     Left = 51
     Height = 26
+    Hint = 'Unidade Lógica e Aritmética'
     Top = 107
     Width = 19
     Brush.Color = clLime
@@ -878,6 +970,7 @@ object frmCPU: TfrmCPU
   object Shape15: TShape
     Left = 129
     Height = 27
+    Hint = 'Unidade Lógica e Aritmética'
     Top = 108
     Width = 20
     Brush.Color = clLime
@@ -886,6 +979,7 @@ object frmCPU: TfrmCPU
   object shBI3: TShape
     Left = 9
     Height = 12
+    Hint = 'Barramento Interno'
     Top = 36
     Width = 158
     Brush.Color = 13346356
@@ -895,6 +989,7 @@ object frmCPU: TfrmCPU
   object shBI2: TShape
     Left = 8
     Height = 160
+    Hint = 'Barramento Interno'
     Top = 38
     Width = 11
     Brush.Color = 13346356
@@ -1216,7 +1311,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object Shape58: TShape
+  object shUCIn1: TShape
     Left = 158
     Height = 6
     Top = 324
@@ -1224,7 +1319,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape59: TShape
+  object shUCIn2: TShape
     Left = 241
     Height = 16
     Top = 319
@@ -1233,7 +1328,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRightTriangle
   end
-  object Shape60: TShape
+  object shUCIn3: TShape
     Left = 158
     Height = 6
     Top = 339
@@ -1241,7 +1336,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape61: TShape
+  object shUCIn4: TShape
     Left = 241
     Height = 16
     Top = 334
@@ -1250,7 +1345,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRightTriangle
   end
-  object Shape62: TShape
+  object shUCIn5: TShape
     Left = 158
     Height = 6
     Top = 368
@@ -1258,7 +1353,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape63: TShape
+  object shUCIn6: TShape
     Left = 241
     Height = 16
     Top = 363
@@ -1285,7 +1380,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stCircle
   end
-  object Shape65: TShape
+  object shClock1: TShape
     Left = 342
     Height = 6
     Top = 362
@@ -1293,7 +1388,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape66: TShape
+  object shClock2: TShape
     Left = 338
     Height = 17
     Top = 356
@@ -1305,6 +1400,7 @@ object frmCPU: TfrmCPU
   object Shape69: TShape
     Left = 369
     Height = 231
+    Hint = 'Barramento de Controle'
     Top = 65
     Width = 6
     Brush.Color = 57311
@@ -1321,6 +1417,7 @@ object frmCPU: TfrmCPU
   object Shape71: TShape
     Left = 210
     Height = 157
+    Hint = 'Barramento de Controle'
     Top = 139
     Width = 6
     Brush.Color = 57311
@@ -1329,6 +1426,7 @@ object frmCPU: TfrmCPU
   object Shape72: TShape
     Left = 146
     Height = 6
+    Hint = 'Barramento de Controle'
     Top = 139
     Width = 69
     Brush.Color = 57311
@@ -1346,6 +1444,7 @@ object frmCPU: TfrmCPU
   object Shape74: TShape
     Left = 162
     Height = 6
+    Hint = 'Barramento de Controle'
     Top = 254
     Width = 52
     Brush.Color = 57311
@@ -1431,6 +1530,7 @@ object frmCPU: TfrmCPU
   object Shape84: TShape
     Left = 98
     Height = 35
+    Hint = 'Barramento de Controle'
     Top = 65
     Width = 6
     Brush.Color = 57311
@@ -1481,6 +1581,7 @@ object frmCPU: TfrmCPU
   object shBD1: TShape
     Left = 518
     Height = 12
+    Hint = 'Barramento de Dados'
     Top = 163
     Width = 100
     Brush.Color = clAqua
@@ -1490,6 +1591,7 @@ object frmCPU: TfrmCPU
   object shBD2: TShape
     Left = 518
     Height = 40
+    Hint = 'Barramento de Dados'
     Top = 126
     Width = 12
     Brush.Color = clAqua
@@ -1533,6 +1635,7 @@ object frmCPU: TfrmCPU
   object shBE1: TShape
     Left = 518
     Height = 29
+    Hint = 'Barramento de Endereços'
     Top = 242
     Width = 12
     Brush.Color = 50688
@@ -1542,6 +1645,7 @@ object frmCPU: TfrmCPU
   object shBE2: TShape
     Left = 518
     Height = 12
+    Hint = 'Barramento de Endereços'
     Top = 241
     Width = 100
     Brush.Color = 50688
@@ -1568,6 +1672,7 @@ object frmCPU: TfrmCPU
   object shRD1: TShape
     Left = 338
     Height = 5
+    Hint = 'Sinal de Leitura'
     Top = 324
     Width = 265
     Brush.Color = clFuchsia
@@ -1576,6 +1681,7 @@ object frmCPU: TfrmCPU
   object shRD2: TShape
     Left = 602
     Height = 16
+    Hint = 'Sinal de Leitura'
     Top = 318
     Width = 16
     Brush.Color = clFuchsia
@@ -1585,6 +1691,7 @@ object frmCPU: TfrmCPU
   object shWR1: TShape
     Left = 338
     Height = 5
+    Hint = 'Sinal de Escrita'
     Top = 338
     Width = 265
     Brush.Color = 33023
@@ -1593,6 +1700,7 @@ object frmCPU: TfrmCPU
   object shWR2: TShape
     Left = 602
     Height = 16
+    Hint = 'Sinal de Escrita'
     Top = 332
     Width = 16
     Brush.Color = 33023
@@ -1745,6 +1853,7 @@ object frmCPU: TfrmCPU
   object shBI1: TShape
     Left = 8
     Height = 12
+    Hint = 'Barramento Interno'
     Top = 193
     Width = 482
     Brush.Color = 13346356
@@ -1844,6 +1953,7 @@ object frmCPU: TfrmCPU
   object stPC: TStaticText
     Left = 273
     Height = 20
+    Hint = 'Program Counter'
     Top = 244
     Width = 56
     Caption = 'PC:00'
@@ -1900,6 +2010,7 @@ object frmCPU: TfrmCPU
   object stUC1: TStaticText
     Left = 286
     Height = 20
+    Hint = 'Unidade de Controle'
     Top = 336
     Width = 25
     Caption = 'UC'
@@ -1918,6 +2029,7 @@ object frmCPU: TfrmCPU
   object stULA: TStaticText
     Left = 70
     Height = 19
+    Hint = 'Unidade Lógica e Aritmética'
     Top = 133
     Width = 66
     Caption = 'ULA:00'
@@ -1936,6 +2048,7 @@ object frmCPU: TfrmCPU
   object StaticText12: TStaticText
     Left = 10
     Height = 21
+    Hint = 'Barramento Interno'
     Top = 206
     Width = 20
     Caption = 'BI'
@@ -2062,6 +2175,7 @@ object frmCPU: TfrmCPU
   object StaticText19: TStaticText
     Left = 565
     Height = 21
+    Hint = 'Barramento de Dados'
     Top = 139
     Width = 25
     Caption = 'BD'
@@ -2080,6 +2194,7 @@ object frmCPU: TfrmCPU
   object StaticText20: TStaticText
     Left = 565
     Height = 21
+    Hint = 'Barramento de Endereços'
     Top = 217
     Width = 25
     Caption = 'BE'
@@ -2098,6 +2213,7 @@ object frmCPU: TfrmCPU
   object StaticText21: TStaticText
     Left = 565
     Height = 21
+    Hint = 'Sinal de Leitura'
     Top = 296
     Width = 26
     Caption = 'RD'
@@ -2116,6 +2232,7 @@ object frmCPU: TfrmCPU
   object StaticText22: TStaticText
     Left = 565
     Height = 21
+    Hint = 'Sinal de Escrita'
     Top = 347
     Width = 29
     Caption = 'WR'
@@ -2171,7 +2288,7 @@ object frmCPU: TfrmCPU
     Font.Style = [fsBold]
     HeaderHotZones = [gzFixedCols, gzFixedCells]
     MouseWheelOption = mwGrid
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goEditing, goAlwaysShowEditor, goThumbTracking]
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goDrawFocusSelected, goEditing, goTabs, goAlwaysShowEditor, goThumbTracking]
     ParentFont = False
     RowCount = 257
     TabOrder = 1
@@ -2192,7 +2309,7 @@ object frmCPU: TfrmCPU
     Top = 352
     Width = 17
     Associate = edtClock
-    Min = 0
+    Min = 1
     Position = 50
     TabOrder = 24
     Thousands = False
@@ -2243,6 +2360,7 @@ object frmCPU: TfrmCPU
     Title = 'Load binary file'
     DefaultExt = '.bin'
     Filter = 'Binary file|*.bin|All|*.*'
+    Options = [ofPathMustExist, ofFileMustExist, ofEnableSizing, ofViewDetail]
     left = 400
     top = 40
   end
@@ -2288,5 +2406,18 @@ object frmCPU: TfrmCPU
       OnExecute = spHelpClick
       ShortCut = 112
     end
+    object acSave: TAction
+      Caption = 'acSave'
+      Hint = 'Save'
+      OnExecute = sbSaveClick
+      ShortCut = 16467
+    end
+  end
+  object sdSave: TSaveDialog
+    DefaultExt = '.bin'
+    Filter = 'Binary file|*.bin|All|*.*'
+    Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
+    left = 502
+    top = 40
   end
 end

@@ -11,12 +11,12 @@
   contidas no documento CPU-8E-Specs-vX.Y.pdf ('X.Y' conforme a versao atual
   do programa), parte deste pacote.
 
-  Este programa, e todos seus componentes, e colocado à disposicão do publico
+  Este programa, e todos seus componentes, e colocado a disposicao do publico
   na forma de um 'Programa Livre' ("Free Software") sob uma licenca "GNU -
   General Public License" (Copyleft), sendo assim entendido que voce tem o
   direito de utiliza-lo livremente, sem pagar quaisquer direitos por isto,
   inclusive o direito de copia-lo, modifica-lo e redistribui-lo, desde que
-  mantidos estes termos a quaisquer copias ou modificacões.
+  mantidos estes termos a quaisquer copias ou modificacoes.
   Este programa e distribuido na esperanca de que possa ser util, mas SEM
   NENHUMA GARANTIA, IMPLICITA OU EXPLICITA, de ADEQUACAO a qualquer MERCADO
   ou APLICACAO EM PARTICULAR. Para maiores detalhes veja o documento
@@ -24,17 +24,20 @@
 
   Autor: Prof. Joel Guilherme da Silva Filho
 
-  Interface Gráfica: Bárbara A.B. dos Anjos e Wanderlan Santos dos Anjos	
+  Interface Grafica: Barbara A.B. dos Anjos e Wanderlan Santos dos Anjos
 
-  Organizacao: IESB - Instituto de Educacao Superior de Brasília
+  Documentacao, fontes e executavel deste simulador podem ser baixados do site: 
+  http://cpu-8e.googlecode.com
+
+  Organizacao: IESB - Instituto de Educacao Superior de Brasilia
   Local: Brasilia/DF, Brasil
 
   Historico:
      Versao: 0.9  - 01/02/2009 - Primeira versao totalmente operacional
      Versão: 1.0  - 05/02/2009 - Corrigidos alguns problemas nao criticos
      Versão: 1.0b - 29/04/2009 - Corrigido problema na sinalizacao de Carry
-     Versão: 2.0  - 28/11/2009 - Interface caractere substituída por interface
-                                 gráfica construída no Lazarus
+     Versão: 2.0  - 28/11/2009 - Interface caractere substituida por interface
+                                 grafica construida no Lazarus
 
 --------------------------------------------------------------------------------
 
@@ -48,11 +51,12 @@ O programa CPU8E_sim foi desenvolvido para permitir a simulacao da operacao da
 CPU Educativa CPU-8E, definida pelo documento "UCP-8E-Specs-v0.9.pdf" que faz
 parte deste pacote.
 
-Ao ser executado, o simulador abre uma "janela de comando" do Windows que eh
+Ao ser executado, o simulador abre uma "janela grafica"  que eh
 composta de 3 partes:
-1. CPU - Ocupando o quadrante superior esquerdo da tela, contem uma represen-
-   tacao dos principais componentes definidos na arquitetura da CPU-8E, inclu-
-   indo seus registradores, ULA e bits de status;
+
+1. CPU - Ocupando a maior parte da tela, contem uma representacao de todos os
+   componentes definidos na arquitetura da CPU-8E, incluindo seus registradores,
+   barramentos, ULA e bits de status;
    Os elementos apresentados nesta janela sao:
 	ACC:   Conteudo do Acumulador
 	PC:    Conteudo do "Program Counter"
@@ -65,21 +69,19 @@ composta de 3 partes:
 	N:     Bit de status "Negativo"
 	C:     Bit de status "Carry"
 	IR:    Conteudo do "Instruction Register"
-	Oper:  Decodificacao da instrucao corrente
+	DI:    Decodificacao da instrucao corrente
+	UC:    Unidade de controle
 	Clock: Valor corrente do "clock" da CPU
-	Mode:  Indicador do 'Modo de Operacao'do simulador:
-	       STEP ("Single Step"), CYCLE ("Single Cycle"), RUN
-	       ("Run program")
 
 2. Memoria - ocupando a parte direita da tela, apresenta o conteudo da Memoria
-   de 256 Bytes da CPU, onde e realcado o endereco correntemente apontado pelo
-   registrador PC. Apenas 20 posicões de memoria sao apresentadas de cada vez,
+   de 256 Bytes da CPU, onde eh realcado o endereco correntemente apontado pelo
+   registrador PC. Apenas 16 posicões de memoria sao apresentadas de cada vez,
    normalmente sendo apresentadas aquelas ao redor da instrucao corrente, mas
-   as demais posicões podem ser inspecionadas, a qualquer instante, utilizan-
-   do-se as teclas de setas (para cima e para baixo).
+   as demais posicões podem ser inspecionadas ou editadas a qualquer instante,
+   utilizando-se a barra do rolagem ("Scrollbar" para cima ou para baixo).
 
-3. Area de Dialogo - ocupando o quadrante inferior esquerdo da tela, nesta
-   area ocorre o dialogo operacional do simulador com o usuario, permitindo a
+3. Barra de Ferramentas (Toolbar) - ocupando a parte superior da tela. Nesta
+   area estao os comandos operacionais do simulador para o usuario, permitindo a
    este fornecer comandos para o simulador bem como passar a este informacões
    que o permitam melhor acompanhar a operacao em andamento.
 
@@ -91,73 +93,84 @@ simulador for indesejada, abra o arquivo "CPU8E_Sim.txt", que acompanha
 este pacote de software, separadamente, utilizando qualquer leitor de texto 
 de sua preferencia.
 
-OPERAcAO DO SIMULADOR:
+OPERACAO DO SIMULADOR:
 ---------------------
 
-Logo abaixo da "janela da CPU", encontra-se uma linha que contem os principais
-comandos disponiveis: 'Clock', 'Load', 'Edit', 'Mode', 'Go', 'Pause', 'Halt',
-'Rst', e 'eXit'. Cada um destes comandos e acessivel pressionando-se a tecla
-correspondente ao caracter em maiusculo no nome do comando. Por exemplo,
-pressionando-se a tecla <g> o comando 'Go' e executado, pressionando-se <l> o
-comando 'Load' e executado, e assim por diante. Eh indiferente o uso de 
-maiusculas ou minusculas para a selecao de comandos.
+Na parte superior da tela, encontra-se a barra de ferramentas (Toolbar) que 
+contem os principais comandos disponiveis: 'Load', 'Save', 'Go', 'Edit', 'Pause', 
+'Halt', 'Reset', 'Exit', 'Help' e os indicadores de 'Mode', 'Phase' e 'Status'. 
+Cada um destes comandos eh acessivel acionando-se o botão correspondente na toolbar ou pressionando-se a tecla <Ctrl> e uma letra correspondente a um comando. Por exemplo pressionando-se <Ctrl+L> o comando 'Load' eh executado, pressionando-se a tecla <Ctrl+G> o comando 'Go' eh executado e assim por diante. 
 
-COMANDOS:
-Clock - Permite um ajuste do "clock" de simulacao. Sera solicitado a entrada 
-	de um valor que pode variar de 1 a 100, o qual pode ser interpretado
-	como uma "porcentagem" da velocidade maxima atingivel (100%), a qual 
-	eh funcao da plataforma em que o simulador esta sendo executado;
-	O valor corrente do "clock" eh apresentado logo abaixo do nome do 
-	comando. O valor default eh 75;
-Load  - Este comando solicita o nome de um arquivo executavel, para a CPU-8E,
+COMANDOS DA BARRA DE FERRAMENTAS "TOOLBAR":
+
+Load <Ctrl+L> - Este comando solicita o nome de um arquivo executavel, para a CPU-8E,
 	para ser carregado em memoria. Este arquivo pode ter qualquer exten-
 	sao, mas recomendamos o uso da extensao ".bin" para indicar tratar-
 	-se de um arquivo binario. Para fins de teste incluimos o arquivo 
 	"teste.bin" e seu correspondente em linguagem de montagem "teste.asm".
-Edit  - Permite se alterar o conteudo de uma posicao de memoria digitando-se
-	o endereco da posicao a ser alterada e seu novo valor. Se um endereco
-	ou um valor invalido for fornecido a operacao sera cancelada, sem
-	alteracao do conteudo da memoria;
-Mode  - seleciona o modo de operacao do simulador, sendo oferecidas as seguin-
-	tes opcões:
-	"Single Step" - pressione a tecla <t> para selecionar este modo, o 
-	qual ira requerer o pressionar de uma tecla pelo usuario para avancar
-	na execucao de cada microoperacao da CPU, enquanto prevalecer este 
-	modo. Os comandos para o simulador (Pause, Halt, etc.) serao ativa-
-	dos a partir das teclas pressionadas somente ao final de cada fase
-	(fetch, operando, execute).
-	"Single Cycle" - pressione a tecla <y> para selecionar este modo, 
-	que, de forma semelhante ao modo "Single Step", oferece agora a exe-
-	cucao do ciclo completo das instrucões, instrucao a instrucao, confor-
-	me sequencia do programa.
-	"Run" - executa completamente o programa, do ponto em que estiver ate
-	encontrar um instrucao de 'HALT', ou for interrompido por outro 
-	comando do simulador.
-Go    - Executa o programa em memoria, a partir do ponto em que se encontrar, 
-	conforme o modo de operacao selecionado.
-Pause - Realiza uma pausa na execucao de um programa, normalmente para permi-
+
+
+Save <Ctrl+S> - Salva o programa que está em memoria para disco, solicitando diretório
+        e nome do arquivo a salvar. Recomendamos que se use a extensao ".bin".
+
+Go <Ctrl+G> - Executa o programa em memoria, a partir do ponto em que se encontrar, 
+	conforme o modo de operacao selecionado. Aciona os barramentos envolvidos na 
+        operacao corrente e destaca os operadores usados em cada passo.
+
+Pause <Ctrl+P> - Realiza uma pausa na execucao de um programa, normalmente para permi-
 	tir ao usuario a observacao de resultados e estados intermediarios da 
 	execucao. 
-Halt  - Aborta a execucao de um programa, de forma semelhante a quando e 
-	encontrada uma instrucao 'HALT'. A execucao do programa somente sera
+
+Halt <Ctrl+H> - Aborta a execucao de um programa, de forma semelhante a quando e 
+	encontrada uma instrucao 'HALT'. A execucao do  programa somente sera
 	possivel novamente apos a execucao de um comando de "Reset".
-Rst   - Executa o "Reset" da CPU, inicializando todos os registradores e 
+
+Reset <Ctrl+R> - Executa o "Reset" da CPU, inicializando todos os registradores e 
 	variaveis, e colocando o simulador em um estado de "Pause", tal como 
 	na inicializacao, exceto pelo fato de que qualquer programa carregado
 	anteriormente em memoria permanece carregado, nao sendo preciso 
 	carrega-lo novamente.
-eXit  - Finaliza a execucao do simulador, independentemente do estado em que 
+
+Exit <Ctrl+E> - Finaliza a execucao do simulador, independentemente do estado em que 
 	se encontrar a simulacao.
 
-Alem destes comandos, os seguintes comandos "ocultos" estao disponiveis:
+Help <F1> - Apresenta este arquivo.
 
-<Up-Arrow>   - "Line Up": move uma linha para cima a janela da Memoria.
-<Down-Arrow> - "Line Down: move uma linha para baixo a janela da Memoria.
-<F1>	     - Apresenta este texto de auxilio à operacao do simulador. 
-	       O retorno à execucao do simulador somente ocorrera quando este
-	       arquivo for fechado. No caso deste arquivo ser aberto indepen-
-	       dentemente, por qualquer leitor de arquivos-texto, esta depen=
-	       dencia e inexistente.
+Mode  - Seleciona o modo de operacao do simulador, sendo oferecidas as seguin-
+	tes opcões na caixa de selecao:
+
+   "Single Step" - pressione o botao ao lado caixa de selecao para selecionar este         	modo, o qual ira requerer o acionamento do botao 'Go' <Ctrl+G> para avancar
+	na execucao de cada microoperacao da CPU, enquanto prevalecer este 
+	modo. Os demais comandos do simulador (Pause, Halt, etc.) poderao ser acionados        	a qualquer momento.
+
+   "Single Cycle" - pressione o botao ao lado da caixa de selecao para selecionar este         modo, que de forma semelhante ao modo "Single Step", oferece agora a exe-
+	cucao do ciclo completo de uma instrucao, instrucao a instrucao, confor-
+	me sequencia do programa.
+
+   "Full Run" - pressione o botao ao lado da caixa de selecao para selecionar este 	modo, executa completamente o programa do ponto em que estiver ate
+	encontrar um instrucao de 'HALT' ou for interrompido por outro comando do
+        simulador.
+
+Phase - Fase de execucao em que a instrucao se encontra. 
+
+   "Fetch"- Fase de busca da instrução.
+
+   "Operand"- Fase opcional de carga do operando.
+
+   "Execute"- Fase em que a instrucao é executada.
+
+EDICAO DA MEMORIA:
+
+Para editar a memora basta colocar o mouse sobre a celula a ser editada e digitar o novo valor em hexadecimal. A memoria rejeita, automaticamente, quaisquer valores invalidos.
+
+ALTERACAO DO CLOCK:
+
+Clock - Permite o ajuste do "clock" de simulacao. Sera permitida a entrada 
+	de um valor que pode variar de 1 a 100, o qual pode ser interpretado
+	como uma "porcentagem" da velocidade maxima atingivel (100%), a qual 
+	eh funcao da plataforma em que o simulador esta sendo executado;
+        O valor default eh 50. Para alteracao coloque o mouse na caixa de edicao
+        do 'Clock' e edite o valor desejado ou solicitado.
 
 Esperamos que este simulador, junto com a definicao da CPU-8E, seja
 efetivamente educativo, facilitando o entendimento dos componentes e da
@@ -165,4 +178,9 @@ operacao basica de uma CPU tipica, no modelo von Neuman.
 
 Prof. Joel Guilherme - IESB/BSB/Brasil
 e-mail: joel.iesb@joelguilherme.com
-BSB, 01/02/2009
+
+Alunos: Barbara A.B. dos Anjos e Wanderlan Santos dos Anjos
+
+http://cpu-8e.googlecode.com
+
+BSB, 30/11/2009
