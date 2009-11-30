@@ -68,38 +68,41 @@ Implementation
 uses StdCtrls, Graphics, Dialogs, ExtCtrls, CPU8E_Panel, Forms;
 
 var
-  LastR        : byte;
-  LastItem     : TStaticText;
+  LastR        : array of byte = nil;
+  LastItem     : array of TStaticText = nil;
   LastDataFlow : array of TShape = nil;
 
-procedure UnFlash(R: byte; Item: TStaticText; DataFlow : array of TShape);
+procedure UnFlash;
 { Desfaz o realce de um dado, realcado pela rotina "Flash" }
 var
   I : integer;
 begin
-  if Item <> nil then begin
-    Item.Caption := copy(Item.Name, 3, 3) + ':' + IntToHex(R,2);
-    Item.Font.Color := clBlack;
+  for I := 0 to high(LastItem) do begin
+    LastItem[I].Caption := copy(LastItem[I].Name, 3, 3) + ':' + IntToHex(LastR[I], 2);
+    LastItem[I].Font.Color := clBlack;
   end;
-  for I := 0 to high(DataFlow) do
-    DataFlow[I].Brush.Color := DataFlow[I].Tag;
+  for I := 0 to high(LastDataFlow) do
+    LastDataFlow[I].Brush.Color := LastDataFlow[I].Tag;
   Application.ProcessMessages;
 end;
 
-procedure Flash(R: byte; Item: TStaticText; DataFlow : array of TShape);
+procedure Flash(R : array of byte; Item : array of TStaticText; DataFlow : array of TShape);
 { Faz o realce de um dado, cujo valor e localizacao sao passados como
   paramentros. Eh utilizada para indicar uma mudanca de valor de um
   elemento da UCP }
 var
   I : integer;
 begin
-  LastR        := R;
-  LastItem     := Item;
+  UnFlash;
+  SetLength(LastR, high(R) + 1);
+  SetLength(LastItem, high(Item) + 1);
   SetLength(LastDataFlow, high(DataFlow)+1);
-  if Item <> nil then begin
-    Item.Caption := copy(Item.Name, 3, 3) + ':' + IntToHex(R,2);
-    Item.Font.Color := clRed;
-    if Item = frmCPU.stPC then ShowMem(CPU.PC);
+  for I := 0 to high(LastItem) do begin
+    Item[I].Caption := copy(Item[I].Name, 3, 3) + ':' + IntToHex(R[I], 2);
+    Item[I].Font.Color := clRed;
+    if Item[I] = frmCPU.stPC then ShowMem(CPU.PC);
+    LastR[I] := R[I];
+    LastItem[I] := Item[I];
   end;
   for I := 0 to high(DataFlow) do
     with DataFlow[I] do begin
@@ -110,32 +113,28 @@ begin
   Application.ProcessMessages;
 end;
 
-procedure PulseClock(Off: boolean);
-{ Faz a temporizacao do clock do sistema, conforme estabelecido pelo comando
-  'Clock' do simulador }
-begin
-  if CPUMode =_Step then begin
-// Se em modo "Single Step", cada pulso de clock aguarda uma tecla ser
-// pressionada pelo usuario
+procedure Pause(Mode : ModeType); begin
+  if CPUMode = Mode then begin
     Cmd := _Pause;
     repeat
       Sleep(10);
       Application.ProcessMessages;
       if Cmd in [_Rst, _Halt, _Load, _Exit] then begin
-        UnFlash(LastR, LastItem, LastDataFlow);
+        UnFlash;
         Abort;
       end;
     until Cmd <> _Pause;
-(*     if Off then
-         write('Press any key ... ')
-      else
-         write('Press a Cmd key or any other ... ');
-      //repeat until keypressed;
-      //if Off then readkey;
-   end else*)
   end;
+end;
+
+procedure PulseClock(R: array of byte; Item: array of TStaticText; DataFlow : array of TShape);
+{ Faz a temporizacao do clock do sistema, conforme estabelecido pelo comando
+  'Clock' do simulador }
+begin
+  Flash(R, Item, DataFlow);
+  Pause(_Step);
   // senao simplesmente aguarda um intervalo de tempo estabelecido pelo "Clock"
-  sleep(Ucontrol.Timer);
+  Sleep(Ucontrol.Timer);
   inc(UControl.T);
 end;
 
@@ -144,8 +143,30 @@ procedure ProcessULA;
   a operacao envolva esta }
 var
   R: Word;       // variavel auxiliar para o computo da saihda
+  Values : array of byte;
+  Items  : array of TStaticText;
+  DataFlows : array of TShape;
+
+  procedure InsertReg(Value : array of byte; Item : array of TStaticText; DataFlow : array of TShape);
+  var
+    I : integer;
+  begin
+    for I := 0 to high(Value) do begin
+      SetLength(Values, Length(Values)+1);
+      Values[high(Values)] := Value[I];
+    end;
+    for I := 0 to high(Item) do begin
+      SetLength(Items, Length(Items)+1);
+      Items[high(Items)] := Item[I];
+    end;
+    for I := 0 to high(DataFlow) do begin
+      SetLength(DataFlows, Length(DataFlows)+1);
+      DataFlows[high(DataFlows)] := DataFlow[I];
+    end;
+  end;
+
 begin
-   with CPU do begin
+   with CPU, frmCPU do begin
       case OpCode of
          _NOT: R := not A;            // Negacao logica
          _LOD: R := A;                // Load acumulador
@@ -161,173 +182,161 @@ begin
          _AND: R := A and B;          // And logico do ocperando c/ o acumulador
          _XOR: R := A xor B;          // Xor logico do ocperando c/ o acumulador
       end;
-// atualiza ...
-      ULA.Value := R and $FF;
-      ULA.Z := (ULA.Value = 0);
-      ULA.N := (R and $80) = $80;
-      ULA.C := (R and $100) = $100;
-// ... e mostra novos valores da saihda da ULA
-      with frmCPU do begin
-        ShowReg(stULA,ULA.Value);
-        ShowReg(stZ, Byte(ULA.Z));
-        ShowReg(stN, Byte(ULA.N));
-        ShowReg(stC, Byte(ULA.C));
-        ShowReg(sxZ, Byte(ULA.Z));
-        ShowReg(sxN, Byte(ULA.N));
-        ShowReg(sxC, Byte(ULA.C));
+      // atualiza ...
+      SetLength(Values, 0);
+      SetLength(Items, 0);
+      SetLength(DataFlows, 0);
+      if ULA.Value <> (R and $FF) then begin
+        ULA.Value := R and $FF;
+        InsertReg([ULA.Value], [stULA], []);
       end;
+      if ULA.Z <> (ULA.Value = 0) then begin
+        ULA.Z := (ULA.Value = 0);
+        InsertReg([byte(ULA.Z), byte(ULA.Z)], [stZ, sxZ], [shZOut1, shZOut2, shZOut3, shZOut4, shZOut5, shZOut6]);
+      end;
+      if ULA.N <> ((R and $80) = $80) then begin
+        ULA.N := (R and $80) = $80;
+        InsertReg([byte(ULA.N), byte(ULA.N)], [stN, sxN], [shNOut1, shNOut2, shNOut3, shNOut4]);
+      end;
+      if ULA.C <> ((R and $100) = $100) then begin
+        ULA.C := (R and $100) = $100;
+        InsertReg([byte(ULA.C), byte(ULA.C)], [stC, sxC], [shCOut1, shCOut2, shCOut3, shCOut4]);
+      end;
+      // ... e mostra novos valores da saida da ULA
+      PulseClock(Values, Items, DataFlows);
    end;
 end;
 
 procedure MARToPC; begin
   with CPU, frmCPU do begin
-    PC := MAR; Flash(PC,stPC, [shMAROut1, shMAROut2, shBI1, shPCIn1, shPCIn2]);   // atualiza PC com novo valor
-    PulseClock(false); UnFlash(PC,stPC, [shMAROut1, shMAROut2, shBI1, shPCIn1, shPCIn2]);
+    PC := MAR;
+    PulseClock(PC, stPC, [shMAROut1, shMAROut2, shBI1, shBI2, shBI3, shPCIn1, shPCIn2]);   // atualiza PC com novo valor
   end;
 end;
 
 procedure PCToMAR; begin
   with CPU, frmCPU do begin
-    MAR := PC; Flash(MAR,stMAR, [shPCOut1, shPCOut2, shBI1, shMARIn1, shMARIn2]);   // atualiza PC com novo valor
-    PulseClock(false); UnFlash(MAR,stMAR, [shPCOut1, shPCOut2, shBI1, shMARIn1, shMARIn2]);
+    MAR := PC;
+    PulseClock(MAR, stMAR, [shPCOut1, shPCOut2, shBI1, shBI2, shBI3, shMARIn1, shMARIn2, shMAROut3, shMAROut4, shBE1, shBE2]);   // atualiza PC com novo valor
   end;
 end;
 
 procedure MemToMDR; begin
   with CPU, frmCPU do begin
-    MDR := Mem[MAR]; Flash(MDR,stMDR, [shRD1, shRD2, shMDRIn3, shMDRIn4, shBD1, shBD2]);  // le endereco do operando
-    PulseClock(true); UnFlash(MDR,stMDR, [shRD1, shRD2, shMDRIn3, shMDRIn4, shBD1, shBD2]);
+    MDR := Mem[MAR];
+    PulseClock([MDR], [stMDR], [shRD1, shRD2, shMDRIn3, shMDRIn4, shBD1, shBD2]);  // le endereco do operando
   end;
 end;
 
 procedure Execute;
 { Implementa a fase de Execucao de uma instrucao }
 begin
-   with CPU, UControl, frmCPU do begin
-     // Mostra que estamos na fase de execucao
-     pgPhase.Caption  := 'Execute';
-     pgPhase.Position := 100;
-   case OpCode of
+  with CPU, UControl, frmCPU do begin
+    // Mostra que estamos na fase de execucao
+    SetPhase(_Execute);
+    case OpCode of
       _HLT: begin
                S := 3;       // se HALT, apenas vah para o estado terminal 3
-               PulseClock(false);
+               PulseClock([], [], []);
             end;
-      _NOP: PulseClock(false);      // nada a fazer!
+      _NOP: PulseClock([], [], []);      // nada a fazer!
       _NOT: begin
-               A := ACC; Flash(A,stA, [shACCOut1, shACCOut2, shBI1, shBI2, shBI3, shAIn1, shAIn2]);      // envia ACC para entrada da ULA
+               A := ACC; // envia ACC para entrada da ULA
                ProcessULA;                   // processa operacao
-               PulseClock(true); UnFlash(A,stA, [shACCOut1, shACCOut2, shBI1, shBI2, shBI3, shAIn1, shAIn2]);
+               PulseClock([A], [stA], [shACCOut1, shACCOut2, shBI1, shBI2, shBI3, shAIn1, shAIn2]);
                ACC := ULA.Value;             // retorna valor a ACC
-               Flash(ACC,stACC, []); Flash(ACC,stACC, []);
-               PulseClock(false); UnFlash(ACC,stACC, []);
+               PulseClock([ACC], [stACC], [shULAOut1, shULAOut2, shBI1, shBI2, shBI3, shACCIn1, shACCIn2]);
             end;
       _JMP: MARToPC;
       _JEQ: if ULA.Z then MARToPC;
       _JGT: if not(ULA.Z or ULA.N) then MARToPC;
       _JGE: if not ULA.N then MARToPC;
       _STO: begin
-               MDR := ACC; Flash(MDR,stMDR, [shACCOut1, shACCOut2, shBI1, shMDRIn1, shMDRIn2]);
-               PulseClock(true); UnFlash(MDR,stMDR, [shACCOut1, shACCOut2, shBI1, shMDRIn1, shMDRIn2]);
-               Mem[MAR] := MDR; Flash(0, nil, [shMDROut3, shMDROut4, shBD1, shBD2, shWR1, shWR2]); // armazena ACC na memoria
-               //ShowMem(MAR);
-               PulseClock(false); UnFlash(0, nil, [shMDROut3, shMDROut4, shBD1, shBD2, shWR1, shWR2]);
-               //ShowMem(PC);
+               MDR := ACC;
+               PulseClock([MDR], [stMDR], [shACCOut1, shACCOut2, shBI1, shBI2, shBI3, shMDRIn1, shMDRIn2]);
+               Mem[MAR] := MDR; // armazena ACC na memoria
+               sgMemoria.Cells[1, MAR+1] := IntToHex(Mem[MAR], 2);
+               ShowMem(MAR);
+               PulseClock([], [], [shMDROut3, shMDROut4, shBD1, shBD2, shWR1, shWR2]);
+               ShowMem(PC);
             end;
       _LOD: begin
                MemToMDR;
-               A := MDR; Flash(A,stA, []);            // transfere para A
-               ProcessULA; Flash(ULA.Value,stULA, []);
-               PulseClock(true); UnFlash(A,stA, []); UnFlash(ULA.Value,stULA, []);
-               ACC := A; Flash(ACC,stACC, []);        // Trasfere para ACC
-               PulseClock(false); UnFlash(ACC,stACC, []);
+               A := MDR;   // transfere para A
+               PulseClock([A], [stA], [shMDROut1, shMDROut2, shBI1, ShBI2, shBI3, shAIn1, shAIn2]);
+               ProcessULA;
+               ACC := A; // Trasfere para ACC
+               PulseClock([ACC], [stACC], [shULAOut1, shULAOut2, shBI1, shBI2, shBI3, shACCIn1, shACCIn2]);
             end;
       _CMP: begin
                MemToMDR;
-               A := ACC; Flash(A,stA, []);   // transfere ACC para entrada da ULA
-               B := MDR; Flash(B,stB, []);   // trasfere valor para entrada da ULA
-               ProcessULA;                // computa resultado da operacao
-               PulseClock(false); UnFlash(A,stA, []); UnFlash(B,stB, []);
+               A := ACC; // transfere ACC para entrada da ULA
+               B := MDR; // trasfere valor para entrada da ULA
+               PulseClock([A, B], [stA, stB],
+                 [shACCOut1, shACCOut2, shMDROut1, shMDROut2, shBI1, shBI2, shBI3, shAIn1, shAIn2, shBIn1, shBIn2]);
+               ProcessULA; // computa resultado da operacao
             end;
       _ADD,
       _SUB,
       _AND,
       _XOR: begin
                MemToMDR;
-               A := ACC; Flash(A,stA, []);   // transfere ACC para entrada da ULA
-               B := MDR; Flash(B,stB, []);   // trasfere valor para entrada da ULA
+               A := ACC; // transfere ACC para entrada da ULA
+               B := MDR; // trasfere valor para entrada da ULA
+               PulseClock([A, B], [stA, stB],
+                 [shACCOut1, shACCOut2, shMDROut1, shMDROut2, shBI1, shBI2, shBI3, shAIn1, shAIn2, shBIn1, shBIn2]);
                ProcessULA;                // computa resultado da operacao
-               PulseClock(true); UnFlash(A,stA, []); UnFlash(B,stB, []);
-               ACC := ULA.Value; Flash(ACC,stACC, []);  // coloca resultado em ACC
-               PulseClock(false); UnFlash(ACC,stACC, []);
+               ACC := ULA.Value; // coloca resultado em ACC
+               PulseClock([ACC], [stACC], [shULAOut1, shULAOut2, shBI1, shBI2, shBI3, shACCIn1, shACCIn2]);
             end;
-   end;
-
-   end;
-   with UControl do
-   begin
-      if S < 3 then S := 0;           // se nao encontrou HALT, reinicia ciclo
-      T := 0;
-   end;
-   if CPUMode =_Cycle then
-// Se modo "Single Cycle, aguarda comando do usuario para iniciar novo ciclo
-   begin
-      ShowMem(CPU.PC);
-      write('Press a key ...');
-      //repeat until keypressed;
-   end;
+    end;
+  end;
+  with UControl do begin
+    if S < 3 then S := 0;           // se nao encontrou HALT, reinicia ciclo
+    T := 0;
+  end;
+  ShowMem(CPU.PC);
+  Pause(_Cycle); // Se modo "Single Cycle, aguarda comando do usuario para iniciar novo ciclo
 end;
 
 procedure FetchOperandAddr;
 { Implementa a fase de Busca do Operando de uma instrucao }
 begin
-   with CPU, frmCPU do begin
-{ mostra em que fase estamos }
-    pgPhase.Caption  := 'Operando';
-    pgPhase.Position := 50;
-   if DW then
-// se instrucao de 2 palavras ...
-   begin
-// PC aponta para a segunda palavra
+  with CPU, frmCPU do begin
+    { mostra em que fase estamos }
+    SetPhase(_Operand);
+    if DW then begin // se instrucao de 2 palavras ...
+      // PC aponta para a segunda palavra
       PCToMAR;
-      inc(PC); Flash(PC,stPC, []);
-      if ED then
-// se enderecamento direto ...
-      begin
-// subciclo S = 1
-         MemToMDR;
-         UnFlash(PC,stPC, []);
-         MAR := MDR; Flash(MAR, stMAR, [shMDROut1, shMDROut2, shBI1, shMARIn1, shMARIn2]);
+      if ED then begin // se enderecamento direto ...
+        // subciclo S = 1
+        MemToMDR;
+        MAR := MDR;
+        PulseClock([MAR], [stMAR], [shMDROut1, shMDROut2, shBI1, shBI2, shBI3, shMARIn1, shMARIn2]);
       end;
-      PulseClock(false);
-      if ED then
-        UnFlash(MAR,stMAR, [shMDROut1, shMDROut2, shBI1, shMARIn1, shMARIn2])
-      else
-        UnFlash(PC,stPC, []);
-   end;
-   end;
-   with UControl do
-   begin
-      S := 2;    // avanca maquina de estado para a outra fase
-      T := 0;
-   end;
+      inc(PC);
+      PulseClock([PC], [stPC], []);
+    end;
+  end;
+  with UControl do begin
+    S := 2;    // avanca maquina de estado para a outra fase
+    T := 0;
+  end;
 end;
 
 procedure FetchOpCode;
 var
-   D,E: byte;
-   Operando : string;
+  D, E: byte;
+  Operando : string;
 begin
-   with CPU, frmCPU do
-   begin
-    { Mostra onde estamos }
-      pgPhase.Caption  := 'Fetch';
-      pgPhase.Position := 10;
+   with CPU, frmCPU do begin
+      { Mostra onde estamos }
+      SetPhase(_Fetch);
       PCToMAR;
-      inc(PC); Flash(PC,stPC, []);
-      MemToMDR;   // Le OPCode
-      UnFlash(PC,stPC, []);
-      IR := MDR; Flash(IR,stIR, [shMDROut1, shMDROut2, shBI1, shIRIn1, shIRIn2]);           // coloca em IR
-// Decodifica OpCode
+      MemToMDR; // Le OPCode
+      IR := MDR; PulseClock([IR], [stIR], [shMDROut1, shMDROut2, shBI1,shBI2, shBI3, shIRIn1, shIRIn2]); // coloca em IR
+      inc(PC); PulseClock([PC], [stPC], []);
+      // Decodifica OpCode
       case IR of
             $00: OpCode := _HLT;
             $01: OpCode := _NOP;
@@ -344,11 +353,11 @@ begin
         $9A,$DA: OpCode := _AND;
         $9B,$DB: OpCode := _XOR;
       else
-         OpCode := _Invalid;
+        OpCode := _Invalid;
       end;
       D := (IR and DoubleMask) shr 7; DW := boolean(D);   // Instrucao de 2 Bytes
       E := (IR and DirectMask) shr 6; ED := boolean(E);   // Enderecamento Direto
-// Mostra operacao decodificada da instrucao
+      // Mostra operacao decodificada da instrucao
       if DW then begin
         Operando := IntToHex(Mem[PC], 2);
         if ED then
@@ -360,39 +369,37 @@ begin
         Operando := '';
       ShowReg(stDI, OpCodeStr[Byte(OpCode)] + Operando);
       stDI.Font.Color := clRed;
-      PulseClock(false); UnFlash(IR,stIR, [shMDROut1, shMDROut2, shBI1, shIRIn1, shIRIn2]);
+      PulseClock([], [], [shIROut1, shIROut2, shIROut3, shIROut4, shIROut5, shIROut6, shIROut7, shIROut8,
+        shIROut9, shIROut10, shIROut11, shIROut12, shIROut13, shIROut14, shIROut15, shIROut16]);
       stDI.Font.Color := clBlack;
    end;
-// Determina estado seguinte
-   with UControl do
-   begin
-      if CPU.DW then
-         S := 1
-      else
-         S := 2;
-      T := 0;
+   // Determina estado seguinte
+   with UControl do begin
+     if CPU.DW then
+       S := 1
+     else
+       S := 2;
+     T := 0;
    end;
-   with CPU do if OpCode = _Invalid then
-   begin
+  with CPU do
+    if OpCode = _Invalid then begin
       Buzz;
       ShowMessage('INVALID OpCode!');
       OpCode := _HLT;
       UControl.S := 3;
-   end;
+    end;
 end;
 
-procedure RunStep;
-begin
+procedure RunStep; begin
   case UControl.S of        // discrimina fase pelo estado atual
      0: begin
-           ShowMem(CPU.PC);
-           FetchOpCode;
+          ShowMem(CPU.PC);
+          FetchOpCode;
         end;
      1: FetchOperandAddr;
      2: Execute;
      3: Cmd := _Halt;
   end;
-//      if keypressed then exit;
 end;
 
 procedure RunProgram;
@@ -406,11 +413,9 @@ end;
 
 // Inicializacao do Controle
 begin
-   with UControl do
-   begin
-      S := 0;
-      T := 0;
-      Timer := 10;
-   end;
+  with UControl do begin
+    S := 0;
+    T := 0;
+    Timer := 10;
+  end;
 end.
-
