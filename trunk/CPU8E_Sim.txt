@@ -151,13 +151,15 @@ Mode  - Seleciona o modo de operacao do simulador, sendo oferecidas as seguin-
 	encontrar um instrucao de 'HALT' ou for interrompido por outro comando do
         simulador.
 
-Phase - Fase de execucao em que a instrucao se encontra. 
+Phase - Indicador da fase de execucao em que a instrucao se encontra. 
 
    "Fetch"- Fase de busca da instrução.
 
    "Operand"- Fase opcional de carga do operando.
 
    "Execute"- Fase em que a instrucao é executada.
+
+Status - Indicador do status da CPU: Vermelho=Halt, Amarelo=Pause e Verde=Run.
 
 EDICAO DA MEMORIA:
 

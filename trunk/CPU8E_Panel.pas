@@ -21,10 +21,13 @@ type
     acExit: TAction;
     acHelp: TAction;
     acSave: TAction;
+    acStatus: TAction;
     alAtalhos: TActionList;
     Bevel1: TBevel;
     Bevel2: TBevel;
     edtClock: TEdit;
+    ilImagens: TImageList;
+    sbStatus: TImage;
     IR0 : TShape;
     IR1 : TShape;
     IR2 : TShape;
@@ -171,6 +174,7 @@ type
     stA : TStaticText;
     StaticText10 : TStaticText;
     StaticText25: TStaticText;
+    StaticText26: TStaticText;
     stULA : TStaticText;
     StaticText12 : TStaticText;
     stZ : TStaticText;
@@ -243,11 +247,13 @@ end;
 
 procedure TfrmCPU.sbHaltClick(Sender: TObject); begin
   Cmd := _Halt;
+  frmCPU.ilImagens.GetBitmap(0, frmCPU.sbStatus.Picture.Bitmap);
   SetPhase(_Reset);
 end;
 
 procedure TfrmCPU.sbPauseClick(Sender: TObject); begin
   Cmd := _Pause;
+  frmCPU.ilImagens.GetBitmap(1, frmCPU.sbStatus.Picture.Bitmap);
 end;
 
 procedure TfrmCPU.sbSaveClick(Sender: TObject);
@@ -276,12 +282,13 @@ procedure TfrmCPU.spExitClick(Sender: TObject); begin
 end;
 
 procedure TfrmCPU.sbGoClick(Sender: TObject); begin
-  if Cmd = _Pause then
-    Cmd := _Go
-  else begin
+  frmCPU.ilImagens.GetBitmap(2, frmCPU.sbStatus.Picture.Bitmap);
+  if Cmd <> _Pause then begin
     Cmd := _Go;
     Run;
-  end;
+  end
+  else
+    Cmd := _Go;
 end;
 
 procedure TfrmCPU.spHelpClick(Sender: TObject); begin
@@ -329,6 +336,7 @@ procedure TfrmCPU.SetPhase(Phase : PhaseType); begin
 end;
 
 procedure TfrmCPU.sbResetClick(Sender: TObject); begin
+  acStatus.ImageIndex := 0;
   SetPhase(_Reset);
   ResetCPU;
 end;
@@ -357,6 +365,7 @@ begin
       LoadMem;
       ShowMem(CPU.PC); // atualiza display da memoria
       Caption := ProgName + ' - ' + ExtractFileName(odLoad.FileName);
+      frmCPU.ilImagens.GetBitmap(0, frmCPU.sbStatus.Picture.Bitmap);
       acGo.Enabled    := true;
       acPause.Enabled := true;
       acHalt.Enabled  := true;
