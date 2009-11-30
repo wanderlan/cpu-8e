@@ -125,7 +125,7 @@ const
    DirectMask = $40;    // bir identificador de enderecamento direto
 
 // Identificador do programa e versao
-   ProgName = 'CPU-8E Simulator V2.0 b.2';
+   ProgName = 'CPU-8E Simulator V2.0 RC.1';
    Author   = '(R) Prof. Joel Guilherme (IESB)';
 
 procedure CPU_Reset;
@@ -139,10 +139,11 @@ procedure ShowCPU;
 procedure ShowMem(Current: byte);
 { Mostra o conteudo da Memoria da CPU, indicando a posicao da instrucao
   corrente a ser executada ou em execucao }
+function LenReg(Item : TStaticText) : integer;
 
 Implementation
 
-uses CPU8E_Panel, Forms, Grids, Graphics;
+uses CPU8E_Panel, Forms, Grids, Graphics, Math;
 
 procedure CPU_Reset;
 { Reinicia a CPU, zerando todos os registradores e ressetando variaveis }
@@ -164,11 +165,15 @@ begin
    Cmd := _Rst;
 end;
 
+function LenReg(Item : TStaticText) : integer; begin
+  Result := IfThen(Item.Name[3] in ['Z', 'N', 'C'], 1, 2);
+end;
+
 procedure ShowReg(Item : TStaticText; Val: byte);
 { Mostra o conteudo de um registrador. Como parametros sao passados o
   identificador do objeto e seu valor, para apresntacao na tela }
 begin
-  Item.Caption := copy(Item.Name, 3, 3) + ':' + IntToHex(Val,2);
+  Item.Caption := copy(Item.Name, 3, 3) + ':' + IntToHex(Val, LenReg(Item));
   Item.Font.Color := clBlack;
   Application.ProcessMessages;
 end;
@@ -226,4 +231,5 @@ end;
 // Inicializacao da Unit CPU8E
 begin
   CPU_Reset;
+  fillchar(CPU.Mem, sizeof(CPU.Mem), 0)
 end.

@@ -20,8 +20,10 @@ type
     acReset: TAction;
     acExit: TAction;
     acHelp: TAction;
+    acSave: TAction;
     alAtalhos: TActionList;
     Bevel1: TBevel;
+    Bevel2: TBevel;
     edtClock: TEdit;
     IR0 : TShape;
     IR1 : TShape;
@@ -35,6 +37,8 @@ type
     lblExecute: TLabel;
     odLoad: TOpenDialog;
     Panel1: TPanel;
+    sdSave: TSaveDialog;
+    sbSave: TSpeedButton;
     Shape1 : TShape;
     Shape10 : TShape;
     shFetch: TShape;
@@ -110,16 +114,16 @@ type
     shIROut14 : TShape;
     shIROut15 : TShape;
     shIROut16 : TShape;
-    Shape58 : TShape;
-    Shape59 : TShape;
+    shUCIn1 : TShape;
+    shUCIn2 : TShape;
     Shape6 : TShape;
-    Shape60 : TShape;
-    Shape61 : TShape;
-    Shape62 : TShape;
-    Shape63 : TShape;
+    shUCIn3 : TShape;
+    shUCIn4 : TShape;
+    shUCIn5 : TShape;
+    shUCIn6 : TShape;
     Shape64 : TShape;
-    Shape65 : TShape;
-    Shape66 : TShape;
+    shClock1 : TShape;
+    shClock2 : TShape;
     Shape68 : TShape;
     Shape69 : TShape;
     Shape7 : TShape;
@@ -197,6 +201,7 @@ type
     procedure cbModeChange(Sender: TObject);
     procedure sbHaltClick(Sender: TObject);
     procedure sbPauseClick(Sender: TObject);
+    procedure sbSaveClick(Sender: TObject);
     procedure sgMemoriaSetEditText(Sender: TObject; ACol, ARow: Integer; const Value: string);
     procedure spExitClick(Sender: TObject);
     procedure sbGoClick(Sender: TObject);
@@ -245,8 +250,24 @@ procedure TfrmCPU.sbPauseClick(Sender: TObject); begin
   Cmd := _Pause;
 end;
 
+procedure TfrmCPU.sbSaveClick(Sender: TObject);
+var
+  NRead : integer;
+begin
+  if sdSave.Execute then begin
+    NRead := SaveFile(sdSave.FileName);
+    if NRead >=0 then begin
+      Caption := ProgName + ' - ' + ExtractFileName(sdSave.FileName);
+      ShowMessage('Foram gravados ' + IntToStr(NRead) + '(' + IntToHex(NRead, 2) + 'h) bytes para disco.');
+    end
+    else
+      ShowMessage('Erro ao gravar arquivo ' + sdSave.FileName);
+  end;
+end;
+
 procedure TfrmCPU.sgMemoriaSetEditText(Sender: TObject; ACol, ARow: Integer; const Value: string); begin
   CPU.Mem[ARow-1] := StrToIntDef('$' + Value, 0);
+  sgMemoria.Cells[ACol, ARow] := IntToHex(CPU.Mem[ARow-1], 2);
 end;
 
 procedure TfrmCPU.spExitClick(Sender: TObject); begin
@@ -313,10 +334,16 @@ procedure TfrmCPU.sbResetClick(Sender: TObject); begin
 end;
 
 procedure TfrmCPU.edtClockChange(Sender: TObject); begin
-  CPUClock := abs(StrToIntDef(edtClock.Text, 0));
+  CPUClock := abs(StrToIntDef(edtClock.Text, 1));
   if CPUClock > 100 then CPUClock := 100;
   edtClock.Text := IntToStr(CPUClock);
   SetClock;
+  shClock1.Brush.Color := clRed;
+  shClock2.Brush.Color := clRed;
+  Application.ProcessMessages;
+  Sleep(100);
+  shClock1.Brush.Color := $DFDF;
+  shClock2.Brush.Color := $DFDF;
 end;
 
 procedure TfrmCPU.acLoadExecute(Sender: TObject);
@@ -326,6 +353,7 @@ begin
   if odLoad.Execute then begin
     NRead := LoadFile(odLoad.FileName);
     if NRead >=0 then begin
+      sbResetClick(nil);
       LoadMem;
       ShowMem(CPU.PC); // atualiza display da memoria
       Caption := ProgName + ' - ' + ExtractFileName(odLoad.FileName);

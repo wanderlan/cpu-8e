@@ -78,7 +78,7 @@ var
   I : integer;
 begin
   for I := 0 to high(LastItem) do begin
-    LastItem[I].Caption := copy(LastItem[I].Name, 3, 3) + ':' + IntToHex(LastR[I], 2);
+    LastItem[I].Caption := copy(LastItem[I].Name, 3, 3) + ':' + IntToHex(LastR[I], LenReg(LastItem[I]));
     LastItem[I].Font.Color := clBlack;
   end;
   for I := 0 to high(LastDataFlow) do
@@ -98,7 +98,7 @@ begin
   SetLength(LastItem, high(Item) + 1);
   SetLength(LastDataFlow, high(DataFlow)+1);
   for I := 0 to high(LastItem) do begin
-    Item[I].Caption := copy(Item[I].Name, 3, 3) + ':' + IntToHex(R[I], 2);
+    Item[I].Caption := copy(Item[I].Name, 3, 3) + ':' + IntToHex(R[I], LenReg(Item[I]));
     Item[I].Font.Color := clRed;
     if Item[I] = frmCPU.stPC then ShowMem(CPU.PC);
     LastR[I] := R[I];
@@ -142,7 +142,7 @@ procedure ProcessULA;
 { Na fase de execucao, aqui eh computadi o valor de saihda da ULA, caso
   a operacao envolva esta }
 var
-  R: Word;       // variavel auxiliar para o computo da saihda
+  R : Word;       // variavel auxiliar para o computo da saihda
   Values : array of byte;
   Items  : array of TStaticText;
   DataFlows : array of TShape;
@@ -370,7 +370,8 @@ begin
       ShowReg(stDI, OpCodeStr[Byte(OpCode)] + Operando);
       stDI.Font.Color := clRed;
       PulseClock([], [], [shIROut1, shIROut2, shIROut3, shIROut4, shIROut5, shIROut6, shIROut7, shIROut8,
-        shIROut9, shIROut10, shIROut11, shIROut12, shIROut13, shIROut14, shIROut15, shIROut16]);
+        shIROut9, shIROut10, shIROut11, shIROut12, shIROut13, shIROut14, shIROut15, shIROut16,
+        shUCIn1, shUCIn2, shUCIn3, shUCIn4, shUCIn5, shUCIn6]);
       stDI.Font.Color := clBlack;
    end;
    // Determina estado seguinte
