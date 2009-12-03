@@ -114,9 +114,11 @@ begin
 end;
 
 procedure Pause(Mode : ModeType); begin
-  if CPUMode = Mode then begin
-    Cmd := _Pause;
-    frmCPU.ilImagens.GetBitmap(1, frmCPU.sbStatus.Picture.Bitmap);
+  if (CPUMode = Mode) or (Cmd in [_Pause, _Halt]) then begin
+    if Cmd <> _Halt then begin
+      Cmd := _Pause;
+      frmCPU.ilImagens.GetBitmap(1, frmCPU.sbStatus.Picture.Bitmap);
+    end;
     repeat
       Sleep(10);
       Application.ProcessMessages;

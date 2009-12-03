@@ -16,6 +16,24 @@ object frmCPU: TfrmCPU
   SessionProperties = 'edtClock.Text;cbMode.ItemIndex'
   ShowHint = True
   LCLVersion = '0.9.29'
+  object stC: TStaticText
+    Left = 116
+    Height = 16
+    Hint = 'Bit de status "C"'#13#10'Indica que ocorreu um carry (vai-um)'#13#10'do bit mais significativo'
+    Top = 177
+    Width = 25
+    Caption = 'C:0'
+    Color = clWhite
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -12
+    Font.Name = 'Arial Black'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
+    ParentColor = False
+    TabOrder = 16
+  end
   object Shape68: TShape
     Left = 102
     Height = 6
@@ -36,9 +54,39 @@ object frmCPU: TfrmCPU
     ClientWidth = 753
     ParentColor = False
     TabOrder = 25
+    object shFetch: TShape
+      Left = 452
+      Height = 23
+      Top = 5
+      Width = 48
+      Brush.Color = clBtnFace
+      Brush.Style = bsPattern
+      Shape = stRoundRect
+    end
+    object lblFetch: TLabel
+      Left = 455
+      Height = 19
+      Hint = 'Fetch (busca) do OpCode'#13#10'Primeira fase do ciclo de instruções'
+      Top = 7
+      Width = 41
+      Alignment = taCenter
+      Caption = 'Fetch'
+      Enabled = False
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = 18
+      Font.Name = 'Arial'
+      Font.Pitch = fpFixed
+      Font.Quality = fqAntialiased
+      Font.Style = [fsBold]
+      ParentColor = False
+      ParentFont = False
+      OptimalFill = True
+    end
     object sbLoad: TSpeedButton
       Left = 6
       Height = 22
+      Hint = 'Load'#13#10'Carrega um arquivo executável para a memória'
       Top = 6
       Width = 23
       Action = acLoad
@@ -116,6 +164,7 @@ object frmCPU: TfrmCPU
     object sbGo: TSpeedButton
       Left = 64
       Height = 22
+      Hint = 'Go'#13#10'Executa o programa em memória'
       Top = 6
       Width = 23
       Action = acGo
@@ -191,6 +240,7 @@ object frmCPU: TfrmCPU
     object sbPause: TSpeedButton
       Left = 92
       Height = 22
+      Hint = 'Pause'#13#10'Realiza uma pausa na execução de um programa'
       Top = 6
       Width = 23
       Action = acPause
@@ -266,6 +316,7 @@ object frmCPU: TfrmCPU
     object sbHalt: TSpeedButton
       Left = 119
       Height = 22
+      Hint = 'Halt'#13#10'Aborta a execução de um programa'
       Top = 6
       Width = 23
       Action = acHalt
@@ -341,6 +392,7 @@ object frmCPU: TfrmCPU
     object sbReset: TSpeedButton
       Left = 147
       Height = 22
+      Hint = 'Reset'#13#10'Inicializa todos os registradores e variáveis'#13#10'e colocando o simulador em um estado de "Pause"'
       Top = 6
       Width = 23
       Action = acReset
@@ -416,6 +468,7 @@ object frmCPU: TfrmCPU
     object spExit: TSpeedButton
       Left = 175
       Height = 22
+      Hint = 'Exit'#13#10'Finaliza a execução do simulador'
       Top = 6
       Width = 23
       Action = acExit
@@ -491,6 +544,7 @@ object frmCPU: TfrmCPU
     object spHelp: TSpeedButton
       Left = 203
       Height = 22
+      Hint = 'Help'#13#10'Mostra o arquivo de Ajuda'
       Top = 6
       Width = 23
       Action = acHelp
@@ -573,6 +627,7 @@ object frmCPU: TfrmCPU
     object cbMode: TComboBox
       Left = 286
       Height = 24
+      Hint = 'Seleciona o modo de execução do simulador'#13#10'Single Step  = Passo a passo'#13#10'Single Cycle = Instrução por instrução'#13#10'Full Run       = Executa todo o programa de uma vez '
       Top = 4
       Width = 104
       AutoDropDown = True
@@ -601,6 +656,7 @@ object frmCPU: TfrmCPU
     object StaticText24: TStaticText
       Left = 241
       Height = 16
+      Hint = 'Seleciona o modo de execução do simulador'#13#10'Single Step  = Passo a passo'#13#10'Single Cycle = Instrução por instrução'#13#10'Full Run       = Executa todo o programa de uma vez '
       Top = 8
       Width = 43
       Caption = 'Mode:'
@@ -620,6 +676,7 @@ object frmCPU: TfrmCPU
     object StaticText25: TStaticText
       Left = 403
       Height = 16
+      Hint = 'Fase do ciclo de instrução'
       Top = 8
       Width = 43
       Caption = 'Phase:'
@@ -635,54 +692,28 @@ object frmCPU: TfrmCPU
       ParentColor = False
       TabOrder = 1
     end
-    object shFetch: TShape
-      Left = 452
-      Height = 23
-      Top = 5
-      Width = 46
-      Brush.Color = clBtnFace
-      Brush.Style = bsPattern
-      Shape = stRoundRect
-    end
-    object lblFetch: TLabel
-      Left = 454
-      Height = 18
-      Top = 7
-      Width = 45
-      AutoSize = False
-      Caption = 'Fetch'
-      Enabled = False
-      Font.CharSet = ANSI_CHARSET
-      Font.Color = clBlack
-      Font.Height = 18
-      Font.Name = 'Arial Black'
-      Font.Pitch = fpFixed
-      Font.Quality = fqAntialiased
-      Font.Style = [fsBold]
-      ParentColor = False
-      ParentFont = False
-      OptimalFill = True
-    end
     object shOperand: TShape
-      Left = 500
+      Left = 502
       Height = 23
+      Hint = 'Obtenção do endereço do Operando'#13#10'Segunda fase (opcional) do ciclo de instruções'
       Top = 5
       Width = 46
       Brush.Color = clBtnFace
       Shape = stRoundRect
     end
     object lblOperand: TLabel
-      Left = 502
+      Left = 503
       Height = 13
+      Hint = 'Obtenção do endereço do Operando'#13#10'Segunda fase (opcional) do ciclo de instruções'
       Top = 10
-      Width = 45
-      AutoSize = False
+      Width = 43
+      Alignment = taCenter
       Caption = 'Operand'
       Enabled = False
       Font.CharSet = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = 13
-      Font.Name = 'Arial Black'
+      Font.Name = 'Arial'
       Font.Pitch = fpFixed
       Font.Quality = fqAntialiased
       Font.Style = [fsBold]
@@ -691,8 +722,9 @@ object frmCPU: TfrmCPU
       OptimalFill = True
     end
     object shExecute: TShape
-      Left = 548
+      Left = 550
       Height = 23
+      Hint = 'Execução da instrução'#13#10'Terceira fase, ou fase final, do ciclo de instruções'
       Top = 5
       Width = 46
       Brush.Color = clBtnFace
@@ -700,17 +732,18 @@ object frmCPU: TfrmCPU
       Shape = stRoundRect
     end
     object lblExecute: TLabel
-      Left = 551
-      Height = 14
+      Left = 552
+      Height = 13
+      Hint = 'Execução da instrução'#13#10'Terceira fase, ou fase final, do ciclo de instruções'
       Top = 10
-      Width = 45
-      AutoSize = False
+      Width = 41
+      Alignment = taCenter
       Caption = 'Execute'
       Enabled = False
       Font.CharSet = ANSI_CHARSET
       Font.Color = clBlack
       Font.Height = 13
-      Font.Name = 'Arial Black'
+      Font.Name = 'Arial'
       Font.Pitch = fpFixed
       Font.Quality = fqAntialiased
       Font.Style = [fsBold]
@@ -721,6 +754,7 @@ object frmCPU: TfrmCPU
     object sbSave: TSpeedButton
       Left = 31
       Height = 22
+      Hint = 'Save'#13#10'Salva o programa que está em memória para disco'
       Top = 7
       Width = 23
       Action = acSave
@@ -805,6 +839,7 @@ object frmCPU: TfrmCPU
     object StaticText26: TStaticText
       Left = 638
       Height = 16
+      Hint = 'Status do processador'#13#10'Vermelho = Halt'#13#10'Amarelo   = Pause'#13#10'Verde       = Run'
       Top = 8
       Width = 43
       Caption = 'Status:'
@@ -823,6 +858,7 @@ object frmCPU: TfrmCPU
     object sbStatus: TImage
       Left = 688
       Height = 32
+      Hint = 'Status do processador'#13#10'Vermelho = Halt'#13#10'Amarelo   = Pause'#13#10'Verde       = Run '
       Top = 0
       Width = 66
       Center = True
@@ -943,6 +979,7 @@ object frmCPU: TfrmCPU
   object Shape11: TShape
     Left = 409
     Height = 32
+    Hint = 'Clock'#13#10'Gerador da temporização '#13#10'primária da UC'
     Top = 349
     Width = 95
     Brush.Color = clSilver
@@ -956,7 +993,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
   end
   object Shape1: TShape
-    Left = 68
+    Left = 67
     Height = 26
     Top = 130
     Width = 65
@@ -983,14 +1020,16 @@ object frmCPU: TfrmCPU
   object IR2: TShape
     Left = 50
     Height = 26
+    Hint = 'Unidade Lógica e Aritmética'
     Top = 106
     Width = 38
     Brush.Color = clLime
     Shape = stUpTriangle
   end
   object IR3: TShape
-    Left = 113
+    Left = 112
     Height = 26
+    Hint = 'Unidade Lógica e Aritmética'
     Top = 130
     Width = 38
     Brush.Color = clLime
@@ -999,6 +1038,7 @@ object frmCPU: TfrmCPU
   object IR5: TShape
     Left = 110
     Height = 26
+    Hint = 'Unidade Lógica e Aritmética'
     Top = 106
     Width = 38
     Brush.Color = clLime
@@ -1037,6 +1077,7 @@ object frmCPU: TfrmCPU
   object Shape5: TShape
     Left = 409
     Height = 30
+    Hint = 'Memory Data Register'#13#10'Registrador de Dados a serem lidos ou escritos na memória'
     Top = 126
     Width = 81
     Brush.Color = clSilver
@@ -1044,6 +1085,7 @@ object frmCPU: TfrmCPU
   object Shape6: TShape
     Left = 48
     Height = 30
+    Hint = 'Instruction Register: Registrador de Instruções'#13#10'Armazena o OpCode da instrução em execução'
     Top = 241
     Width = 110
     Brush.Color = clSilver
@@ -1051,7 +1093,7 @@ object frmCPU: TfrmCPU
   object Shape7: TShape
     Left = 257
     Height = 30
-    Hint = 'Program Counter'
+    Hint = 'Program Counter'#13#10'Contém o endereço da próxima instrução'
     Top = 241
     Width = 81
     Brush.Color = clSilver
@@ -1059,6 +1101,7 @@ object frmCPU: TfrmCPU
   object Shape8: TShape
     Left = 409
     Height = 30
+    Hint = 'Memory Address Register'#13#10'Registrador de Endereçamento de Memória'
     Top = 241
     Width = 81
     Brush.Color = clSilver
@@ -1546,6 +1589,7 @@ object frmCPU: TfrmCPU
   object Shape70: TShape
     Left = 213
     Height = 6
+    Hint = 'Barramento de Controle'
     Top = 290
     Width = 161
     Brush.Color = 57311
@@ -1987,21 +2031,13 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stUpTriangle
   end
-  object shBI1: TShape
-    Left = 8
-    Height = 12
-    Hint = 'Barramento Interno'
-    Top = 193
-    Width = 482
-    Brush.Color = 13346356
-    Pen.Style = psClear
-    Shape = stRoundRect
-  end
   object stA: TStaticText
-    Left = 34
+    Left = 33
     Height = 17
+    Hint = 'Registrador temporário para '#13#10'o 1o. operando da ULA,'#13#10'corresponde ao ACC'
     Top = 89
-    Width = 34
+    Width = 35
+    Alignment = taCenter
     Caption = 'A:00'
     Color = clLime
     Font.CharSet = ANSI_CHARSET
@@ -2010,16 +2046,17 @@ object frmCPU: TfrmCPU
     Font.Name = 'Arial Black'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
-    Font.Style = [fsBold]
     ParentFont = False
     ParentColor = False
     TabOrder = 5
   end
   object stB: TStaticText
-    Left = 133
+    Left = 131
     Height = 17
+    Hint = 'Registrador temporário para '#13#10'o 2o. operando da ULA'
     Top = 90
-    Width = 32
+    Width = 35
+    Alignment = taCenter
     Caption = 'B:00'
     Color = clLime
     Font.CharSet = ANSI_CHARSET
@@ -2036,6 +2073,7 @@ object frmCPU: TfrmCPU
   object stACC: TStaticText
     Left = 265
     Height = 21
+    Hint = 'Acumulador'
     Top = 129
     Width = 72
     Caption = 'ACC:00'
@@ -2046,16 +2084,17 @@ object frmCPU: TfrmCPU
     Font.Name = 'Arial Black'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
-    Font.Style = [fsBold]
     ParentFont = False
     ParentColor = False
     TabOrder = 6
   end
   object stMDR: TStaticText
     Left = 417
-    Height = 20
-    Top = 130
-    Width = 71
+    Height = 24
+    Hint = 'Memory Data Register'#13#10'Registrador de Dados a serem lidos ou escritos na memória'
+    Top = 129
+    Width = 66
+    AutoSize = True
     Caption = 'MDR:00'
     Color = clSilver
     Font.CharSet = ANSI_CHARSET
@@ -2064,16 +2103,17 @@ object frmCPU: TfrmCPU
     Font.Name = 'Arial Black'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
-    Font.Style = [fsBold]
     ParentFont = False
     ParentColor = False
     TabOrder = 7
   end
   object stIR: TStaticText
     Left = 82
-    Height = 23
+    Height = 24
+    Hint = 'Instruction Register: Registrador de Instruções'#13#10'Armazena o OpCode da instrução em execução'
     Top = 244
-    Width = 51
+    Width = 45
+    AutoSize = True
     Caption = 'IR:00'
     Color = clSilver
     Font.CharSet = ANSI_CHARSET
@@ -2082,17 +2122,17 @@ object frmCPU: TfrmCPU
     Font.Name = 'Arial Black'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
-    Font.Style = [fsBold]
     ParentFont = False
     ParentColor = False
     TabOrder = 8
   end
   object stPC: TStaticText
     Left = 273
-    Height = 20
-    Hint = 'Program Counter'
+    Height = 24
+    Hint = 'Program Counter'#13#10'Contém o endereço da próxima instrução'
     Top = 244
-    Width = 56
+    Width = 51
+    AutoSize = True
     Caption = 'PC:00'
     Color = clSilver
     Font.CharSet = ANSI_CHARSET
@@ -2108,9 +2148,11 @@ object frmCPU: TfrmCPU
   end
   object stMAR: TStaticText
     Left = 417
-    Height = 20
+    Height = 24
+    Hint = 'Memory Address Register'#13#10'Registrador de Endereçamento de Memória'
     Top = 244
-    Width = 67
+    Width = 66
+    AutoSize = True
     Caption = 'MAR:00'
     Color = clSilver
     Font.CharSet = ANSI_CHARSET
@@ -2119,14 +2161,13 @@ object frmCPU: TfrmCPU
     Font.Name = 'Arial Black'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
-    Font.Style = [fsBold]
     ParentFont = False
     ParentColor = False
     TabOrder = 10
   end
   object stDI: TStaticText
     Left = 51
-    Height = 21
+    Height = 24
     Hint = 'Decodificador de Instruções'
     Top = 335
     Width = 104
@@ -2139,17 +2180,17 @@ object frmCPU: TfrmCPU
     Font.Name = 'Arial Black'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
-    Font.Style = [fsBold]
     ParentFont = False
     ParentColor = False
     TabOrder = 11
   end
   object stUC1: TStaticText
     Left = 286
-    Height = 20
+    Height = 24
     Hint = 'Unidade de Controle'
     Top = 336
     Width = 25
+    AutoSize = True
     Caption = 'UC'
     Color = clSilver
     Font.CharSet = ANSI_CHARSET
@@ -2158,17 +2199,18 @@ object frmCPU: TfrmCPU
     Font.Name = 'Arial Black'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
-    Font.Style = [fsBold]
     ParentFont = False
     ParentColor = False
     TabOrder = 12
   end
   object stULA: TStaticText
-    Left = 70
-    Height = 19
+    Left = 68
+    Height = 24
     Hint = 'Unidade Lógica e Aritmética'
-    Top = 133
-    Width = 66
+    Top = 131
+    Width = 63
+    Alignment = taCenter
+    AutoSize = True
     Caption = 'ULA:00'
     Color = clLime
     Font.CharSet = ANSI_CHARSET
@@ -2202,10 +2244,11 @@ object frmCPU: TfrmCPU
     TabOrder = 14
   end
   object stZ: TStaticText
-    Left = 47
-    Height = 13
+    Left = 45
+    Height = 16
+    Hint = 'Bit de status "Z"'#13#10'Indica que a última operação deu resultado zero'
     Top = 177
-    Width = 22
+    Width = 25
     Caption = 'Z:0'
     Color = clWhite
     Font.CharSet = ANSI_CHARSET
@@ -2214,16 +2257,16 @@ object frmCPU: TfrmCPU
     Font.Name = 'Arial Black'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
-    Font.Style = [fsBold]
     ParentFont = False
     ParentColor = False
     TabOrder = 0
   end
   object stN: TStaticText
-    Left = 71
-    Height = 14
+    Left = 69
+    Height = 15
+    Hint = 'Bit de status "N"'#13#10'Indica que a última operação deu resultado negativo'
     Top = 177
-    Width = 22
+    Width = 24
     Caption = 'N:0'
     Color = clWhite
     Font.CharSet = ANSI_CHARSET
@@ -2232,34 +2275,17 @@ object frmCPU: TfrmCPU
     Font.Name = 'Arial Black'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
-    Font.Style = [fsBold]
     ParentFont = False
     ParentColor = False
     TabOrder = 15
   end
-  object stC: TStaticText
-    Left = 116
-    Height = 13
-    Top = 177
-    Width = 22
-    Caption = 'C:0'
-    Color = clWhite
-    Font.CharSet = ANSI_CHARSET
-    Font.Color = clBlack
-    Font.Height = -12
-    Font.Name = 'Arial Black'
-    Font.Pitch = fpVariable
-    Font.Quality = fqDraft
-    Font.Style = [fsBold]
-    ParentFont = False
-    ParentColor = False
-    TabOrder = 16
-  end
   object sxZ: TStaticText
     Left = 259
-    Height = 15
+    Height = 18
+    Hint = 'Bit de status "Z"'#13#10'Indica que a última operação deu resultado zero'
     Top = 396
-    Width = 22
+    Width = 21
+    AutoSize = True
     Caption = 'Z:0'
     Color = clWhite
     Font.CharSet = ANSI_CHARSET
@@ -2268,16 +2294,17 @@ object frmCPU: TfrmCPU
     Font.Name = 'Arial Black'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
-    Font.Style = [fsBold]
     ParentFont = False
     ParentColor = False
     TabOrder = 17
   end
   object sxN: TStaticText
     Left = 284
-    Height = 15
+    Height = 18
+    Hint = 'Bit de status "N"'#13#10'Indica que a última operação deu resultado negativo'
     Top = 396
     Width = 22
+    AutoSize = True
     Caption = 'N:0'
     Color = clWhite
     Font.CharSet = ANSI_CHARSET
@@ -2286,16 +2313,17 @@ object frmCPU: TfrmCPU
     Font.Name = 'Arial Black'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
-    Font.Style = [fsBold]
     ParentFont = False
     ParentColor = False
     TabOrder = 18
   end
   object sxC: TStaticText
     Left = 310
-    Height = 15
+    Height = 18
+    Hint = 'Bit de status "C"'#13#10'Indica que ocorreu um carry (vai-um)'#13#10'do bit mais significativo'
     Top = 396
     Width = 21
+    AutoSize = True
     Caption = 'C:0'
     Color = clWhite
     Font.CharSet = ANSI_CHARSET
@@ -2304,7 +2332,6 @@ object frmCPU: TfrmCPU
     Font.Name = 'Arial Black'
     Font.Pitch = fpVariable
     Font.Quality = fqDraft
-    Font.Style = [fsBold]
     ParentFont = False
     ParentColor = False
     TabOrder = 19
@@ -2388,6 +2415,7 @@ object frmCPU: TfrmCPU
   object sgMemoria: TStringGrid
     Left = 618
     Height = 380
+    Hint = 'Memória principal com 256 bytes'
     Top = 33
     Width = 135
     Align = alRight
@@ -2455,6 +2483,7 @@ object frmCPU: TfrmCPU
   object edtClock: TEdit
     Left = 461
     Height = 28
+    Hint = 'Clock'#13#10'Gerador da temporização '#13#10'primária da UC'
     Top = 352
     Width = 43
     Alignment = taRightJustify
@@ -2467,7 +2496,6 @@ object frmCPU: TfrmCPU
     Font.Name = 'Arial Black'
     Font.Pitch = fpVariable
     Font.Quality = fqAntialiased
-    Font.Style = [fsBold]
     MaxLength = 3
     OnChange = edtClockChange
     ParentFont = False
@@ -2477,6 +2505,7 @@ object frmCPU: TfrmCPU
   object StaticText10: TStaticText
     Left = 411
     Height = 20
+    Hint = 'Clock'#13#10'Gerador da temporização '#13#10'primária da UC'
     Top = 352
     Width = 57
     Caption = 'Clock:'
@@ -2492,6 +2521,16 @@ object frmCPU: TfrmCPU
     ParentFont = False
     ParentColor = False
     TabOrder = 13
+  end
+  object shBI1: TShape
+    Left = 8
+    Height = 12
+    Hint = 'Barramento Interno'
+    Top = 193
+    Width = 482
+    Brush.Color = 13346356
+    Pen.Style = psClear
+    Shape = stRoundRect
   end
   object odLoad: TOpenDialog
     Title = 'Load binary file'

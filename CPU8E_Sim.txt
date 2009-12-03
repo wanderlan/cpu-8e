@@ -75,7 +75,7 @@ composta de 3 partes:
 
 2. Memoria - ocupando a parte direita da tela, apresenta o conteudo da Memoria
    de 256 Bytes da CPU, onde eh realcado o endereco correntemente apontado pelo
-   registrador PC. Apenas 16 posicões de memoria sao apresentadas de cada vez,
+   registrador PC. Apenas 18 posicões de memoria sao apresentadas de cada vez,
    normalmente sendo apresentadas aquelas ao redor da instrucao corrente, mas
    as demais posicões podem ser inspecionadas ou editadas a qualquer instante,
    utilizando-se a barra do rolagem ("Scrollbar" para cima ou para baixo).
@@ -136,18 +136,21 @@ Exit <Ctrl+E> - Finaliza a execucao do simulador, independentemente do estado em
 
 Help <F1> - Apresenta este arquivo.
 
-Mode  - Seleciona o modo de operacao do simulador, sendo oferecidas as seguin-
+Mode  - Seleciona o modo de execucao do simulador, sendo oferecidas as seguin-
 	tes opcões na caixa de selecao:
 
-   "Single Step" - pressione o botao ao lado caixa de selecao para selecionar este         	modo, o qual ira requerer o acionamento do botao 'Go' <Ctrl+G> para avancar
+   "Single Step" - pressione o botao ao lado caixa de selecao para selecionar este         	        		modo, o qual ira requerer o acionamento do botao 'Go' <Ctrl+G> para avancar
 	na execucao de cada microoperacao da CPU, enquanto prevalecer este 
-	modo. Os demais comandos do simulador (Pause, Halt, etc.) poderao ser acionados        	a qualquer momento.
+	modo. Os demais comandos do simulador (Pause, Halt, etc.) poderao ser acionados        	
+	a qualquer momento.
 
-   "Single Cycle" - pressione o botao ao lado da caixa de selecao para selecionar este         modo, que de forma semelhante ao modo "Single Step", oferece agora a exe-
+   "Single Cycle" - pressione o botao ao lado da caixa de selecao para selecionar este         
+	modo, que de forma semelhante ao modo "Single Step", oferece agora a exe-
 	cucao do ciclo completo de uma instrucao, instrucao a instrucao, confor-
 	me sequencia do programa.
 
-   "Full Run" - pressione o botao ao lado da caixa de selecao para selecionar este 	modo, executa completamente o programa do ponto em que estiver ate
+   "Full Run" - pressione o botao ao lado da caixa de selecao para selecionar este 	
+	modo, executa completamente o programa do ponto em que estiver ate
 	encontrar um instrucao de 'HALT' ou for interrompido por outro comando do
         simulador.
 

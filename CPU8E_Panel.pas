@@ -249,6 +249,8 @@ procedure TfrmCPU.sbHaltClick(Sender: TObject); begin
   Cmd := _Halt;
   frmCPU.ilImagens.GetBitmap(0, frmCPU.sbStatus.Picture.Bitmap);
   SetPhase(_Reset);
+  acGo.Enabled := false;
+  acPause.Enabled := false;
 end;
 
 procedure TfrmCPU.sbPauseClick(Sender: TObject); begin
@@ -339,6 +341,8 @@ procedure TfrmCPU.sbResetClick(Sender: TObject); begin
   acStatus.ImageIndex := 0;
   SetPhase(_Reset);
   ResetCPU;
+  acGo.Enabled := true;
+  acPause.Enabled := true;
 end;
 
 procedure TfrmCPU.edtClockChange(Sender: TObject); begin
