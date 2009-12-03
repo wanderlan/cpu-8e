@@ -13,7 +13,7 @@
       <UseAppBundle Value="False"/>
       <Icon Value="0"/>
       <UseXPManifest Value="True"/>
-      <ActiveEditorIndexAtStart Value="0"/>
+      <ActiveEditorIndexAtStart Value="2"/>
     </General>
     <i18n>
       <EnableI18N Value="True"/>
@@ -92,7 +92,7 @@
         <Filename Value="CPU8E_Oper.pas"/>
         <UnitName Value="CPU8E_Oper"/>
         <CursorPos X="13" Y="123"/>
-        <TopLine Value="114"/>
+        <TopLine Value="110"/>
         <EditorIndex Value="4"/>
         <UsageCount Value="51"/>
         <Loaded Value="True"/>
@@ -101,8 +101,8 @@
       <Unit6>
         <Filename Value="CPU8E.pas"/>
         <UnitName Value="CPU8E"/>
-        <CursorPos X="1" Y="1"/>
-        <TopLine Value="1"/>
+        <CursorPos X="37" Y="128"/>
+        <TopLine Value="94"/>
         <EditorIndex Value="2"/>
         <UsageCount Value="51"/>
         <Loaded Value="True"/>
@@ -167,40 +167,40 @@
         <UsageCount Value="3"/>
       </Unit14>
       <Unit15>
-        <Filename Value="C:\lazarus\lcl\comctrls.pp"/>
+        <Filename Value="..\..\..\..\lazarus\lcl\comctrls.pp"/>
         <UnitName Value="ComCtrls"/>
         <CursorPos X="35" Y="1259"/>
         <TopLine Value="1255"/>
         <UsageCount Value="8"/>
       </Unit15>
       <Unit16>
-        <Filename Value="C:\lazarus\lcl\include\progressbar.inc"/>
+        <Filename Value="..\..\..\..\lazarus\lcl\include\progressbar.inc"/>
         <CursorPos X="31" Y="291"/>
         <TopLine Value="290"/>
         <UsageCount Value="8"/>
       </Unit16>
       <Unit17>
-        <Filename Value="C:\lazarus\lcl\controls.pp"/>
+        <Filename Value="..\..\..\..\lazarus\lcl\controls.pp"/>
         <UnitName Value="Controls"/>
         <CursorPos X="31" Y="278"/>
         <TopLine Value="276"/>
         <UsageCount Value="12"/>
       </Unit17>
       <Unit18>
-        <Filename Value="C:\lazarus\lcl\include\control.inc"/>
+        <Filename Value="..\..\..\..\lazarus\lcl\include\control.inc"/>
         <CursorPos X="1" Y="4159"/>
         <TopLine Value="4142"/>
         <UsageCount Value="13"/>
       </Unit18>
       <Unit19>
-        <Filename Value="C:\lazarus\lcl\forms.pp"/>
+        <Filename Value="..\..\..\..\lazarus\lcl\forms.pp"/>
         <UnitName Value="Forms"/>
         <CursorPos X="16" Y="721"/>
         <TopLine Value="704"/>
         <UsageCount Value="12"/>
       </Unit19>
       <Unit20>
-        <Filename Value="C:\lazarus\lcl\propertystorage.pas"/>
+        <Filename Value="..\..\..\..\lazarus\lcl\propertystorage.pas"/>
         <UnitName Value="PropertyStorage"/>
         <CursorPos X="39" Y="95"/>
         <TopLine Value="95"/>
@@ -214,14 +214,14 @@
         <UsageCount Value="10"/>
       </Unit21>
       <Unit22>
-        <Filename Value="C:\lazarus\lcl\imglist.pp"/>
+        <Filename Value="..\..\..\..\lazarus\lcl\imglist.pp"/>
         <UnitName Value="ImgList"/>
         <CursorPos X="36" Y="107"/>
         <TopLine Value="104"/>
         <UsageCount Value="10"/>
       </Unit22>
       <Unit23>
-        <Filename Value="C:\lazarus\lcl\lclclasses.pp"/>
+        <Filename Value="..\..\..\..\lazarus\lcl\lclclasses.pp"/>
         <UnitName Value="LCLClasses"/>
         <CursorPos X="3" Y="85"/>
         <TopLine Value="52"/>
@@ -371,12 +371,13 @@
       <Optimizations>
         <VariablesInRegisters Value="True"/>
         <UncertainOptimizations Value="True"/>
+        <OptimizationLevel Value="3"/>
       </Optimizations>
     </CodeGeneration>
     <Linking>
       <Debugging>
-        <GenerateDebugInfo Value="True"/>
-        <UseExternalDbgSyms Value="True"/>
+        <UseLineInfoUnit Value="False"/>
+        <StripSymbols Value="True"/>
       </Debugging>
       <LinkSmart Value="True"/>
       <Options>
