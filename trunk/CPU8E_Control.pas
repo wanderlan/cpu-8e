@@ -41,8 +41,6 @@ Unit CPU8E_Control;
 
 Interface
 
-uses SysUtils,CPU8E_Utils,CPU8E;
-
 var
 // Define o estado atual da Unidade de Controle
  UControl: record
@@ -65,7 +63,9 @@ procedure RunStep;
 
 Implementation
 
-uses StdCtrls, Graphics, Dialogs, ExtCtrls, CPU8E_Panel, Forms;
+uses
+  SysUtils, StdCtrls, Graphics, Dialogs, ExtCtrls, Forms,
+  CPU8E_Utils, CPU8E, CPU8E_Panel;
 
 var
   LastR        : array of byte = nil;
@@ -274,9 +274,9 @@ begin
       _CMP: begin
                MemToMDR;
                A := ACC; // transfere ACC para entrada da ULA
+               PulseClock([A], [stA], [shACCOut1, shACCOut2, shBI1, shBI2, shBI3, shAIn1, shAIn2]);
                B := MDR; // trasfere valor para entrada da ULA
-               PulseClock([A, B], [stA, stB],
-                 [shACCOut1, shACCOut2, shMDROut1, shMDROut2, shBI1, shBI2, shBI3, shAIn1, shAIn2, shBIn1, shBIn2]);
+               PulseClock([B], [stB], [shMDROut1, shMDROut2, shBI1, shBI2, shBI3, shBIn1, shBIn2]);
                ProcessULA; // computa resultado da operacao
             end;
       _ADD,
@@ -285,9 +285,9 @@ begin
       _XOR: begin
                MemToMDR;
                A := ACC; // transfere ACC para entrada da ULA
+               PulseClock([A], [stA], [shACCOut1, shACCOut2, shBI1, shBI2, shBI3, shAIn1, shAIn2]);
                B := MDR; // trasfere valor para entrada da ULA
-               PulseClock([A, B], [stA, stB],
-                 [shACCOut1, shACCOut2, shMDROut1, shMDROut2, shBI1, shBI2, shBI3, shAIn1, shAIn2, shBIn1, shBIn2]);
+               PulseClock([B], [stB], [shMDROut1, shMDROut2, shBI1, shBI2, shBI3, shBIn1, shBIn2]);
                ProcessULA;                // computa resultado da operacao
                ACC := ULA.Value; // coloca resultado em ACC
                PulseClock([ACC], [stACC], [shULAOut1, shULAOut2, shBI1, shBI2, shBI3, shACCIn1, shACCIn2]);
@@ -311,14 +311,14 @@ begin
     if DW then begin // se instrucao de 2 palavras ...
       // PC aponta para a segunda palavra
       PCToMAR;
+      inc(PC);
+      PulseClock([PC], [stPC], []);
       if ED then begin // se enderecamento direto ...
         // subciclo S = 1
         MemToMDR;
         MAR := MDR;
-        PulseClock([MAR], [stMAR], [shMDROut1, shMDROut2, shBI1, shBI2, shBI3, shMARIn1, shMARIn2]);
+        PulseClock([MAR], [stMAR], [shMDROut1, shMDROut2, shBI1, shBI2, shBI3, shMARIn1, shMARIn2, shMAROut3, shMAROut4, shBE1, ShBE2]);
       end;
-      inc(PC);
-      PulseClock([PC], [stPC], []);
     end;
   end;
   with UControl do begin
@@ -336,9 +336,9 @@ begin
       { Mostra onde estamos }
       SetPhase(_Fetch);
       PCToMAR;
+      inc(PC); PulseClock([PC], [stPC], []);
       MemToMDR; // Le OPCode
       IR := MDR; PulseClock([IR], [stIR], [shMDROut1, shMDROut2, shBI1,shBI2, shBI3, shIRIn1, shIRIn2]); // coloca em IR
-      inc(PC); PulseClock([PC], [stPC], []);
       // Decodifica OpCode
       case IR of
             $00: OpCode := _HLT;
@@ -404,6 +404,7 @@ procedure RunStep; begin
      2: Execute;
      3: Cmd := _Halt;
   end;
+  Application.ProcessMessages;
 end;
 
 procedure RunProgram;

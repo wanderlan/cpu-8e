@@ -40,7 +40,7 @@ Unit CPU8E;
 
 Interface
 
-uses StdCtrls,SysUtils;
+uses StdCtrls;
 
 type
 // Define a representacao interna, para o simulador, dos OpCodes definidos
@@ -125,7 +125,7 @@ const
    DirectMask = $40;    // bir identificador de enderecamento direto
 
 // Identificador do programa e versao
-   ProgName = 'CPU-8E Simulator V2.0';
+   ProgName = 'CPU-8E Simulator V2.0a';
    Author   = '(R) Prof. Joel Guilherme (IESB)';
 
 procedure CPU_Reset;
@@ -143,7 +143,7 @@ function LenReg(Item : TStaticText) : integer;
 
 Implementation
 
-uses CPU8E_Panel, Forms, Grids, Graphics, Math;
+uses SysUtils, Forms, Grids, Graphics, Math, CPU8E_Panel;
 
 procedure CPU_Reset;
 { Reinicia a CPU, zerando todos os registradores e ressetando variaveis }
