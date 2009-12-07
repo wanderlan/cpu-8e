@@ -42,7 +42,7 @@ Unit CPU8E_Oper;
 
 interface
 
-uses Crt,SysUtils,CPU8E,CPU8E_Utils,CPU8E_Control;
+uses SysUtils,CPU8E,CPU8E_Utils,CPU8E_Control;
 
 function LoadFile(fname : string) : integer;
 { Faz a carga de um arquivo executavel pela CPU-8E para sua "memoria" }
@@ -63,7 +63,7 @@ var
 
 implementation
 
-uses DOS, Dialogs;
+uses Dialogs;
 
 function LoadFile(fname : string) : integer;
 { Faz a carga de um arquivo executavel pela CPU-8E para sua "memoria" }

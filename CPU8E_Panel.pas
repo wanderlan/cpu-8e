@@ -226,7 +226,7 @@ var
 implementation
 
 uses
-  Dos, CPU8E_Utils, CPU8E_Oper, CPU8E_Control;
+  CPU8E_Utils, CPU8E_Oper, CPU8E_Control;
 
 { TfrmCPU }
 
@@ -276,6 +276,11 @@ end;
 procedure TfrmCPU.sgMemoriaSetEditText(Sender: TObject; ACol, ARow: Integer; const Value: string); begin
   CPU.Mem[ARow-1] := StrToIntDef('$' + Value, 0);
   sgMemoria.Cells[ACol, ARow] := IntToHex(CPU.Mem[ARow-1], 2);
+  ProgramLoaded   := CPU.Mem[0] <> 0;
+  acGo.Enabled    := ProgramLoaded;
+  acPause.Enabled := ProgramLoaded;
+  acHalt.Enabled  := ProgramLoaded;
+  acReset.Enabled := ProgramLoaded;
 end;
 
 procedure TfrmCPU.spExitClick(Sender: TObject); begin
@@ -294,7 +299,7 @@ procedure TfrmCPU.sbGoClick(Sender: TObject); begin
 end;
 
 procedure TfrmCPU.spHelpClick(Sender: TObject); begin
-  Exec('Notepad.exe', 'CPU8E_Sim.txt');
+  ExecuteProcess('Notepad.exe', 'CPU8E_Sim.txt');
 end;
 
 procedure TfrmCPU.LoadMem;
@@ -338,7 +343,7 @@ procedure TfrmCPU.SetPhase(Phase : PhaseType); begin
 end;
 
 procedure TfrmCPU.sbResetClick(Sender: TObject); begin
-  acStatus.ImageIndex := 0;
+  frmCPU.ilImagens.GetBitmap(0, frmCPU.sbStatus.Picture.Bitmap);
   SetPhase(_Reset);
   ResetCPU;
   acGo.Enabled := true;

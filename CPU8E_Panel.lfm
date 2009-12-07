@@ -15,7 +15,7 @@ object frmCPU: TfrmCPU
   Position = poScreenCenter
   SessionProperties = 'edtClock.Text;cbMode.ItemIndex'
   ShowHint = True
-  LCLVersion = '0.9.27'
+  LCLVersion = '0.9.29'
   object Shape68: TShape
     Left = 102
     Height = 6
@@ -2179,11 +2179,11 @@ object frmCPU: TfrmCPU
   object stDI: TStaticText
     Left = 51
     Height = 24
-    Hint = 'Decodificador de Instruções'
+    Hint = 'Instruction Decoder: Decodificador de Instruções'
     Top = 335
     Width = 104
     Alignment = taCenter
-    Caption = 'DI:NOP'
+    Caption = 'ID:NOP'
     Color = clSilver
     Font.CharSet = ANSI_CHARSET
     Font.Color = clBlack

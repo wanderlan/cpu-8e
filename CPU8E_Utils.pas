@@ -40,7 +40,7 @@ Unit CPU8e_Utils;
 
 interface
 
-uses DOS,SysUtils;
+uses SysUtils;
 
 procedure SetLocalDir;
 { Estabelece diretorio local do programa }
