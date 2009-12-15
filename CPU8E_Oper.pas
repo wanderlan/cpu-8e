@@ -1,4 +1,4 @@
-Unit CPU8E_Oper;
+unit CPU8E_Oper;
 
 {
   CPU-8E Simulator
