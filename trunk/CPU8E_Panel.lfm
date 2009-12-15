@@ -2,12 +2,12 @@ object frmCPU: TfrmCPU
   Left = 337
   Height = 416
   Top = 232
-  Width = 753
+  Width = 819
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
   Caption = 'CPU-8E Simulador V2.0 - (R) Prof. Joel Guilherme (IESB)'
   ClientHeight = 416
-  ClientWidth = 753
+  ClientWidth = 819
   Color = clWhite
   Font.Color = 16744576
   OnClose = FormClose
@@ -15,7 +15,7 @@ object frmCPU: TfrmCPU
   Position = poScreenCenter
   SessionProperties = 'edtClock.Text;cbMode.ItemIndex'
   ShowHint = True
-  LCLVersion = '0.9.29'
+  LCLVersion = '0.9.28.2'
   object Shape68: TShape
     Left = 102
     Height = 6
@@ -1112,11 +1112,11 @@ object frmCPU: TfrmCPU
     Left = 0
     Height = 33
     Top = 0
-    Width = 753
+    Width = 819
     Align = alTop
     BevelInner = bvLowered
     ClientHeight = 33
-    ClientWidth = 753
+    ClientWidth = 819
     ParentColor = False
     TabOrder = 25
     object shFetch: TShape
@@ -1835,7 +1835,7 @@ object frmCPU: TfrmCPU
       Shape = bsLeftLine
     end
     object sbStatus: TImage
-      Left = 688
+      Left = 755
       Height = 32
       Hint = 'Status do processador'#13#10'Vermelho = Halt'#13#10'Amarelo   = Pause'#13#10'Verde       = Run '
       Top = 0
@@ -2023,7 +2023,7 @@ object frmCPU: TfrmCPU
       TabOrder = 1
     end
     object StaticText26: TStaticText
-      Left = 638
+      Left = 705
       Height = 16
       Hint = 'Status do processador'#13#10'Vermelho = Halt'#13#10'Amarelo   = Pause'#13#10'Verde       = Run'
       Top = 8
@@ -2424,15 +2424,15 @@ object frmCPU: TfrmCPU
     TabOrder = 23
   end
   object sgMemoria: TStringGrid
-    Left = 618
+    Left = 617
     Height = 383
     Hint = 'Memória principal com 256 bytes'
     Top = 33
-    Width = 135
+    Width = 202
     Align = alRight
     AlternateColor = 16776948
     AutoAdvance = aaDown
-    ColCount = 2
+    ColCount = 3
     Columns = <    
       item
         Alignment = taCenter
@@ -2451,6 +2451,18 @@ object frmCPU: TfrmCPU
         Font.Quality = fqDraft
         Title.Caption = 'Memory'
         Width = 57
+      end    
+      item
+        Alignment = taCenter
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Pitch = fpVariable
+        Font.Quality = fqDraft
+        ReadOnly = True
+        Title.Caption = 'Assembly'
+        Width = 67
       end>
     DefaultColWidth = 30
     ExtendedSelect = False

@@ -116,7 +116,7 @@ var
 const
    NumOpCodes = 14;
 // Forma simbolica para os OpCodes
-   OpCodeStr: array[0..(NumOpCodes)] of string[3]
+   OpCodeStr: array[OpCodeType] of string[3]
               = ('HLT','NOP','NOT','JMP','JEQ','JGT','JGE','STO','LOD',
                  'CMP','ADD','SUB','AND','XOR','XXX');
 // Mascaras para isolar areas do IR
@@ -199,7 +199,7 @@ begin
     ShowReg(stA,A);
     ShowReg(stB,B);
     ShowReg(stULA,ULA.Value);
-    ShowReg(stDI, OpCodeStr[Byte(OpCode)]);
+    ShowReg(stDI, OpCodeStr[OpCode]);
     ShowReg(stZ, Byte(ULA.Z));
     ShowReg(stN, Byte(ULA.N));
     ShowReg(stC, Byte(ULA.C));
@@ -222,7 +222,7 @@ begin
   TSG(frmCPU.sgMemoria).MoveExtend(false, 0, Current);
   Sel.Left   := 0;
   Sel.Top    := Current;
-  Sel.Right  := 1;
+  Sel.Right  := 2;
   Sel.Bottom := Current;
   frmCPU.sgMemoria.Selection := Sel;
   Application.ProcessMessages;

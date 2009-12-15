@@ -305,9 +305,28 @@ end;
 procedure TfrmCPU.LoadMem;
 var
   I : integer;
+  OpCode, OpCodeAnt : OpCodeType;
+  DW, ED : boolean;
 begin
-  for I := 0 to 255 do
+  for I := 0 to 255 do begin
     sgMemoria.Cells[1, I+1] := IntToHex(CPU.Mem[I], 2);
+    sgMemoria.Cells[2, I+1] := '';
+  end;
+  // Disassembler
+  I := 0;
+  OpCodeAnt := _Invalid;
+  while true do begin
+    OpCodeAnt := OpCode;
+    DecodeOpCode(CPU.Mem[I], OpCode, DW, ED);
+    if (OpCode = OpCodeAnt) and (OpCode = _HLT) then exit;
+    sgMemoria.Cells[2, I+1] := OpCodeStr[OpCode];
+    if DW then begin
+      inc(I);
+      sgMemoria.Cells[2, I+1] := IntToHex(CPU.Mem[I], 2);
+      if ED then sgMemoria.Cells[2, I+1] := '[' + sgMemoria.Cells[2, I+1] + ']';
+    end;
+    inc(I);
+  end;
 end;
 
 procedure TfrmCPU.StoreMem;
