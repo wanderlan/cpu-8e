@@ -1,4 +1,4 @@
-			CPU8E_Sim v2.0 - 11/2009
+			CPU8E_Sim v2.0 - 12/2009
 
                           Simulador da CPU-8E
 
@@ -38,7 +38,7 @@
      Versão: 1.0b - 29/04/2009 - Corrigido problema na sinalizacao de Carry
      Versão: 2.0  - 28/11/2009 - Interface caractere substituida por interface
                                  grafica construida no Lazarus
-
+     Versão: 2.1  - 16/12/2009 - Disassembler.
 --------------------------------------------------------------------------------
 
 (*
@@ -74,11 +74,12 @@ composta de 3 partes:
 	Clock: Valor corrente do "clock" da CPU
 
 2. Memoria - ocupando a parte direita da tela, apresenta o conteudo da Memoria
-   de 256 Bytes da CPU, onde eh realcado o endereco correntemente apontado pelo
-   registrador PC. Apenas 18 posicões de memoria sao apresentadas de cada vez,
-   normalmente sendo apresentadas aquelas ao redor da instrucao corrente, mas
-   as demais posicões podem ser inspecionadas ou editadas a qualquer instante,
-   utilizando-se a barra do rolagem ("Scrollbar" para cima ou para baixo).
+   de 256 Bytes da CPU, em hexadecimal e em Assembly. O endereco correntemente
+   apontado pelo registrador PC eh destacado. Apenas 18 posicões de memoria 
+   sao apresentadas de cada vez, normalmente sendo apresentadas aquelas ao redor
+   da instrucao corrente, mas as demais posicões podem ser inspecionadas ou 
+   editadas a qualquer instante, utilizando-se a barra do rolagem ("Scrollbar" 
+   para cima ou para baixo). 
 
 3. Barra de Ferramentas (Toolbar) - ocupando a parte superior da tela. Nesta
    area estao os comandos operacionais do simulador para o usuario, permitindo a
@@ -99,7 +100,10 @@ OPERACAO DO SIMULADOR:
 Na parte superior da tela, encontra-se a barra de ferramentas (Toolbar) que 
 contem os principais comandos disponiveis: 'Load', 'Save', 'Go', 'Edit', 'Pause', 
 'Halt', 'Reset', 'Exit', 'Help' e os indicadores de 'Mode', 'Phase' e 'Status'. 
-Cada um destes comandos eh acessivel acionando-se o botão correspondente na toolbar ou pressionando-se a tecla <Ctrl> e uma letra correspondente a um comando. Por exemplo pressionando-se <Ctrl+L> o comando 'Load' eh executado, pressionando-se a tecla <Ctrl+G> o comando 'Go' eh executado e assim por diante. 
+Cada um destes comandos eh acessivel acionando-se o botão correspondente na toolbar
+ou pressionando-se a tecla <Ctrl> e uma letra correspondente a um comando. 
+Por exemplo pressionando-se <Ctrl+L> o comando 'Load' eh executado, 
+pressionando-se a tecla <Ctrl+G> o comando 'Go' eh executado e assim por diante. 
 
 COMANDOS DA BARRA DE FERRAMENTAS "TOOLBAR":
 
@@ -139,7 +143,8 @@ Help <F1> - Apresenta este arquivo.
 Mode  - Seleciona o modo de execucao do simulador, sendo oferecidas as seguin-
 	tes opcões na caixa de selecao:
 
-   "Single Step" - pressione o botao ao lado caixa de selecao para selecionar este         	        		modo, o qual ira requerer o acionamento do botao 'Go' <Ctrl+G> para avancar
+   "Single Step" - pressione o botao ao lado caixa de selecao para selecionar este
+	modo, o qual ira requerer o acionamento do botao 'Go' <Ctrl+G> para avancar
 	na execucao de cada microoperacao da CPU, enquanto prevalecer este 
 	modo. Os demais comandos do simulador (Pause, Halt, etc.) poderao ser acionados        	
 	a qualquer momento.
@@ -166,7 +171,9 @@ Status - Indicador do status da CPU: Vermelho=Halt, Amarelo=Pause e Verde=Run.
 
 EDICAO DA MEMORIA:
 
-Para editar a memora basta colocar o mouse sobre a celula a ser editada e digitar o novo valor em hexadecimal. A memoria rejeita, automaticamente, quaisquer valores invalidos.
+Para editar a memora basta colocar o mouse sobre a celula a ser editada e digitar
+o novo valor em hexadecimal. O programa Assembly correspondente é atualizado 
+automaticamente.A memoria rejeita, automaticamente, quaisquer valores invalidos.
 
 ALTERACAO DO CLOCK:
 
@@ -188,4 +195,4 @@ Alunos: Barbara A.B. dos Anjos e Wanderlan Santos dos Anjos
 
 http://cpu-8e.googlecode.com
 
-BSB, 30/11/2009
+BSB, 16/12/2009
