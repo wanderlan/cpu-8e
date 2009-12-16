@@ -30,6 +30,8 @@ Unit CPU8E;
     Versão: 1.0b - 28/04/2009 - Registradores CPU.A e CPU.B (ULA) foram
                                 redefinidos como do tipo "Byte"
                               - Corrigida lógica de geração dos flags da ULA.
+    Versão: 2.0  - 30/11/2009 - Nova interface gráfica.
+    Versão: 2.1  - 16/12/2009 - Disassembler.
 }
 
 {
@@ -105,13 +107,11 @@ var
       DW: boolean;                  // Flag indicando Instrucao de 2 palavras
       ED: boolean;                  // Flag indicando Enderecamento Direto
       Mem: packed array[0..255] of byte;   // Memoria de 256 Bytes
+      LenProg : integer;            // Tamanho do programa carregado na memória
     end;
 
     Cmd, LastCmd: CmdType;          // Comando do usuario
     CPUMode : ModeType = _Step;     // Modo de operacao selecionado
-
-    ProgramLoaded: boolean;         // Flag indicando programa (para a CPU-8E
-                                    // carregado em memoria
 
 const
    NumOpCodes = 14;
@@ -125,7 +125,7 @@ const
    DirectMask = $40;    // bir identificador de enderecamento direto
 
 // Identificador do programa e versao
-   ProgName = 'CPU-8E Simulator V2.0a';
+   ProgName = 'CPU-8E Simulator V2.1';
    Author   = '(R) Prof. Joel Guilherme (IESB)';
 
 procedure CPU_Reset;

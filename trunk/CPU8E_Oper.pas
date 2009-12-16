@@ -31,6 +31,8 @@ unit CPU8E_Oper;
     Versão: 1.0b - 28/04/2009 - Registradores CPU.A e CPU.B (ULA) foram
                                 redefinidos como do tipo "Byte"
                               - Corrigida lógica de geração dos flags da ULA.
+    Versão: 2.0  - 30/11/2009 - Nova interface gráfica.
+    Versão: 2.1  - 16/12/2009 - Disassembler.
 }
 
 {
@@ -71,7 +73,7 @@ var
   f : file;
 begin
   Cmd := _Halt;               // pausa a CPU após esta operacao
-  assign(f,fname);
+  assign(f, fname);
   {$I-}
   reset(f,1);
   if IOResult <> 0 then begin  // se houve erro na abertura do arquivo ...
@@ -81,58 +83,52 @@ begin
     exit;
   end;
   fillchar(CPU.Mem, sizeof(CPU.Mem), 0);
-  blockread(f,CPU.Mem,sizeof(CPU.Mem),Result);  // le arquivo completo
+  blockread(f, CPU.Mem, sizeof(CPU.Mem), CPU.LenProg);  // le arquivo completo
+  Result := CPU.LenProg;
   close(f);
   {$I+}
-  ProgramLoaded := true;       // sinaliza que programa carregado Ok
 end;
 
 function SaveFile(fname : string) : integer;
 { Salva o conteudo da memoria para um arquivo binario }
 var
   f : file;
-  I : integer;
 begin
   assign(f,fname);
   {$I-}
   rewrite(f,1);
   if IOResult <> 0 then begin  // se houve erro na gravação do arquivo ...
-    close(f);
     Buzz;
     Result := -1;
   end
-  else begin
-    for I := sizeof(CPU.Mem)-1 downto 0 do
-      if CPU.Mem[I] <> 0 then break; // acha fim do programa
-    if I > 255 then I := 255;
-    blockwrite(f, CPU.Mem, I+1, Result);  // grava arquivo completo
-    close(f);
-  end;
+  else
+    blockwrite(f, CPU.Mem, CPU.LenProg, Result);  // grava arquivo completo
+  close(f);
   {$I+}
 end;
 
 procedure Run;
 { Executa o arquivo em memoria pela CPU simulada }
 begin
-   if not ProgramLoaded then begin   // se nao ha programa carregado ...
-      Buzz;
-      ShowMessage('Nenhum programa carregado em memoria!');
-      Cmd := _Halt;
+   if CPU.LenProg = 0 then begin   // se nao ha programa carregado ...
+     Buzz;
+     ShowMessage('Nenhum programa carregado em memoria!');
+     Cmd := _Halt;
    end
    else
-      RunProgram;            // executa o programa
+     RunProgram;            // executa o programa
    if UControl.S = 3 then    // se programa terminou ...
-      Cmd := _Halt;
+     Cmd := _Halt;
 end;
 
 procedure ResetCPU;
 { Executa um "hardware reset" da CPU simulada }
 begin
-   CPU_Reset;                   // executa o reset da CPU e ...
-   UControl.S := 0;             // das variaveis de controle
-   UControl.T := 0;
-   ShowMem(CPU.PC);             // atualiza display da memoria
-   ShowCPU;                     // atualiza display da CPU
+  CPU_Reset;                   // executa o reset da CPU e ...
+  UControl.S := 0;             // das variaveis de controle
+  UControl.T := 0;
+  ShowMem(CPU.PC);             // atualiza display da memoria
+  ShowCPU;                     // atualiza display da CPU
 end;
 
 procedure SetClock;

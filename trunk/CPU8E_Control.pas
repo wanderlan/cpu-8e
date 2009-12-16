@@ -31,6 +31,8 @@ unit CPU8E_Control;
     Versão: 1.0b - 28/04/2009 - Registradores CPU.A e CPU.B (ULA) foram
                                 redefinidos como do tipo "Byte"
                               - Corrigida lógica de geração dos flags da ULA.
+    Versão: 2.0  - 30/11/2009 - Nova interface gráfica.
+    Versão: 2.1  - 16/12/2009 - Disassembler.
 }
 
 {
