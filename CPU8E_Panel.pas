@@ -212,6 +212,7 @@ type
     procedure spHelpClick(Sender: TObject);
     procedure sbResetClick(Sender: TObject);
   private
+    procedure Disassembler;
     procedure LoadMem;
     procedure StoreMem;
     { private declarations }
@@ -276,11 +277,12 @@ end;
 procedure TfrmCPU.sgMemoriaSetEditText(Sender: TObject; ACol, ARow: Integer; const Value: string); begin
   CPU.Mem[ARow-1] := StrToIntDef('$' + Value, 0);
   sgMemoria.Cells[ACol, ARow] := IntToHex(CPU.Mem[ARow-1], 2);
-  ProgramLoaded   := CPU.Mem[0] <> 0;
-  acGo.Enabled    := ProgramLoaded;
-  acPause.Enabled := ProgramLoaded;
-  acHalt.Enabled  := ProgramLoaded;
-  acReset.Enabled := ProgramLoaded;
+  if ARow > CPU.LenProg then CPU.LenProg := ARow;
+  Disassembler;
+  acGo.Enabled    := CPU.LenProg <> 0;
+  acPause.Enabled := acGo.Enabled;
+  acHalt.Enabled  := acGo.Enabled;
+  acReset.Enabled := acGo.Enabled;
 end;
 
 procedure TfrmCPU.spExitClick(Sender: TObject); begin
@@ -302,31 +304,36 @@ procedure TfrmCPU.spHelpClick(Sender: TObject); begin
   ExecuteProcess('Notepad.exe', 'CPU8E_Sim.txt');
 end;
 
+// Disassembla o programa carregado em memória
+procedure TfrmCPU.Disassembler;
+var
+  I : integer;
+  OpCode : OpCodeType;
+  DW, ED : boolean;
+begin
+  I := 0;
+  while I < CPU.LenProg do begin
+    DecodeOpCode(CPU.Mem[I], OpCode, DW, ED);
+    sgMemoria.Cells[2, I+1] := OpCodeStr[OpCode];
+    if DW then begin // Double word, instrução tem operando
+      inc(I);
+      sgMemoria.Cells[2, I+1] := IntToHex(CPU.Mem[I], 2);
+      if ED then // Endereçamento direto
+        sgMemoria.Cells[2, I+1] := '[' + sgMemoria.Cells[2, I+1] + ']';
+    end;
+    inc(I);
+  end;
+end;
+
 procedure TfrmCPU.LoadMem;
 var
   I : integer;
-  OpCode, OpCodeAnt : OpCodeType;
-  DW, ED : boolean;
 begin
   for I := 0 to 255 do begin
     sgMemoria.Cells[1, I+1] := IntToHex(CPU.Mem[I], 2);
     sgMemoria.Cells[2, I+1] := '';
   end;
-  // Disassembler
-  I := 0;
-  OpCodeAnt := _Invalid;
-  while true do begin
-    OpCodeAnt := OpCode;
-    DecodeOpCode(CPU.Mem[I], OpCode, DW, ED);
-    if (OpCode = OpCodeAnt) and (OpCode = _HLT) then exit;
-    sgMemoria.Cells[2, I+1] := OpCodeStr[OpCode];
-    if DW then begin
-      inc(I);
-      sgMemoria.Cells[2, I+1] := IntToHex(CPU.Mem[I], 2);
-      if ED then sgMemoria.Cells[2, I+1] := '[' + sgMemoria.Cells[2, I+1] + ']';
-    end;
-    inc(I);
-  end;
+  Disassembler;
 end;
 
 procedure TfrmCPU.StoreMem;
@@ -382,13 +389,9 @@ procedure TfrmCPU.edtClockChange(Sender: TObject); begin
   shClock2.Brush.Color := $DFDF;
 end;
 
-procedure TfrmCPU.acLoadExecute(Sender: TObject);
-var
-  NRead : integer;
-begin
+procedure TfrmCPU.acLoadExecute(Sender: TObject); begin
   if odLoad.Execute then begin
-    NRead := LoadFile(odLoad.FileName);
-    if NRead >=0 then begin
+    if LoadFile(odLoad.FileName) >= 0 then begin
       sbResetClick(nil);
       LoadMem;
       ShowMem(CPU.PC); // atualiza display da memoria
@@ -398,7 +401,7 @@ begin
       acPause.Enabled := true;
       acHalt.Enabled  := true;
       acReset.Enabled := true;
-      ShowMessage('Foram lidos ' + IntToStr(NRead) + '(' + IntToHex(NRead, 2) + 'h) bytes para a memória.');
+      ShowMessage('Foram lidos ' + IntToStr(CPU.LenProg) + '(' + IntToHex(CPU.LenProg, 2) + 'h) bytes para a memória.');
     end
     else
       ShowMessage('Erro ao carregar arquivo ' + odLoad.FileName);
