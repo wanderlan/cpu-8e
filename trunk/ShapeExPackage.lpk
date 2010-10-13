@@ -3,11 +3,12 @@
   <Package Version="3">
     <PathDelim Value="\"/>
     <Name Value="ShapeExPackage"/>
+    <Author Value="Wanderlan Santos dos Anjos"/>
     <CompilerOptions>
       <Version Value="8"/>
       <PathDelim Value="\"/>
       <SearchPaths>
-        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)\"/>
+        <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
       </SearchPaths>
       <Parsing>
         <SyntaxOptions>
@@ -18,6 +19,8 @@
         <CompilerPath Value="$(CompPath)"/>
       </Other>
     </CompilerOptions>
+    <Description Value="Acrescenta triângulos ao TShape"/>
+    <License Value="GPL 3"/>
     <Version Major="1"/>
     <Files Count="1">
       <Item1>
