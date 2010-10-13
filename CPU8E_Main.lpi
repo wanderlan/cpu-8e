@@ -47,7 +47,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="10" Y="9"/>
-        <UsageCount Value="157"/>
+        <UsageCount Value="164"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit0>
@@ -57,12 +57,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="CPU8E_Panel"/>
-        <IsVisibleTab Value="True"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
-        <CursorPos X="27" Y="34"/>
-        <UsageCount Value="76"/>
+        <CursorPos X="33" Y="36"/>
+        <UsageCount Value="80"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit1>
@@ -71,7 +70,7 @@
         <UnitName Value="CPU8E_Simulator"/>
         <TopLine Value="54"/>
         <CursorPos X="21" Y="69"/>
-        <UsageCount Value="33"/>
+        <UsageCount Value="32"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit2>
       <Unit3>
@@ -79,7 +78,7 @@
         <UnitName Value="CPU8e_Utils"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
-        <UsageCount Value="47"/>
+        <UsageCount Value="46"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit3>
       <Unit4>
@@ -87,7 +86,7 @@
         <UnitName Value="CPU8E_Oper"/>
         <TopLine Value="14"/>
         <CursorPos X="1" Y="36"/>
-        <UsageCount Value="50"/>
+        <UsageCount Value="49"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit4>
       <Unit5>
@@ -95,7 +94,7 @@
         <UnitName Value="CPU8E"/>
         <TopLine Value="20"/>
         <CursorPos X="1" Y="35"/>
-        <UsageCount Value="50"/>
+        <UsageCount Value="49"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit5>
       <Unit6>
@@ -103,14 +102,14 @@
         <UnitName Value="Grids"/>
         <TopLine Value="875"/>
         <CursorPos X="15" Y="897"/>
-        <UsageCount Value="1"/>
+        <UsageCount Value="0"/>
       </Unit6>
       <Unit7>
         <Filename Value="CPU8E_Control.pas"/>
         <UnitName Value="CPU8E_Control"/>
         <TopLine Value="15"/>
         <CursorPos X="1" Y="36"/>
-        <UsageCount Value="75"/>
+        <UsageCount Value="74"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit7>
       <Unit8>
@@ -118,13 +117,13 @@
         <UnitName Value="ComCtrls"/>
         <TopLine Value="1255"/>
         <CursorPos X="35" Y="1259"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit8>
       <Unit9>
         <Filename Value="C:\lazarus\lcl\include\progressbar.inc"/>
         <TopLine Value="290"/>
         <CursorPos X="31" Y="291"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit9>
       <Unit10>
         <Filename Value="C:\lazarus\lcl\controls.pp"/>
@@ -132,48 +131,48 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1977"/>
         <CursorPos X="15" Y="1999"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit10>
       <Unit11>
         <Filename Value="C:\lazarus\lcl\include\control.inc"/>
         <TopLine Value="4142"/>
         <CursorPos X="1" Y="4159"/>
-        <UsageCount Value="8"/>
+        <UsageCount Value="7"/>
       </Unit11>
       <Unit12>
         <Filename Value="C:\lazarus\lcl\forms.pp"/>
         <UnitName Value="Forms"/>
         <TopLine Value="704"/>
         <CursorPos X="16" Y="721"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit12>
       <Unit13>
         <Filename Value="C:\lazarus\lcl\propertystorage.pas"/>
         <UnitName Value="PropertyStorage"/>
         <TopLine Value="95"/>
         <CursorPos X="39" Y="95"/>
-        <UsageCount Value="7"/>
+        <UsageCount Value="6"/>
       </Unit13>
       <Unit14>
         <Filename Value="..\..\..\ExtPascal\CGIGateway.dpr"/>
         <UnitName Value="CGIGateway"/>
         <TopLine Value="46"/>
         <CursorPos X="1" Y="46"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
       </Unit14>
       <Unit15>
         <Filename Value="C:\lazarus\lcl\imglist.pp"/>
         <UnitName Value="ImgList"/>
         <TopLine Value="104"/>
         <CursorPos X="36" Y="107"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
       </Unit15>
       <Unit16>
         <Filename Value="C:\lazarus\lcl\lclclasses.pp"/>
         <UnitName Value="LCLClasses"/>
         <TopLine Value="52"/>
         <CursorPos X="3" Y="85"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
       </Unit16>
       <Unit17>
         <Filename Value="C:\lazarus\lcl\extctrls.pp"/>
@@ -181,20 +180,20 @@
         <WindowIndex Value="0"/>
         <TopLine Value="376"/>
         <CursorPos X="17" Y="412"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit17>
       <Unit18>
         <Filename Value="C:\lazarus\lcl\include\shape.inc"/>
         <WindowIndex Value="0"/>
         <TopLine Value="42"/>
         <CursorPos X="3" Y="42"/>
-        <UsageCount Value="11"/>
+        <UsageCount Value="10"/>
       </Unit18>
       <Unit19>
         <Filename Value="CPU8E_Panel.lfm"/>
         <TopLine Value="1"/>
         <CursorPos X="1" Y="1"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit19>
       <Unit20>
@@ -203,15 +202,18 @@
         <WindowIndex Value="0"/>
         <TopLine Value="1"/>
         <CursorPos X="23" Y="2"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit20>
       <Unit21>
         <Filename Value="shapeex.pas"/>
         <UnitName Value="ShapeEx"/>
+        <IsVisibleTab Value="True"/>
+        <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="43"/>
-        <CursorPos X="18" Y="60"/>
-        <UsageCount Value="11"/>
+        <TopLine Value="94"/>
+        <CursorPos X="40" Y="56"/>
+        <UsageCount Value="15"/>
+        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit21>
       <Unit22>
@@ -219,7 +221,7 @@
         <WindowIndex Value="0"/>
         <TopLine Value="71"/>
         <CursorPos X="1" Y="97"/>
-        <UsageCount Value="10"/>
+        <UsageCount Value="9"/>
       </Unit22>
     </Units>
     <JumpHistory Count="1" HistoryIndex="0">
