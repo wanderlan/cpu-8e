@@ -16,7 +16,7 @@ object frmCPU: TfrmCPU
   SessionProperties = 'edtClock.Text;cbMode.ItemIndex'
   ShowHint = True
   LCLVersion = '0.9.28.2'
-  object Shape68: TShape
+  object Shape68: TShapeEx
     Left = 102
     Height = 6
     Hint = 'Barramento de Controle'
@@ -25,7 +25,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape11: TShape
+  object Shape11: TShapeEx
     Left = 409
     Height = 32
     Hint = 'Clock'#13#10'Gerador da temporização '#13#10'primária da UC'
@@ -33,7 +33,7 @@ object frmCPU: TfrmCPU
     Width = 95
     Brush.Color = clSilver
   end
-  object shIRIn1: TShape
+  object shIRIn1: TShapeEx
     Left = 100
     Height = 30
     Top = 201
@@ -41,14 +41,14 @@ object frmCPU: TfrmCPU
     Brush.Color = 13346356
     Pen.Style = psClear
   end
-  object Shape1: TShape
+  object Shape1: TShapeEx
     Left = 67
     Height = 26
     Top = 130
     Width = 65
     Brush.Color = clLime
   end
-  object IR0: TShape
+  object IR0: TShapeEx
     Left = 32
     Height = 26
     Hint = 'Unidade Lógica e Aritmética'
@@ -57,7 +57,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clLime
     Shape = stDownTriangle
   end
-  object IR1: TShape
+  object IR1: TShapeEx
     Left = 50
     Height = 26
     Hint = 'Unidade Lógica e Aritmética'
@@ -66,7 +66,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clLime
     Shape = stDownTriangle
   end
-  object IR2: TShape
+  object IR2: TShapeEx
     Left = 50
     Height = 26
     Hint = 'Unidade Lógica e Aritmética'
@@ -75,7 +75,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clLime
     Shape = stUpTriangle
   end
-  object IR3: TShape
+  object IR3: TShapeEx
     Left = 112
     Height = 26
     Hint = 'Unidade Lógica e Aritmética'
@@ -84,7 +84,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clLime
     Shape = stDownTriangle
   end
-  object IR5: TShape
+  object IR5: TShapeEx
     Left = 110
     Height = 26
     Hint = 'Unidade Lógica e Aritmética'
@@ -93,7 +93,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clLime
     Shape = stUpTriangle
   end
-  object IR4: TShape
+  object IR4: TShapeEx
     Left = 130
     Height = 26
     Hint = 'Unidade Lógica e Aritmética'
@@ -102,28 +102,28 @@ object frmCPU: TfrmCPU
     Brush.Color = clLime
     Shape = stDownTriangle
   end
-  object Shape2: TShape
+  object Shape2: TShapeEx
     Left = 32
     Height = 19
     Top = 88
     Width = 37
     Brush.Color = clLime
   end
-  object Shape3: TShape
+  object Shape3: TShapeEx
     Left = 129
     Height = 19
     Top = 89
     Width = 39
     Brush.Color = clLime
   end
-  object Shape4: TShape
+  object Shape4: TShapeEx
     Left = 257
     Height = 30
     Top = 126
     Width = 81
     Brush.Color = clLime
   end
-  object Shape5: TShape
+  object Shape5: TShapeEx
     Left = 409
     Height = 30
     Hint = 'Memory Data Register'#13#10'Registrador de Dados a serem lidos ou escritos na memória'
@@ -131,7 +131,7 @@ object frmCPU: TfrmCPU
     Width = 81
     Brush.Color = clSilver
   end
-  object Shape6: TShape
+  object Shape6: TShapeEx
     Left = 48
     Height = 30
     Hint = 'Instruction Register: Registrador de Instruções'#13#10'Armazena o OpCode da instrução em execução'
@@ -139,7 +139,7 @@ object frmCPU: TfrmCPU
     Width = 110
     Brush.Color = clSilver
   end
-  object Shape7: TShape
+  object Shape7: TShapeEx
     Left = 257
     Height = 30
     Hint = 'Program Counter'#13#10'Contém o endereço da próxima instrução'
@@ -147,7 +147,7 @@ object frmCPU: TfrmCPU
     Width = 81
     Brush.Color = clSilver
   end
-  object Shape8: TShape
+  object Shape8: TShapeEx
     Left = 409
     Height = 30
     Hint = 'Memory Address Register'#13#10'Registrador de Endereçamento de Memória'
@@ -155,7 +155,7 @@ object frmCPU: TfrmCPU
     Width = 81
     Brush.Color = clSilver
   end
-  object Shape9: TShape
+  object Shape9: TShapeEx
     Left = 48
     Height = 54
     Hint = 'Decodificador de Instruções'
@@ -163,7 +163,7 @@ object frmCPU: TfrmCPU
     Width = 110
     Brush.Color = clSilver
   end
-  object Shape10: TShape
+  object Shape10: TShapeEx
     Left = 257
     Height = 54
     Hint = 'Unidade de Controle'
@@ -171,7 +171,7 @@ object frmCPU: TfrmCPU
     Width = 81
     Brush.Color = clSilver
   end
-  object Shape12: TShape
+  object Shape12: TShapeEx
     Left = 69
     Height = 26
     Top = 130
@@ -179,7 +179,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clLime
     Pen.Style = psClear
   end
-  object Shape13: TShape
+  object Shape13: TShapeEx
     Left = 112
     Height = 27
     Top = 129
@@ -187,7 +187,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clLime
     Pen.Style = psClear
   end
-  object Shape14: TShape
+  object Shape14: TShapeEx
     Left = 51
     Height = 26
     Hint = 'Unidade Lógica e Aritmética'
@@ -196,7 +196,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clLime
     Pen.Style = psClear
   end
-  object Shape15: TShape
+  object Shape15: TShapeEx
     Left = 129
     Height = 27
     Hint = 'Unidade Lógica e Aritmética'
@@ -205,7 +205,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clLime
     Pen.Style = psClear
   end
-  object shBI3: TShape
+  object shBI3: TShapeEx
     Left = 9
     Height = 12
     Hint = 'Barramento Interno'
@@ -215,7 +215,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRoundRect
   end
-  object shBI2: TShape
+  object shBI2: TShapeEx
     Left = 8
     Height = 160
     Hint = 'Barramento Interno'
@@ -225,7 +225,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRoundRect
   end
-  object shULAOut1: TShape
+  object shULAOut1: TShapeEx
     Left = 100
     Height = 23
     Top = 156
@@ -233,7 +233,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 13346356
     Pen.Style = psClear
   end
-  object shULAOut2: TShape
+  object shULAOut2: TShapeEx
     Left = 92
     Height = 16
     Top = 178
@@ -242,7 +242,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shACCOut1: TShape
+  object shACCOut1: TShapeEx
     Left = 321
     Height = 22
     Top = 156
@@ -250,7 +250,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 13346356
     Pen.Style = psClear
   end
-  object shACCOut2: TShape
+  object shACCOut2: TShapeEx
     Left = 313
     Height = 17
     Top = 177
@@ -259,7 +259,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shMDROut1: TShape
+  object shMDROut1: TShapeEx
     Left = 472
     Height = 22
     Top = 156
@@ -267,7 +267,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 13346356
     Pen.Style = psClear
   end
-  object shMDROut2: TShape
+  object shMDROut2: TShapeEx
     Left = 464
     Height = 17
     Top = 177
@@ -276,7 +276,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shACCIn1: TShape
+  object shACCIn1: TShapeEx
     Left = 273
     Height = 23
     Top = 171
@@ -284,7 +284,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 13346356
     Pen.Style = psClear
   end
-  object shACCIn2: TShape
+  object shACCIn2: TShapeEx
     Left = 265
     Height = 18
     Top = 155
@@ -293,7 +293,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stUpTriangle
   end
-  object shMDRIn1: TShape
+  object shMDRIn1: TShapeEx
     Left = 425
     Height = 23
     Top = 171
@@ -301,7 +301,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 13346356
     Pen.Style = psClear
   end
-  object shMDRIn2: TShape
+  object shMDRIn2: TShapeEx
     Left = 417
     Height = 18
     Top = 155
@@ -310,7 +310,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stUpTriangle
   end
-  object shPCIn2: TShape
+  object shPCIn2: TShapeEx
     Left = 265
     Height = 17
     Top = 225
@@ -319,7 +319,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shPCIn1: TShape
+  object shPCIn1: TShapeEx
     Left = 273
     Height = 26
     Top = 201
@@ -327,7 +327,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 13346356
     Pen.Style = psClear
   end
-  object shMARIn1: TShape
+  object shMARIn1: TShapeEx
     Left = 425
     Height = 32
     Top = 199
@@ -335,7 +335,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 13346356
     Pen.Style = psClear
   end
-  object shMARIn2: TShape
+  object shMARIn2: TShapeEx
     Left = 417
     Height = 15
     Top = 227
@@ -344,7 +344,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shPCOut2: TShape
+  object shPCOut2: TShapeEx
     Left = 312
     Height = 18
     Top = 203
@@ -353,7 +353,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stUpTriangle
   end
-  object shPCOut1: TShape
+  object shPCOut1: TShapeEx
     Left = 320
     Height = 25
     Top = 217
@@ -361,7 +361,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 13346356
     Pen.Style = psClear
   end
-  object shIRIn2: TShape
+  object shIRIn2: TShapeEx
     Left = 92
     Height = 16
     Top = 226
@@ -370,7 +370,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shBIn1: TShape
+  object shBIn1: TShapeEx
     Left = 145
     Height = 35
     Top = 47
@@ -378,7 +378,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 13346356
     Pen.Style = psClear
   end
-  object shBIn2: TShape
+  object shBIn2: TShapeEx
     Left = 139
     Height = 10
     Top = 80
@@ -387,7 +387,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shAIn2: TShape
+  object shAIn2: TShapeEx
     Left = 41
     Height = 10
     Top = 79
@@ -396,7 +396,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shAIn1: TShape
+  object shAIn1: TShapeEx
     Left = 47
     Height = 36
     Top = 47
@@ -404,7 +404,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 13346356
     Pen.Style = psClear
   end
-  object shIROut1: TShape
+  object shIROut1: TShapeEx
     Left = 51
     Height = 35
     Top = 271
@@ -412,7 +412,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object shIROut2: TShape
+  object shIROut2: TShapeEx
     Left = 45
     Height = 16
     Top = 305
@@ -421,7 +421,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shIROut3: TShape
+  object shIROut3: TShapeEx
     Left = 65
     Height = 35
     Top = 271
@@ -429,7 +429,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object shIROut4: TShape
+  object shIROut4: TShapeEx
     Left = 59
     Height = 16
     Top = 305
@@ -438,7 +438,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shIROut5: TShape
+  object shIROut5: TShapeEx
     Left = 80
     Height = 35
     Top = 271
@@ -446,7 +446,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object shIROut6: TShape
+  object shIROut6: TShapeEx
     Left = 74
     Height = 16
     Top = 305
@@ -455,7 +455,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shIROut7: TShape
+  object shIROut7: TShapeEx
     Left = 94
     Height = 35
     Top = 271
@@ -463,7 +463,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object shIROut8: TShape
+  object shIROut8: TShapeEx
     Left = 88
     Height = 16
     Top = 305
@@ -472,7 +472,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shIROut9: TShape
+  object shIROut9: TShapeEx
     Left = 108
     Height = 35
     Top = 271
@@ -480,7 +480,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object shIROut10: TShape
+  object shIROut10: TShapeEx
     Left = 102
     Height = 16
     Top = 305
@@ -489,7 +489,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shIROut11: TShape
+  object shIROut11: TShapeEx
     Left = 122
     Height = 35
     Top = 271
@@ -497,7 +497,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object shIROut12: TShape
+  object shIROut12: TShapeEx
     Left = 116
     Height = 16
     Top = 305
@@ -506,7 +506,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shIROut13: TShape
+  object shIROut13: TShapeEx
     Left = 137
     Height = 35
     Top = 271
@@ -514,7 +514,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object shIROut14: TShape
+  object shIROut14: TShapeEx
     Left = 131
     Height = 16
     Top = 305
@@ -523,7 +523,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shIROut15: TShape
+  object shIROut15: TShapeEx
     Left = 151
     Height = 35
     Top = 271
@@ -531,7 +531,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object shIROut16: TShape
+  object shIROut16: TShapeEx
     Left = 145
     Height = 16
     Top = 305
@@ -540,7 +540,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shUCIn1: TShape
+  object shUCIn1: TShapeEx
     Left = 158
     Height = 6
     Top = 324
@@ -548,7 +548,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object shUCIn2: TShape
+  object shUCIn2: TShapeEx
     Left = 241
     Height = 16
     Top = 319
@@ -557,7 +557,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRightTriangle
   end
-  object shUCIn3: TShape
+  object shUCIn3: TShapeEx
     Left = 158
     Height = 6
     Top = 339
@@ -565,7 +565,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object shUCIn4: TShape
+  object shUCIn4: TShapeEx
     Left = 241
     Height = 16
     Top = 334
@@ -574,7 +574,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRightTriangle
   end
-  object shUCIn5: TShape
+  object shUCIn5: TShapeEx
     Left = 158
     Height = 6
     Top = 368
@@ -582,7 +582,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object shUCIn6: TShape
+  object shUCIn6: TShapeEx
     Left = 241
     Height = 16
     Top = 363
@@ -591,7 +591,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRightTriangle
   end
-  object Shape36: TShape
+  object Shape36: TShapeEx
     Left = 195
     Height = 10
     Top = 345
@@ -600,7 +600,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stCircle
   end
-  object Shape64: TShape
+  object Shape64: TShapeEx
     Left = 195
     Height = 10
     Top = 357
@@ -609,7 +609,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stCircle
   end
-  object shClock1: TShape
+  object shClock1: TShapeEx
     Left = 342
     Height = 6
     Top = 362
@@ -617,7 +617,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object shClock2: TShape
+  object shClock2: TShapeEx
     Left = 338
     Height = 17
     Top = 356
@@ -626,7 +626,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stLeftTriangle
   end
-  object Shape69: TShape
+  object Shape69: TShapeEx
     Left = 369
     Height = 231
     Hint = 'Barramento de Controle'
@@ -635,7 +635,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape70: TShape
+  object Shape70: TShapeEx
     Left = 213
     Height = 6
     Hint = 'Barramento de Controle'
@@ -644,7 +644,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape71: TShape
+  object Shape71: TShapeEx
     Left = 210
     Height = 157
     Hint = 'Barramento de Controle'
@@ -653,7 +653,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape72: TShape
+  object Shape72: TShapeEx
     Left = 146
     Height = 6
     Hint = 'Barramento de Controle'
@@ -662,7 +662,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape73: TShape
+  object Shape73: TShapeEx
     Left = 142
     Height = 16
     Top = 134
@@ -671,7 +671,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stLeftTriangle
   end
-  object Shape74: TShape
+  object Shape74: TShapeEx
     Left = 162
     Height = 6
     Hint = 'Barramento de Controle'
@@ -680,7 +680,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape75: TShape
+  object Shape75: TShapeEx
     Left = 158
     Height = 16
     Top = 249
@@ -689,7 +689,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stLeftTriangle
   end
-  object Shape76: TShape
+  object Shape76: TShapeEx
     Left = 342
     Height = 6
     Top = 139
@@ -697,7 +697,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape77: TShape
+  object Shape77: TShapeEx
     Left = 338
     Height = 16
     Top = 134
@@ -706,7 +706,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stLeftTriangle
   end
-  object Shape78: TShape
+  object Shape78: TShapeEx
     Left = 342
     Height = 6
     Top = 254
@@ -714,7 +714,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape79: TShape
+  object Shape79: TShapeEx
     Left = 338
     Height = 16
     Top = 249
@@ -723,7 +723,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stLeftTriangle
   end
-  object Shape80: TShape
+  object Shape80: TShapeEx
     Left = 371
     Height = 6
     Top = 254
@@ -731,7 +731,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape81: TShape
+  object Shape81: TShapeEx
     Left = 394
     Height = 16
     Top = 249
@@ -740,7 +740,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRightTriangle
   end
-  object Shape82: TShape
+  object Shape82: TShapeEx
     Left = 371
     Height = 6
     Top = 139
@@ -748,7 +748,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape83: TShape
+  object Shape83: TShapeEx
     Left = 394
     Height = 16
     Top = 134
@@ -757,7 +757,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRightTriangle
   end
-  object Shape84: TShape
+  object Shape84: TShapeEx
     Left = 98
     Height = 35
     Hint = 'Barramento de Controle'
@@ -766,7 +766,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape85: TShape
+  object Shape85: TShapeEx
     Left = 98
     Height = 6
     Top = 97
@@ -774,7 +774,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape86: TShape
+  object Shape86: TShapeEx
     Left = 82
     Height = 6
     Top = 97
@@ -782,7 +782,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object Shape87: TShape
+  object Shape87: TShapeEx
     Left = 70
     Height = 16
     Top = 92
@@ -791,7 +791,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stLeftTriangle
   end
-  object Shape88: TShape
+  object Shape88: TShapeEx
     Left = 114
     Height = 16
     Top = 92
@@ -800,7 +800,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRightTriangle
   end
-  object Shape89: TShape
+  object Shape89: TShapeEx
     Left = 295
     Height = 31
     Top = 291
@@ -808,7 +808,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 57311
     Pen.Style = psClear
   end
-  object shBD1: TShape
+  object shBD1: TShapeEx
     Left = 518
     Height = 12
     Hint = 'Barramento de Dados'
@@ -818,7 +818,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRoundRect
   end
-  object shBD2: TShape
+  object shBD2: TShapeEx
     Left = 518
     Height = 40
     Hint = 'Barramento de Dados'
@@ -828,7 +828,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRoundRect
   end
-  object shMDRIn3: TShape
+  object shMDRIn3: TShapeEx
     Left = 502
     Height = 6
     Top = 131
@@ -836,7 +836,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clAqua
     Pen.Style = psClear
   end
-  object shMDRIn4: TShape
+  object shMDRIn4: TShapeEx
     Left = 490
     Height = 16
     Top = 126
@@ -845,7 +845,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stLeftTriangle
   end
-  object shMDROut4: TShape
+  object shMDROut4: TShapeEx
     Left = 503
     Height = 16
     Top = 142
@@ -854,7 +854,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRightTriangle
   end
-  object shMDROut3: TShape
+  object shMDROut3: TShapeEx
     Left = 490
     Height = 6
     Top = 147
@@ -862,7 +862,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clAqua
     Pen.Style = psClear
   end
-  object shBE1: TShape
+  object shBE1: TShapeEx
     Left = 518
     Height = 29
     Hint = 'Barramento de Endereços'
@@ -872,7 +872,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRoundRect
   end
-  object shBE2: TShape
+  object shBE2: TShapeEx
     Left = 518
     Height = 12
     Hint = 'Barramento de Endereços'
@@ -882,7 +882,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRoundRect
   end
-  object shMAROut3: TShape
+  object shMAROut3: TShapeEx
     Left = 490
     Height = 6
     Top = 253
@@ -890,7 +890,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 50688
     Pen.Style = psClear
   end
-  object shMAROut4: TShape
+  object shMAROut4: TShapeEx
     Left = 503
     Height = 17
     Top = 247
@@ -899,7 +899,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRightTriangle
   end
-  object shRD1: TShape
+  object shRD1: TShapeEx
     Left = 338
     Height = 5
     Hint = 'Sinal de Leitura'
@@ -908,7 +908,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clFuchsia
     Pen.Style = psClear
   end
-  object shRD2: TShape
+  object shRD2: TShapeEx
     Left = 602
     Height = 16
     Hint = 'Sinal de Leitura'
@@ -918,7 +918,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRightTriangle
   end
-  object shWR1: TShape
+  object shWR1: TShapeEx
     Left = 338
     Height = 5
     Hint = 'Sinal de Escrita'
@@ -927,7 +927,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 33023
     Pen.Style = psClear
   end
-  object shWR2: TShape
+  object shWR2: TShapeEx
     Left = 602
     Height = 16
     Hint = 'Sinal de Escrita'
@@ -937,7 +937,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stRightTriangle
   end
-  object shZOut1: TShape
+  object shZOut1: TShapeEx
     Left = 74
     Height = 9
     Top = 155
@@ -945,7 +945,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clBlack
     Pen.Style = psClear
   end
-  object shNOut1: TShape
+  object shNOut1: TShapeEx
     Left = 82
     Height = 18
     Top = 155
@@ -953,7 +953,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clBlack
     Pen.Style = psClear
   end
-  object Shape108: TShape
+  object Shape108: TShapeEx
     Left = 129
     Height = 14
     Top = 155
@@ -961,7 +961,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clBlack
     Pen.Style = psClear
   end
-  object shCOut2: TShape
+  object shCOut2: TShapeEx
     Left = 121
     Height = 10
     Top = 168
@@ -970,7 +970,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shZOut5: TShape
+  object shZOut5: TShapeEx
     Left = 269
     Height = 24
     Top = 376
@@ -978,7 +978,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clBlack
     Pen.Style = psClear
   end
-  object shZOut6: TShape
+  object shZOut6: TShapeEx
     Left = 264
     Height = 11
     Top = 374
@@ -987,7 +987,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stUpTriangle
   end
-  object shNOut3: TShape
+  object shNOut3: TShapeEx
     Left = 295
     Height = 24
     Top = 376
@@ -995,7 +995,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clBlack
     Pen.Style = psClear
   end
-  object shNOut4: TShape
+  object shNOut4: TShapeEx
     Left = 290
     Height = 11
     Top = 374
@@ -1004,7 +1004,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stUpTriangle
   end
-  object shCOut1: TShape
+  object shCOut1: TShapeEx
     Left = 126
     Height = 16
     Top = 155
@@ -1012,7 +1012,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clBlack
     Pen.Style = psClear
   end
-  object shCOut4: TShape
+  object shCOut4: TShapeEx
     Left = 315
     Height = 11
     Top = 374
@@ -1021,7 +1021,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stUpTriangle
   end
-  object shCOut3: TShape
+  object shCOut3: TShapeEx
     Left = 320
     Height = 24
     Top = 376
@@ -1029,7 +1029,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clBlack
     Pen.Style = psClear
   end
-  object shNOut2: TShape
+  object shNOut2: TShapeEx
     Left = 77
     Height = 10
     Top = 168
@@ -1038,7 +1038,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shZOut4: TShape
+  object shZOut4: TShapeEx
     Left = 53
     Height = 10
     Top = 168
@@ -1047,7 +1047,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stDownTriangle
   end
-  object shZOut3: TShape
+  object shZOut3: TShapeEx
     Left = 58
     Height = 9
     Top = 163
@@ -1055,7 +1055,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clBlack
     Pen.Style = psClear
   end
-  object shZOut2: TShape
+  object shZOut2: TShapeEx
     Left = 58
     Height = 3
     Top = 161
@@ -1063,7 +1063,7 @@ object frmCPU: TfrmCPU
     Brush.Color = clBlack
     Pen.Style = psClear
   end
-  object shMAROut1: TShape
+  object shMAROut1: TShapeEx
     Left = 472
     Height = 25
     Top = 217
@@ -1071,7 +1071,7 @@ object frmCPU: TfrmCPU
     Brush.Color = 13346356
     Pen.Style = psClear
   end
-  object shMAROut2: TShape
+  object shMAROut2: TShapeEx
     Left = 464
     Height = 18
     Top = 203
@@ -1080,7 +1080,7 @@ object frmCPU: TfrmCPU
     Pen.Style = psClear
     Shape = stUpTriangle
   end
-  object shBI1: TShape
+  object shBI1: TShapeEx
     Left = 8
     Height = 12
     Hint = 'Barramento Interno'
@@ -1119,7 +1119,7 @@ object frmCPU: TfrmCPU
     ClientWidth = 819
     ParentColor = False
     TabOrder = 25
-    object shFetch: TShape
+    object shFetch: TShapeEx
       Left = 452
       Height = 23
       Top = 5
@@ -1689,7 +1689,7 @@ object frmCPU: TfrmCPU
       Width = 2
       Shape = bsLeftLine
     end
-    object shOperand: TShape
+    object shOperand: TShapeEx
       Left = 502
       Height = 23
       Hint = 'Obtenção do endereço do Operando'#13#10'Segunda fase (opcional) do ciclo de instruções'
@@ -1719,7 +1719,7 @@ object frmCPU: TfrmCPU
       ParentFont = False
       OptimalFill = True
     end
-    object shExecute: TShape
+    object shExecute: TShapeEx
       Left = 550
       Height = 23
       Hint = 'Execução da instrução'#13#10'Terceira fase, ou fase final, do ciclo de instruções'
