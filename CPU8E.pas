@@ -2,36 +2,60 @@ Unit CPU8E;
 {
   CPU-8E Simulator
 
-                                                   Copyright 2009 Joel Guilherme
+                                 Copyright 2009/10 Joel Guilherme da Silva Filho
 
-  Simulador para uma CPU de 8-bits Educacional, conforme especificações
-  contidas no documento CPU-8E-Specs-vX.Y.pdf ('X.Y' conforme a versão atual
+  Simulador para uma CPU Educacional de 8-bits, conforme especificacoes
+  contidas no documento CPU-8E-Specs-vX.Y.pdf ('X.Y' indica a versão atual
   do programa), parte deste pacote.
 
-  Este programa, e todos seus componentes, é colocado à disposição do público
-  na forma de um 'Programa Livre' ("Free Software") sob uma licença "GNU -
-  General Public License" (Copyleft), sendo assim entendido que você tem o
-  direito de utilizá-lo livremente, sem pagar quaisquer direitos por isto,
-  inclusive o direito de copiá-lo, modificá-lo e redistribuí-lo, desde que
-  mantidos estes termos a quaisquer cópias ou modificações.
-  Este programa é distribuido na esperança de que possa ser útil, mas SEM
-  NENHUMA GARANTIA, IMPLÍCITA OU EXPLÍCITA, de ADEQUAÇÃO a qualquer MERCADO
-  ou APLICAÇÃO EM PARTICULAR. Para maiores detalhes veja o documento
+  Este programa, e todos seus componentes, eh colocado aa disposicao do publico
+  na forma de um 'Programa Livre' ("Free Software") sob uma licenca "GNU -
+  General Public License" (Copyleft), sendo assim entendido que voce tem o
+  direito de utiliza-lo livremente, sem pagar quaisquer direitos por isto,
+  inclusive o direito de copia-lo, modifica-lo e redistribui-lo, desde que
+  mantidos estes termos a quaisquer copias ou modificacoes.
+  Este programa eh distribuido na esperanca de que possa ser util, mas SEM
+  NENHUMA GARANTIA, IMPLICITA OU EXPLICITA, de ADEQUACAO a qualquer MERCADO
+  ou APLICACAO EM PARTICULAR. Para maiores detalhes veja o documento
   "Copiando(GPL).txt", parte integrante deste pacote de programa.
 
   Autor: Prof. Joel Guilherme da Silva Filho
+         joel@joelguilherme.com
   Organização: IESB - Instituto de Educação Superior de Brasília
   Local: Brasília/DF, Brasil
 
-  Histórico:
-    Versão: 0.9 - 01/02/2009: Primeira versão totalmente operacional
-    Versão: 1.0a - 04/02/2009 - Corrigida lógica de "Single Step"/"Single Cycle"
-                              - Corrigida representacão de End. Imediato/Direto
-    Versão: 1.0b - 28/04/2009 - Registradores CPU.A e CPU.B (ULA) foram
-                                redefinidos como do tipo "Byte"
-                              - Corrigida lógica de geração dos flags da ULA.
-    Versão: 2.0  - 30/11/2009 - Nova interface gráfica.
-    Versão: 2.1  - 16/12/2009 - Disassembler.
+  Contribuicoes:
+  V2.0 - Wanderlan Santos dos Anjos e Barbara A.B. dos Anjos
+         wanderlan.anjos@gmail.com
+         barbara.ab.anjos@gmail.com
+  V2.1 - Wanderlan Santos dos Anjos e Barbara A.B. dos Anjos
+         wanderlan.anjos@gmail.com
+         barbara.ab.anjos@gmail.com
+  V2.2 - Anderson de Souza Freitas e Daniel Machado Vasconcelos
+         anderson.souza.freitas@gmail.com
+         danielm.vasconcelos@gmail.com
+
+  Historico:
+    Versao 0.9    - 01/02/2009 - Primeira versão totalmente operacional.
+    Versao 1.0a   - 04/02/2009 - Corrigida logica "Single Step"/"Single Cycle".
+                               - Corrigida representacao para enderecamento
+                                 Imediato/Direto.
+    Versao 1.0b   - 28/04/2009 - Registradores CPU.A e CPU.B (ULA) foram
+                                 redefinidos como do tipo "Byte"
+                               - Corrigida lógica de geração dos flags da ULA.
+    Versao 2.0    - 24/11/2009 - Interface modo texto substituida por interface
+                                 grafica construida com o Lazarus/FPC,
+                                 permitindo compilacao multiplataforma.
+    Versao 2.1    - 16/12/2009 - Introduzido o disassembly automatico dos
+                                 codigos em memoria.
+                                 Introduzidas facilidades para editar e salvar
+                                 um programa no simulador.
+    Versao: 2.2.0 - 21/07/2010 - Expandido conjunto de instrucoes para incluir
+                                 shifts, rotates e chamada de sub-rotina.
+                               - Revistas funcoes de controle e do simulador.
+    Versao: 2.2.2 - 09/10/2010 - Revisao geral do codigo com total adequacao
+                                 deste aas especificacoes da CPU-8Ev2.0.
+
 }
 
 {
@@ -48,7 +72,7 @@ type
 // Define a representacao interna, para o simulador, dos OpCodes definidos
 // para a UCP-8E
    OpCodeType = (_HLT,_NOP,_NOT,_JMP,_JEQ,_JGT,_JGE,_STO,_LOD,_CMP,_ADD,_SUB,
-                 _AND,_XOR,_Invalid);
+                 _AND,_XOR,_ORL,_JCY,_SHL,_SHR,_SRA,_ROL,_ROR,_CAL,_RET,_Invalid);
 
 // Define os comandos para operacao do simulador
 {
@@ -63,7 +87,7 @@ type
   _Rst:   forca um Reset da CPU
   _eXit:  encerra o programa simulador
   _Up:    avanca o cursor de visualizacao da memoria
-  _Doewn: retrocede o cursor de visualizacao da memoria
+  _Down:  retrocede o cursor de visualizacao da memoria
   _Help:  abre um arquivo de auxilio aa operacao do simulador
 }
   CmdType = (_Clock,_Load,_Edit,_Mode,_Go,_Pause,_Halt,_Rst,_eXit,
@@ -91,11 +115,12 @@ var
 // Esta eh a estrutura basica correspondente aa arquitetura da CPU
    CPU: record
       ACC: shortint;                // Acumulador
-      PC: byte;                     // Contador de Programa
+      PC:  byte;                     // Contador de Programa
       MAR: byte;                    // Reg. de Ender. da Memoria
       MDR: byte;                    // Reg. de Dados da Memoria
-      A:   Byte;                    // Reg. A, associado aa ULA
-      B:   Byte;                    // Reg. B, associado aa ULA
+      A:   byte;                    // Reg. A, associado aa ULA
+      B:   byte;                    // Reg. B, associado aa ULA
+      SP:  byte;                    // Stake Pointer (Ponteiro De Pilha)
       ULA: record                   // Unidade Logica e Aritmetica
          Value: Byte;                  // Valor de saida
          Z,                            // Bit de Status 'Zero'
@@ -112,20 +137,23 @@ var
 
     Cmd, LastCmd: CmdType;          // Comando do usuario
     CPUMode : ModeType = _Step;     // Modo de operacao selecionado
+    CPU_Caption: string;
 
 const
-   NumOpCodes = 14;
+   NumOpCodes = 24;
 // Forma simbolica para os OpCodes
    OpCodeStr: array[OpCodeType] of string[3]
               = ('HLT','NOP','NOT','JMP','JEQ','JGT','JGE','STO','LOD',
-                 'CMP','ADD','SUB','AND','XOR','XXX');
+                 'CMP','ADD','SUB','AND','XOR','ORL','JCY','SHL','SHR',
+                 'SRA','ROL','ROR','CAL','RET','XXX');
 // Mascaras para isolar areas do IR
    OpCodeMask = $1F;    // 5-bits inferiores, que definem a identidade do OpCode
    DoubleMask = $80;    // bit identificador de instrucao de 2 palavras
-   DirectMask = $40;    // bir identificador de enderecamento direto
+   DirectMask = $40;    // bit identificador de enderecamento direto
 
 // Identificador do programa e versao
-   ProgName = 'CPU-8E Simulator V2.1';
+   ProgName = 'CPU-8E Simulator';
+   Version  = 'V2.2.3';
    Author   = '(R) Prof. Joel Guilherme (IESB)';
 
 procedure CPU_Reset;
@@ -143,7 +171,7 @@ function LenReg(Item : TStaticText) : integer;
 
 Implementation
 
-uses SysUtils, Forms, Grids, Graphics, Math, CPU8E_Panel;
+uses SysUtils, Forms, Grids, Graphics, CPU8E_Panel;
 
 procedure CPU_Reset;
 { Reinicia a CPU, zerando todos os registradores e ressetando variaveis }
@@ -156,6 +184,7 @@ begin
       A   := 0;
       B   := 0;
       IR  := 0;
+      SP  := 255;
       ULA.Value := 0;
       ULA.Z   := false;
       ULA.N   := false;
@@ -166,7 +195,14 @@ begin
 end;
 
 function LenReg(Item : TStaticText) : integer; begin
-  Result := IfThen(Item.Name[3] in ['Z', 'N', 'C'], 1, 2);
+//  Result := IfThen(Item.Name[3] in ['Z', 'N', 'C'], 1, 2);
+   If (Item.Name = 'stZ') or (Item.Name = 'sxZ') or
+      (Item.Name = 'stN') or (Item.Name = 'sxN') or
+      (Item.Name = 'stC') or (Item.Name = 'sxC')
+   then
+      Result := 1
+   else
+      Result := 2;
 end;
 
 procedure ShowReg(Item : TStaticText; Val: byte);
@@ -196,6 +232,7 @@ begin
     ShowReg(stMAR,MAR);
     ShowReg(stMDR,MDR);
     ShowReg(stIR,IR);
+    ShowReg(stSP,SP);
     ShowReg(stA,A);
     ShowReg(stB,B);
     ShowReg(stULA,ULA.Value);
@@ -224,6 +261,18 @@ begin
   Sel.Top    := Current;
   Sel.Right  := 2;
   Sel.Bottom := Current;
+     frmCPU.sgMemoria.Row := 0;
+     frmCPU.sgMemoria.SetFocus;
+  if Current > (257-9) then begin
+     frmCPU.sgMemoria.Row := 257;
+     frmCPU.sgMemoria.SetFocus;
+  end else
+  if Current > 9 then begin
+     frmCPU.sgMemoria.Row := Current+9;
+     frmCPU.sgMemoria.SetFocus;
+  end;
+  frmCPU.sgMemoria.Row := Current;
+  frmCPU.sgMemoria.SetFocus;
   frmCPU.sgMemoria.Selection := Sel;
   Application.ProcessMessages;
 end;
@@ -231,5 +280,6 @@ end;
 // Inicializacao da Unit CPU8E
 begin
   CPU_Reset;
-  fillchar(CPU.Mem, sizeof(CPU.Mem), 0)
+  fillchar(CPU.Mem, sizeof(CPU.Mem), 0);
 end.
+
