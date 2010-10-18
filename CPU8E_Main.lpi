@@ -57,10 +57,11 @@
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
         <UnitName Value="CPU8E_Panel"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="2"/>
         <WindowIndex Value="0"/>
-        <TopLine Value="1"/>
-        <CursorPos X="33" Y="36"/>
+        <TopLine Value="144"/>
+        <CursorPos X="65" Y="166"/>
         <UsageCount Value="80"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -102,7 +103,7 @@
         <UnitName Value="Grids"/>
         <TopLine Value="875"/>
         <CursorPos X="15" Y="897"/>
-        <UsageCount Value="0"/>
+        <UsageCount Value="10"/>
       </Unit6>
       <Unit7>
         <Filename Value="CPU8E_Control.pas"/>
@@ -207,11 +208,10 @@
       <Unit21>
         <Filename Value="shapeex.pas"/>
         <UnitName Value="ShapeEx"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
         <WindowIndex Value="0"/>
         <TopLine Value="94"/>
-        <CursorPos X="40" Y="56"/>
+        <CursorPos X="12" Y="97"/>
         <UsageCount Value="15"/>
         <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
@@ -224,11 +224,23 @@
         <UsageCount Value="9"/>
       </Unit22>
     </Units>
-    <JumpHistory Count="1" HistoryIndex="0">
+    <JumpHistory Count="4" HistoryIndex="3">
       <Position1>
         <Filename Value="CPU8E_Main.lpr"/>
         <Caret Line="9" Column="8" TopLine="1"/>
       </Position1>
+      <Position2>
+        <Filename Value="CPU8E_Panel.pas"/>
+        <Caret Line="31" Column="19" TopLine="1"/>
+      </Position2>
+      <Position3>
+        <Filename Value="CPU8E_Panel.pas"/>
+        <Caret Line="44" Column="55" TopLine="1"/>
+      </Position3>
+      <Position4>
+        <Filename Value="CPU8E_Panel.pas"/>
+        <Caret Line="17" Column="47" TopLine="1"/>
+      </Position4>
     </JumpHistory>
   </ProjectOptions>
   <CompilerOptions>

@@ -1,7 +1,7 @@
 object frmCPU: TfrmCPU
-  Left = 337
+  Left = 330
   Height = 416
-  Top = 232
+  Top = 415
   Width = 819
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsSingle
@@ -15,7 +15,7 @@ object frmCPU: TfrmCPU
   Position = poScreenCenter
   SessionProperties = 'edtClock.Text;cbMode.ItemIndex'
   ShowHint = True
-  LCLVersion = '0.9.28.2'
+  LCLVersion = '0.9.29'
   object Shape68: TShapeEx
     Left = 102
     Height = 6
@@ -2101,10 +2101,10 @@ object frmCPU: TfrmCPU
   end
   object stMDR: TStaticText
     Left = 417
-    Height = 24
+    Height = 19
     Hint = 'Memory Data Register'#13#10'Registrador de Dados a serem lidos ou escritos na memória'
     Top = 129
-    Width = 66
+    Width = 58
     AutoSize = True
     Caption = 'MDR:00'
     Color = clSilver
@@ -2120,10 +2120,10 @@ object frmCPU: TfrmCPU
   end
   object stIR: TStaticText
     Left = 82
-    Height = 24
+    Height = 19
     Hint = 'Instruction Register: Registrador de Instruções'#13#10'Armazena o OpCode da instrução em execução'
     Top = 244
-    Width = 45
+    Width = 36
     AutoSize = True
     Caption = 'IR:00'
     Color = clSilver
@@ -2139,10 +2139,10 @@ object frmCPU: TfrmCPU
   end
   object stPC: TStaticText
     Left = 273
-    Height = 24
+    Height = 20
     Hint = 'Program Counter'#13#10'Contém o endereço da próxima instrução'
     Top = 244
-    Width = 51
+    Width = 47
     AutoSize = True
     Caption = 'PC:00'
     Color = clSilver
@@ -2159,10 +2159,10 @@ object frmCPU: TfrmCPU
   end
   object stMAR: TStaticText
     Left = 417
-    Height = 24
+    Height = 19
     Hint = 'Memory Address Register'#13#10'Registrador de Endereçamento de Memória'
     Top = 244
-    Width = 66
+    Width = 57
     AutoSize = True
     Caption = 'MAR:00'
     Color = clSilver
@@ -2197,10 +2197,10 @@ object frmCPU: TfrmCPU
   end
   object stUC1: TStaticText
     Left = 286
-    Height = 24
+    Height = 19
     Hint = 'Unidade de Controle'
     Top = 336
-    Width = 25
+    Width = 23
     AutoSize = True
     Caption = 'UC'
     Color = clSilver
@@ -2216,10 +2216,10 @@ object frmCPU: TfrmCPU
   end
   object stULA: TStaticText
     Left = 68
-    Height = 24
+    Height = 20
     Hint = 'Unidade Lógica e Aritmética'
     Top = 131
-    Width = 63
+    Width = 57
     Alignment = taCenter
     AutoSize = True
     Caption = 'ULA:00'
@@ -2292,10 +2292,10 @@ object frmCPU: TfrmCPU
   end
   object sxZ: TStaticText
     Left = 259
-    Height = 18
+    Height = 16
     Hint = 'Bit de status "Z"'#13#10'Indica que a última operação deu resultado zero'
     Top = 396
-    Width = 21
+    Width = 17
     AutoSize = True
     Caption = 'Z:0'
     Color = clWhite
@@ -2311,10 +2311,10 @@ object frmCPU: TfrmCPU
   end
   object sxN: TStaticText
     Left = 284
-    Height = 18
+    Height = 16
     Hint = 'Bit de status "N"'#13#10'Indica que a última operação deu resultado negativo'
     Top = 396
-    Width = 22
+    Width = 19
     AutoSize = True
     Caption = 'N:0'
     Color = clWhite
@@ -2330,10 +2330,10 @@ object frmCPU: TfrmCPU
   end
   object sxC: TStaticText
     Left = 310
-    Height = 18
+    Height = 16
     Hint = 'Bit de status "C"'#13#10'Indica que ocorreu um carry (vai-um)'#13#10'do bit mais significativo'
     Top = 396
-    Width = 21
+    Width = 19
     AutoSize = True
     Caption = 'C:0'
     Color = clWhite
