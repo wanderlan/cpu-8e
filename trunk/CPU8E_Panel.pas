@@ -2,11 +2,78 @@ unit CPU8E_Panel;
 
 {$mode objfpc}{$H+}
 
+{
+  CPU-8E Simulator
+
+                                 Copyright 2009/10 Joel Guilherme da Silva Filho
+
+  Simulador para uma CPU Educacional de 8-bits, conforme especificacoes
+  contidas no documento CPU-8E-Specs-vX.Y.pdf ('X.Y' indica a versão atual
+  do programa), parte deste pacote.
+
+  Este programa, e todos seus componentes, eh colocado aa disposicao do publico
+  na forma de um 'Programa Livre' ("Free Software") sob uma licenca "GNU -
+  General Public License" (Copyleft), sendo assim entendido que voce tem o
+  direito de utiliza-lo livremente, sem pagar quaisquer direitos por isto,
+  inclusive o direito de copia-lo, modifica-lo e redistribui-lo, desde que
+  mantidos estes termos a quaisquer copias ou modificacoes.
+  Este programa eh distribuido na esperanca de que possa ser util, mas SEM
+  NENHUMA GARANTIA, IMPLICITA OU EXPLICITA, de ADEQUACAO a qualquer MERCADO
+  ou APLICACAO EM PARTICULAR. Para maiores detalhes veja o documento
+  "Copiando(GPL).txt", parte integrante deste pacote de programa.
+
+  Autor: Prof. Joel Guilherme da Silva Filho
+         joel@joelguilherme.com
+  Organização: IESB - Instituto de Educação Superior de Brasília
+  Local: Brasília/DF, Brasil
+
+  Contribuicoes:
+  V2.0 - Wanderlan Santos dos Anjos e Barbara A.B. dos Anjos
+         wanderlan.anjos@gmail.com
+         barbara.ab.anjos@gmail.com
+  V2.1 - Wanderlan Santos dos Anjos e Barbara A.B. dos Anjos
+         wanderlan.anjos@gmail.com
+         barbara.ab.anjos@gmail.com
+  V2.2 - Anderson de Souza Freitas e Daniel Machado Vasconcelos
+         anderson.souza.freitas@gmail.com
+         danielm.vasconcelos@gmail.com
+
+  Historico:
+    Versao 0.9    - 01/02/2009 - Primeira versão totalmente operacional.
+    Versao 1.0a   - 04/02/2009 - Corrigida logica "Single Step"/"Single Cycle".
+                               - Corrigida representacao para enderecamento
+                                 Imediato/Direto.
+    Versao 1.0b   - 28/04/2009 - Registradores CPU.A e CPU.B (ULA) foram
+                                 redefinidos como do tipo "Byte"
+                               - Corrigida lógica de geração dos flags da ULA.
+    Versao 2.0    - 24/11/2009 - Interface modo texto substituida por interface
+                                 grafica construida com o Lazarus/FPC,
+                                 permitindo compilacao multiplataforma.
+    Versao 2.1    - 16/12/2009 - Introduzido o disassembly automatico dos
+                                 codigos em memoria.
+                                 Introduzidas facilidades para editar e salvar
+                                 um programa no simulador.
+    Versao: 2.2.0 - 21/07/2010 - Expandido conjunto de instrucoes para incluir
+                                 shifts, rotates e chamada de sub-rotina.
+                               - Revistas funcoes de controle e do simulador.
+    Versao: 2.2.2 - 09/10/2010 - Revisao geral do codigo com total adequacao
+                                 deste aas especificacoes da CPU-8Ev2.0.
+    Versao: 2.2.3 - 18/10/2010 - Componente TShapeEx para facilitar instalação
+                                 no Lazarus.
+}
+
+{
+  CPU8E_Panel.pas
+  Esta Unit implementa a parte visual do simulador e as funcoes de interacao
+  com o usuario.
+}
+
 interface
 
 uses
-  Classes, SysUtils, FileUtil, LResources, Forms, Controls, Graphics, Dialogs, ExtCtrls, StdCtrls, Menus, Grids, ComCtrls,
-  Buttons, ActnList, CPU8E, ShapeEx;
+  Classes, SysUtils, Process, FileUtil, LResources, Forms, Controls, Graphics,
+  Dialogs, ExtCtrls, StdCtrls, Menus, Grids, ComCtrls, Buttons, ActnList, CPU8E,
+  ShapeEx;
 
 type
 
@@ -25,8 +92,9 @@ type
     alAtalhos: TActionList;
     Bevel1: TBevel;
     Bevel2: TBevel;
-    edtClock: TEdit;
+    ClockSelect: TComboBox;
     ilImagens: TImageList;
+    Label1: TLabel;
     sbStatus: TImage;
     IR0 : TShapeEx;
     IR1 : TShapeEx;
@@ -42,6 +110,13 @@ type
     Panel1: TPanel;
     sdSave: TSaveDialog;
     sbSave: TSpeedButton;
+    Shape19: TShapeEx;
+    Shape20: TShapeEx;
+    shSPIn2: TShapeEx;
+    Shape16: TShapeEx;
+    shSPOut1: TShapeEx;
+    shSPOut2: TShapeEx;
+    shSPIn1: TShapeEx;
     Shape1 : TShapeEx;
     Shape10 : TShapeEx;
     shFetch: TShapeEx;
@@ -57,7 +132,6 @@ type
     shZOut2 : TShapeEx;
     Shape108 : TShapeEx;
     shCOut2 : TShapeEx;
-    Shape11 : TShapeEx;
     shCOut1 : TShapeEx;
     shNOut2 : TShapeEx;
     shZOut5 : TShapeEx;
@@ -175,6 +249,8 @@ type
     StaticText10 : TStaticText;
     StaticText25: TStaticText;
     StaticText26: TStaticText;
+    stMAR: TStaticText;
+    stSP: TStaticText;
     stULA : TStaticText;
     StaticText12 : TStaticText;
     stZ : TStaticText;
@@ -193,13 +269,11 @@ type
     stMDR : TStaticText;
     stIR : TStaticText;
     stPC : TStaticText;
-    stMAR : TStaticText;
     stDI : TStaticText;
     stUC1 : TStaticText;
     sgMemoria : TStringGrid;
-    UpDown1 : TUpDown;
     procedure acLoadExecute(Sender: TObject);
-    procedure edtClockChange(Sender: TObject);
+    procedure ClockSelectChange(Sender: TObject);
     procedure FormClose(Sender: TObject; var CloseAction: TCloseAction);
     procedure FormCreate(Sender: TObject);
     procedure cbModeChange(Sender: TObject);
@@ -211,6 +285,42 @@ type
     procedure sbGoClick(Sender: TObject);
     procedure spHelpClick(Sender: TObject);
     procedure sbResetClick(Sender: TObject);
+    procedure stACCMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stACCMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stAMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stAMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stBMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stBMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stIRMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stIRMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stMARMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stMARMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stMDRMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stMDRMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stPCMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stPCMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stSPMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stSPMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stULAMouseDown(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
+    procedure stULAMouseUp(Sender: TObject; Button: TMouseButton;
+      Shift: TShiftState; X, Y: Integer);
   private
     procedure Disassembler;
     procedure LoadMem;
@@ -235,7 +345,8 @@ procedure TfrmCPU.FormCreate(Sender: TObject);
 var
   I : integer;
 begin
-  Caption := ProgName + ' - ' + Author;
+  CPU_Caption := ProgName + ' ' + Version + ' - ' + Author;
+  Caption := CPU_Caption;
   SetLocalDir;
   SetClock;
   for I := 0 to 255 do
@@ -266,7 +377,7 @@ begin
   if sdSave.Execute then begin
     NRead := SaveFile(sdSave.FileName);
     if NRead >=0 then begin
-      Caption := ProgName + ' - ' + ExtractFileName(sdSave.FileName);
+      Caption := CPU_Caption + ' - ' + ExtractFileName(sdSave.FileName);
       ShowMessage('Foram gravados ' + IntToStr(NRead) + '(' + IntToHex(NRead, 2) + 'h) bytes para disco.');
     end
     else
@@ -300,8 +411,17 @@ procedure TfrmCPU.sbGoClick(Sender: TObject); begin
     Cmd := _Go;
 end;
 
-procedure TfrmCPU.spHelpClick(Sender: TObject); begin
-  ExecuteProcess('Notepad.exe', 'CPU8E_Sim.txt');
+procedure TfrmCPU.spHelpClick(Sender: TObject);
+var HProcess: TProcess;
+begin
+  if FileExists('CPU8E_Sim.txt') then
+  begin
+     HProcess := TProcess.Create(nil);
+     HProcess.CommandLine := 'gedit CPU8E_Sim.txt';
+     HProcess.Execute;
+     HProcess.Free;
+  end else
+     MessageDlg('CPU-8E', 'Arquivo <CPU8E_Sim.txt> não encontrado', mtInformation, [mbOk], 0);
 end;
 
 // Disassembla o programa carregado em memória
@@ -354,7 +474,7 @@ procedure TfrmCPU.SetPhase(Phase : PhaseType); begin
   case Phase of
     _Fetch : begin
       lblFetch.Enabled := true;
-      shFetch.Brush.Color := clYellow;
+      shFetch.Brush.Color := clAqua;
     end;
     _Operand : begin
       lblOperand.Enabled := true;
@@ -362,7 +482,7 @@ procedure TfrmCPU.SetPhase(Phase : PhaseType); begin
     end;
     _Execute : begin
       lblExecute.Enabled := true;
-      shExecute.Brush.Color := clYellow;
+      shExecute.Brush.Color := clLime;
     end;
   end;
   Application.ProcessMessages;
@@ -376,17 +496,301 @@ procedure TfrmCPU.sbResetClick(Sender: TObject); begin
   acPause.Enabled := true;
 end;
 
-procedure TfrmCPU.edtClockChange(Sender: TObject); begin
-  CPUClock := abs(StrToIntDef(edtClock.Text, 1));
-  if CPUClock > 100 then CPUClock := 100;
-  edtClock.Text := IntToStr(CPUClock);
-  SetClock;
-  shClock1.Brush.Color := clRed;
-  shClock2.Brush.Color := clRed;
+procedure TfrmCPU.stACCMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+   BinStr: string;
+   i,Val: Byte;
+begin
+   BinStr := '';
+   Val := CPU.ACC;
+   for i := 1 to 8 do
+   begin
+      if boolean(Val and 1) then
+         BinStr := '1' + BinStr
+      else
+         BinStr := '0' + BinStr;
+      Val := Val shr 1;
+   end;
+   with Label1 do
+   begin
+      Left := stACC.Left-10;
+      Top := stACC.Top-20;
+      Caption := 'ACC='+BinStr;
+      Visible := true;
+   end;
+   Application.ProcessMessages;
+end;
+
+procedure TfrmCPU.stACCMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  Label1.visible := false;
   Application.ProcessMessages;
-  Sleep(100);
-  shClock1.Brush.Color := $DFDF;
-  shClock2.Brush.Color := $DFDF;
+end;
+
+procedure TfrmCPU.stAMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+   BinStr: string;
+   i,Val: Byte;
+begin
+   BinStr := '';
+   Val := CPU.A;
+   for i := 1 to 8 do
+   begin
+      if boolean(Val and 1) then
+         BinStr := '1' + BinStr
+      else
+         BinStr := '0' + BinStr;
+      Val := Val shr 1;
+   end;
+   with Label1 do
+   begin
+      Left := stA.Left-10;
+      Top := stA.Top-20;
+      Caption := 'A='+BinStr;
+      Visible := true;
+   end;
+   Application.ProcessMessages;
+end;
+
+procedure TfrmCPU.stAMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  Label1.visible := false;
+  Application.ProcessMessages;
+end;
+
+procedure TfrmCPU.stBMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+   BinStr: string;
+   i,Val: Byte;
+begin
+   BinStr := '';
+   Val := CPU.B;
+   for i := 1 to 8 do
+   begin
+      if boolean(Val and 1) then
+         BinStr := '1' + BinStr
+      else
+         BinStr := '0' + BinStr;
+      Val := Val shr 1;
+   end;
+   with Label1 do
+   begin
+      Left := stB.Left-10;
+      Top := stB.Top-20;
+      Caption := 'B='+BinStr;
+      Visible := true;
+   end;
+   Application.ProcessMessages;
+end;
+
+procedure TfrmCPU.stBMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  Label1.visible := false;
+  Application.ProcessMessages;
+end;
+
+procedure TfrmCPU.stIRMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+   BinStr: string;
+   i,Val: Byte;
+begin
+   BinStr := '';
+   Val := CPU.IR;
+   for i := 1 to 8 do
+   begin
+      if boolean(Val and 1) then
+         BinStr := '1' + BinStr
+      else
+         BinStr := '0' + BinStr;
+      Val := Val shr 1;
+   end;
+   with Label1 do
+   begin
+      Left := stIR.Left-10;
+      Top := stIR.Top-20;
+      Caption := 'IR='+BinStr;
+      Visible := true;
+   end;
+   Application.ProcessMessages;
+end;
+
+procedure TfrmCPU.stIRMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  Label1.visible := false;
+  Application.ProcessMessages;
+end;
+
+procedure TfrmCPU.stMARMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+   BinStr: string;
+   i,Val: Byte;
+begin
+   BinStr := '';
+   Val := CPU.MAR;
+   for i := 1 to 8 do
+   begin
+      if boolean(Val and 1) then
+         BinStr := '1' + BinStr
+      else
+         BinStr := '0' + BinStr;
+      Val := Val shr 1;
+   end;
+   with Label1 do
+   begin
+      Left := stMAR.Left-20;
+      Top := stMAR.Top-20;
+      Caption := 'MAR='+BinStr;
+      Visible := true;
+   end;
+   Application.ProcessMessages;
+end;
+
+procedure TfrmCPU.stMARMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  Label1.visible := false;
+  Application.ProcessMessages;
+end;
+
+procedure TfrmCPU.stMDRMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+   BinStr: string;
+   i,Val: Byte;
+begin
+   BinStr := '';
+   Val := CPU.MDR;
+   for i := 1 to 8 do
+   begin
+      if boolean(Val and 1) then
+         BinStr := '1' + BinStr
+      else
+         BinStr := '0' + BinStr;
+      Val := Val shr 1;
+   end;
+   with Label1 do
+   begin
+      Left := stMDR.Left-20;
+      Top := stMDR.Top-20;
+      Caption := 'MDR='+BinStr;
+      Visible := true;
+   end;
+   Application.ProcessMessages;
+end;
+
+procedure TfrmCPU.stMDRMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  Label1.visible := false;
+  Application.ProcessMessages;
+end;
+
+procedure TfrmCPU.stPCMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+   BinStr: string;
+   i,Val: Byte;
+begin
+   BinStr := '';
+   Val := CPU.PC;
+   for i := 1 to 8 do
+   begin
+      if boolean(Val and 1) then
+         BinStr := '1' + BinStr
+      else
+         BinStr := '0' + BinStr;
+      Val := Val shr 1;
+   end;
+   with Label1 do
+   begin
+      Left := stPC.Left-10;
+      Top := stPC.Top-20;
+      Caption := 'PC='+BinStr;
+      Visible := true;
+   end;
+   Application.ProcessMessages;
+end;
+
+procedure TfrmCPU.stPCMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  Label1.visible := false;
+  Application.ProcessMessages;
+end;
+
+procedure TfrmCPU.stSPMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+   BinStr: string;
+   i,Val: Byte;
+begin
+   BinStr := '';
+   Val := CPU.SP;
+   for i := 1 to 8 do
+   begin
+      if boolean(Val and 1) then
+         BinStr := '1' + BinStr
+      else
+         BinStr := '0' + BinStr;
+      Val := Val shr 1;
+   end;
+   with Label1 do
+   begin
+      Left := stSP.Left-10;
+      Top := stSP.Top-20;
+      Caption := 'SP='+BinStr;
+      Visible := true;
+   end;
+   Application.ProcessMessages;
+end;
+
+procedure TfrmCPU.stSPMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  Label1.visible := false;
+  Application.ProcessMessages;
+end;
+
+procedure TfrmCPU.stULAMouseDown(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+var
+   BinStr: string;
+   i,Val: Byte;
+begin
+   BinStr := '';
+   Val := CPU.ULA.Value;
+   for i := 1 to 8 do
+   begin
+      if boolean(Val and 1) then
+         BinStr := '1' + BinStr
+      else
+         BinStr := '0' + BinStr;
+      Val := Val shr 1;
+   end;
+   with Label1 do
+   begin
+      Left := stULA.Left-10;
+      Top := stULA.Top-20;
+      Caption := 'ULA='+BinStr;
+      Visible := true;
+   end;
+   Application.ProcessMessages;
+end;
+
+procedure TfrmCPU.stULAMouseUp(Sender: TObject; Button: TMouseButton;
+  Shift: TShiftState; X, Y: Integer);
+begin
+  Label1.visible := false;
+  Application.ProcessMessages;
 end;
 
 procedure TfrmCPU.acLoadExecute(Sender: TObject); begin
@@ -395,7 +799,7 @@ procedure TfrmCPU.acLoadExecute(Sender: TObject); begin
       sbResetClick(nil);
       LoadMem;
       ShowMem(CPU.PC); // atualiza display da memoria
-      Caption := ProgName + ' - ' + ExtractFileName(odLoad.FileName);
+      Caption := CPU_Caption + ' - ' + ExtractFileName(odLoad.FileName);
       frmCPU.ilImagens.GetBitmap(0, frmCPU.sbStatus.Picture.Bitmap);
       acGo.Enabled    := true;
       acPause.Enabled := true;
@@ -406,6 +810,18 @@ procedure TfrmCPU.acLoadExecute(Sender: TObject); begin
     else
       ShowMessage('Erro ao carregar arquivo ' + odLoad.FileName);
   end;
+end;
+
+procedure TfrmCPU.ClockSelectChange(Sender: TObject);
+begin
+  CPUClock := 10*(ClockSelect.ItemIndex + 1);
+  SetClock;
+  shClock1.Brush.Color := clRed;
+  shClock2.Brush.Color := clRed;
+  Application.ProcessMessages;
+  Sleep(100);
+  shClock1.Brush.Color := $DFDF;
+  shClock2.Brush.Color := $DFDF;
 end;
 
 procedure TfrmCPU.FormClose(Sender: TObject; var CloseAction: TCloseAction); begin

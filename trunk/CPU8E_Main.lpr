@@ -4,15 +4,13 @@ program CPU8E_Main;
 
 uses
   Interfaces, // this includes the LCL widgetset
-  Forms, LResources,
-  { you can add units after this }
+  Forms,
   CPU8E_Panel;
 
 {$IFDEF WINDOWS}{$R CPU8E_Main.rc}{$ENDIF}
 
 begin
-  {$I CPU8E_Main.lrs}
-  Application.Title := 'CPU-8E';
+  Application.Title:='CPU-8E Simulator';
   Application.Initialize;
   Application.CreateForm(TfrmCPU, frmCPU);
   Application.Run;
